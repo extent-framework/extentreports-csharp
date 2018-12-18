@@ -1,0 +1,27 @@
+@if (Model.HasCategory) 
+{
+	<span class="category-list attr-x">
+		@foreach (var category in Model.CategoryContext.All()) 
+		{ 
+			<span class="category badge"><i class="fa fa-tag"></i> @category.Name</span> 
+		}
+	</span>
+}
+@if (Model.HasAuthor) 
+{
+	<span class="author-list attr-x">
+		@foreach (var author in Model.AuthorContext.All()) 
+		{ 
+			<span class="author badge"><i class="fa fa-tag"></i> @author.Name</span> 
+		}
+	</span>
+}
+@if (Model.HasDevice) 
+{
+	<span class="device-list attr-x">
+		@foreach (var device in Model.DeviceContext.All()) 
+		{ 
+			<span class="device badge"><i class="fa fa-tag"></i> @device.Name</span> 
+		}
+	</span>
+}

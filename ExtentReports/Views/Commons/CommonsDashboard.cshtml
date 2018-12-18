@@ -1,0 +1,285 @@
+@using AventStack.ExtentReports
+
+@{
+  var runDuration = DateTime.Now - Model.StartTime;
+
+	var bdd = Model.TestList[0].IsBehaviorDrivenType;
+	
+	var boxSize = "s12 m12 l12";
+	if (Model.ReportStatusStats.ChildCount > 0) {
+		boxSize = "s12 m6 l6";
+	}
+	if (bdd || Model.ReportStatusStats.GrandChildCount > 0) {
+		boxSize = "s12 m4 l4";
+	}
+	
+	var chartWidth="90";
+	var chartHeight="70";
+	var chartBoxHeight="94px";
+	var size = 2;
+  
+	var pluralES = Model.TestList.Count > 1 ? "es" : "";
+	var pluralS = Model.TestList.Count > 1 ? "s" : "";
+
+	var parentViewChartsHeading="Classes";
+	var childViewChartsHeading="Tests";  
+	var grandChildViewChartsHeading="Steps";
+	var parentLabel="class" + pluralES;
+	var childLabel = "test" + pluralS;
+	var grandchildLabel="step" + pluralS;
+
+	if (bdd) {
+		parentViewChartsHeading="Features";
+		childViewChartsHeading="Scenarios";
+		grandChildViewChartsHeading="Steps";
+		parentLabel="feature" + pluralS;
+		childLabel="scenario" + pluralS;
+		size = 3;
+	} else {
+		if (Model.AnalysisStrategy == AnalysisStrategy.Test) {
+			parentViewChartsHeading="Tests";
+			childViewChartsHeading="Steps";
+			grandChildViewChartsHeading="";
+			parentLabel="test" + pluralS;
+			childLabel=grandchildLabel;
+		}
+	}
+	var span = 12 / size;
+}
+<div class="content-main" id="content-main">
+	<div class="padding">
+		<div class="row">
+			<div class="col-6 col-lg-3">
+				<div class="box p-3">
+					<div class="d-flex">
+						<span class="">@parentViewChartsHeading</span>
+					</div>
+					<div class="py-3 text-center text-md text-success">
+						@Model.ReportStatusStats.ParentCount
+					</div>
+					<div class="d-flex">
+						<span class="flex text-muted">Out of which @Model.ReportStatusStats.ParentCountPass passed</span>
+						<span><i class="fa fa-circle-o text-success"></i> @Model.ReportStatusStats.ParentPercentagePass%</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-6 col-lg-3">
+				<div class="box p-3">
+					<div class="d-flex">
+            <span class="">@childViewChartsHeading</span>
+					</div>
+					<div class="py-3 text-center text-md text-primary">
+            @Model.ReportStatusStats.ChildCount
+          </div>
+					<div class="d-flex">
+						<span class="flex text-muted">Out of which @Model.ReportStatusStats.ChildCountPass passed</span>
+						<span><i class="fa fa-circle-o text-primary"></i> @Model.ReportStatusStats.ChildPercentagePass%</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-6 col-lg-3">
+				<div class="box p-3">
+					<div class="d-flex">
+						<span class="">Start</span>
+					</div>
+					<div class="py-3 text-center text-md">
+						@Model.StartTime
+					</div>
+					<div class="d-flex">
+						<span class="flex"></span>
+						<span><i class="fa fa-circle text-primary"></i></span>
+					</div>
+				</div>
+			</div>
+			<div class="col-6 col-lg-3">
+				<div class="box p-3">
+					<div class="d-flex">
+						<span class="">Time Taken</span>
+					</div>
+					<div class="py-3 text-center text-md">
+						@runDuration
+					</div>
+					<div class="d-flex">
+						<span class="flex"></span>
+						<span><i class="fa fa-circle text-danger"></i></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-@span">
+				<div class="box">
+					<div class="box-header">
+						<h3>@parentViewChartsHeading</h3>
+					</div>
+					<div class="box-body pb-4">
+						<div class="row">
+							<div class="col-lg-7">
+								<canvas id="pc" width="100" height="80">
+								</canvas>
+							</div>
+							<div class="col-lg-5">
+								<div class="list">
+                  <div class="list-item">
+										<div><i class="badge badge-xs badge-o b-info"></i> &nbsp;Pass @Model.ReportStatusStats.ParentPercentagePass%</div>
+									</div>
+									<div class="list-item">
+										<div><i class="badge badge-xs badge-o b-danger"></i> &nbsp;Fail @Model.ReportStatusStats.ParentPercentageFail%</div>
+									</div>
+									<div class="list-item">
+										<div><i class="badge badge-xs badge-o b-warning"></i> &nbsp;Skip @Model.ReportStatusStats.ParentPercentageSkip%</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-footer">
+						<small class="text-muted">@Model.ReportStatusStats.ParentCountPass passed, @Model.ReportStatusStats.ParentCountFail failed and @Model.ReportStatusStats.ParentCountSkip skipped</small>
+					</div>
+				</div>
+			</div>
+			@if (Model.ReportStatusStats.ChildCount > 0)
+      {
+			<div class="col-md-@span">
+				<div class="box">
+					<div class="box-header">
+						<h3>@childViewChartsHeading</h3>
+					</div>
+					<div class="box-body pb-4">
+						<div class="row">
+							<div class="col-lg-7">
+								<canvas id="cc" width="100" height="80">
+								</canvas>
+							</div>
+							<div class="col-lg-5">
+								<div class="list">
+									<div class="list-item">
+										<div><i class="badge badge-xs badge-o b-info"></i> &nbsp;Pass @Model.ReportStatusStats.ChildPercentagePass%</div>
+									</div>
+                  <div class="list-item">
+										<div><i class="badge badge-xs badge-o b-danger"></i> &nbsp;Fail @Model.ReportStatusStats.ChildPercentageFail%</div>
+									</div>
+                  <div class="list-item">
+										<div><i class="badge badge-xs badge-o b-warning"></i> &nbsp;Skip @Model.ReportStatusStats.ChildPercentageSkip%</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-footer">
+						<small class="text-muted">@Model.ReportStatusStats.ChildCountPass passed, @Model.ReportStatusStats.ChildCountFail failed and @Model.ReportStatusStats.ChildCountSkip sk ipped</small>
+					</div>
+				</div>
+			</div>
+			}
+			@if (Model.ReportStatusStats.GrandChildCount > 0)
+      {
+			<div class="col-md-@span">
+				<div class="box">
+					<div class="box-header">
+						<h3>@grandChildViewChartsHeading</h3>
+					</div>
+					<div class="box-body pb-4">
+						<div class="row">
+							<div class="col-lg-7">
+								<canvas id="gcc" width="100" height="80">
+								</canvas>
+							</div>
+							<div class="col-lg-5">
+								<div class="list">
+									<div class="list-item">
+										<div><i class="badge badge-xs badge-o b-info"></i> @Model.ReportStatusStats.GrandChildPercentagePass%</div>
+										<div class="list-body"><span class="text-muted">Passed</span></div>
+									</div>
+                  <div class="list-item">
+										<div><i class="badge badge-xs badge-o b-danger"></i> @Model.ReportStatusStats.GrandChildPercentageFail%</div>
+										<div class="list-body"><span class="text-muted">Failed</span></div>
+									</div>
+                  <div class="list-item">
+										<div><i class="badge badge-xs badge-o b-warning"></i> @Model.ReportStatusStats.GrandChildPercentageSkip%</div>
+										<div class="list-body"><span class="text-muted">Skipped</span></div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="box-footer">
+						<small class="text-muted">${report.reportStatusStats.grandChildCountPass} passed, ${report.reportStatusStats.grandChildCountFail} failed and ${report.reportStatusStats.grandChildCountSkip} skipped</small>
+					</div>
+				</div>
+			</div>
+			}
+		</div>
+		@if (Model.MasterConfig.GetValue("enableTimeline") == "true") {
+		<div class="row">
+			<div class="col-md-12">
+				<div class="box">
+					<div class="box-header">
+						<h3>Timeline</h3>
+					</div>
+					<div class="box-body">
+						<canvas id="timeline"></canvas>
+					</div>
+				</div>
+			</div>
+		</div>
+		}
+		<div class="row">
+			@if (Model.SystemAttributeContext.Count > 0)
+			{
+			<div class="col-sm-6">
+				<div class="box">
+					<div class="box-header">
+						<h3>System <i class="fa pull-right text-muted text-sm fa-desktop"></i></h3>
+					</div>
+					<table class="table">
+						<tr>
+							<th>Name</th>
+							<th>Value</th>
+						</tr>
+						@foreach (var attr in Model.SystemAttributeContext.Context)
+						{
+						<tr>
+							<td>@attr.Name</td>
+							<td>@attr.Value</td>
+						</tr>
+						}
+					</table>
+				</div>
+			</div>
+			}
+			@if (Model.CategoryContext.Context.Count > 0)
+			{
+			<div class="col-sm-6">
+				<div class="box">
+					<div class="box-header">
+						<h3>Tags <i class="fa pull-right text-muted text-sm fa-tag"></i></h3>
+					</div>
+					<table class="table">
+						<tr>
+							<th></th>
+							<th>Passed</th>
+							<th>Failed</th>
+							<th>Skipped</th>
+							<th>Others</th>
+						</tr>
+						@foreach(var context in Model.CategoryContext.Context)
+            {
+            <tr>
+							<td>@context.Name</td>
+							<td>@context.Passed</td>
+              <td>@context.Failed</td>
+              <td>@context.Skipped</td>
+              <td>@context.Others</td>
+							<td>
+                @((context.Passed / @context.Count)*100)%
+							</td>
+						</tr>
+						}
+					</table>
+				</div>
+			</div>
+			}
+		</div>
+	</div>
+</div>

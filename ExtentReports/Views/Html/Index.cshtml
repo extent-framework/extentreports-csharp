@@ -1,0 +1,84 @@
+@using RazorEngine
+@using RazorEngine.Templating
+
+<!DOCTYPE html>
+<html>
+	
+	@Include("Head")
+
+	<body class='extent ${ theme } default hide-overflow ${ bddClass }'>
+		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
+			<span><i class='material-icons'>desktop_windows</i></span>
+		</div>
+		
+		@Include("Nav")
+
+		<!-- container -->
+		<div class='container'>
+			@Include("Test")
+			@Include("Author")
+			@Include("Category")
+			@Include("Exception")
+			@Include("Dashboard")
+			@Include("Logs")
+		</div>
+		<!-- container -->
+		<script>
+			var statusGroup = {
+                parentCount: @Model.ReportStatusStats.ParentCount,
+				passParent: @Model.ReportStatusStats.ParentCountPass,
+				failParent: @Model.ReportStatusStats.ParentCountFail,
+				fatalParent: @Model.ReportStatusStats.ParentCountFatal,
+				errorParent: @Model.ReportStatusStats.ParentCountError,
+				warningParent: @Model.ReportStatusStats.ParentCountWarning,
+				skipParent: @Model.ReportStatusStats.ParentCountSkip,
+				exceptionsParent: @Model.ReportStatusStats.ParentCountExceptions,
+				childCount: @Model.ReportStatusStats.ChildCount,
+				passChild: @Model.ReportStatusStats.ChildCountPass,
+				failChild: @Model.ReportStatusStats.ChildCountFail,
+				fatalChild: @Model.ReportStatusStats.ChildCountFatal,
+				errorChild: @Model.ReportStatusStats.ChildCountError,
+				warningChild: @Model.ReportStatusStats.ChildCountWarning,
+				skipChild: @Model.ReportStatusStats.ChildCountSkip,
+				infoChild: @Model.ReportStatusStats.ChildCountInfo,
+				debugChild: @Model.ReportStatusStats.ChildCountDebug,
+				exceptionsChild: @Model.ReportStatusStats.ChildCountExceptions,
+				grandChildCount: @Model.ReportStatusStats.GrandChildCount,
+				passGrandChild: @Model.ReportStatusStats.GrandChildCountPass,
+				failGrandChild: @Model.ReportStatusStats.GrandChildCountFail,
+				fatalGrandChild: @Model.ReportStatusStats.GrandChildCountFatal,
+				errorGrandChild: @Model.ReportStatusStats.GrandChildCountError,
+				warningGrandChild: @Model.ReportStatusStats.GrandChildCountWarning,
+				skipGrandChild: @Model.ReportStatusStats.GrandChildCountSkip,
+				infoGrandChild: @Model.ReportStatusStats.GrandChildCountInfo,
+				debugGrandChild: @Model.ReportStatusStats.GrandChildCountDebug,
+				exceptionsGrandChild: @Model.ReportStatusStats.GrandChildCountExceptions,
+			};
+		</script>
+		@if (Model.MasterConfig.GetValue("enableTimeline") == "true")
+		{
+				var json = "";
+				for (int ix = 0; ix < Model.TestList.Count; ix++) {
+					json += "\"" + Model.TestList[ix].Name + "\"" + ":" + Model.TestList[ix].RunDuration.TotalSeconds;
+					if (ix != Model.TestList.Count-1) {
+						json += ",";
+					}
+				}
+			<script>
+				var timeline = { @json };
+			</script>
+		}
+		<script src='v3html/js/extent.js' type='text/javascript'></script>
+		@if (Model.MasterConfig.GetValue("chartVisibleOnOpen") == "false") 
+		{
+		<script type='text/javascript'>
+			$(document).ready(function() {
+				$('#test-view-charts').addClass('hide');
+			});
+		</script>
+		}
+		<script type='text/javascript'>
+			@Model.MasterConfig.GetValue("js")
+		</script>
+	</body>
+</html>

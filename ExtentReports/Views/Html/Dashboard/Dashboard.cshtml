@@ -1,0 +1,132 @@
+@using AventStack.ExtentReports
+
+@{
+  var bdd = Model.TestList[0].IsBehaviorDrivenType;
+
+  var parentViewChartsHeading="Classes";
+  var childViewChartsHeading="Tests";  
+  var grandChildViewChartsHeading="Steps";
+  var parentLabel="class(es)";
+  var childLabel = "test(s)";
+  var grandchildLabel="step(s)";
+
+  if (bdd) {
+    parentViewChartsHeading="Features";
+    childViewChartsHeading="Scenarios";
+    grandChildViewChartsHeading="Steps";
+	parentLabel="feature(s)";
+	childLabel="scenario(s)";
+  } else {
+    if (Model.AnalysisStrategy == AnalysisStrategy.Test) {
+      parentViewChartsHeading="Tests";
+      childViewChartsHeading="Steps";
+      grandChildViewChartsHeading="";
+	  parentLabel="test(s)";
+	  childLabel=grandchildLabel;
+    }
+  }
+  
+  var runDuration = DateTime.Now - Model.StartTime;
+}
+
+<div id='dashboard-view' class='view hide'>
+	<div class='card-panel transparent np-v'>
+		<h5>Dashboard</h5>
+
+		<div class='row'>
+			<div class='col s2'>
+				<div class='card-panel r'>
+          @parentViewChartsHeading
+          <div class='panel-lead'>@Model.ReportStatusStats.ParentCount</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+          @childViewChartsHeading
+          <div class='panel-lead'>@Model.ReportStatusStats.ChildCount</div>
+				</div>
+			</div>
+      @if (!string.IsNullOrEmpty(grandChildViewChartsHeading))
+      {
+			<div class='col s2'>
+				<div class='card-panel r'>
+          @grandChildViewChartsHeading
+          <div class='panel-lead'>@Model.ReportStatusStats.GrandChildCount</div>
+				</div>
+			</div>
+			}
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Start
+					<div class='panel-lead'>@Model.StartTime</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+			 		End
+			 		<div class='panel-lead'>@Model.EndTime</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Time Taken
+					<div class='panel-lead'>@runDuration</div>
+				</div>
+			</div>
+			@if (Model.SystemAttributeContext.Count > 0)
+			{
+			<div class='col s4'>
+				<div class='card-panel dashboard-environment'>
+					<span class='right label cyan white-text'>Environment</span><p>&nbsp;</p>
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Value</th>
+						</tr>
+						@foreach (var attr in Model.SystemAttributeContext.SystemAttributeCollection)
+						{
+							<tr>
+								<td>@attr.Name</td>
+								<td>@attr.Value</td>
+							</tr>
+						}
+					</table>
+				</div>
+			</div>
+			}
+			@if (Model.CategoryContext.Context.Count > 0)
+      {
+			<div class='col s6'>
+				<div class='card-panel dashboard-categories'>
+					<span class='right label cyan white-text'>Categories</span><p>&nbsp;</p>
+					
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Passed</th>
+              <th>Failed</th>
+              <th>Skipped</th>
+							<th>Others</th>
+							<th>Passed %</th>
+						</tr>
+            @foreach(var context in Model.CategoryContext.Context)
+            {
+            <tr>
+							<td>@context.Name</td>
+							<td>@context.Passed</td>
+              <td>@context.Failed</td>
+              <td>@context.Skipped</td>
+              <td>@context.Others</td>
+							<td>
+                @((context.Passed / @context.Count)*100)%
+							</td>
+						</tr>
+						}
+					</table>
+				</div>
+			</div>
+			}
+		</div>
+	</div>
+</div>
+<!-- dashboard view -->

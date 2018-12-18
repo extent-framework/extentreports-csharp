@@ -1,0 +1,74 @@
+@if (Model.CategoryContext.Context.Count > 0)
+{
+<div id='category-view' class='view hide'>
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+				<i class='material-icons'>search</i> Search
+				</a>
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+	<div class='subview-left left'>
+		<div class='view-summary'>
+			<ul id='category-collection' class='category-collection'>
+				@foreach (var category in Model.CategoryContext.Context)
+				{
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>@category.Name</span>
+						<span class='category-status right'>
+							@if (category.Passed > 0) { <span class='label pass'>@category.Passed</span> }
+							@if (category.Failed > 0) { <span class='label fail'>@category.Failed</span> }
+							@if (category.Skipped > 0) { <span class='label skip'>@category.Skipped</span> }
+							@if (category.Others > 0) { <span class='label others'>@category.Others</span> }
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							@if (category.Passed > 0) { <span class='label green accent-4 white-text'>Passed: @category.Passed</span> }
+							@if (category.Failed > 0) { <span class='label red lighten-1 white-text'>Failed: @category.Failed</span> }
+							@if (category.Skipped > 0) { <span class='label blue darken-2 white-text'>Skipped: @category.Skipped</span> }
+							@if (category.Others > 0) { <span class='label yellow darken-2 white-text'>Others: @category.Others</span> }
+						</div>
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									@foreach (var test in category.TestCollection)
+									{
+									<tr>
+										<td>@test.StartTime</td>
+										<td class='linked' test-id='@test.TestId'>@test.HierarchicalName</td>
+										<td><span class='test-status @test.Status'>@test.Status</span></td>
+									</tr>
+									}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+				}
+			</ul>
+		</div>
+	</div>
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='category-name'></h5>
+		</div>
+	</div>
+</div>
+}
+<!-- category view -->

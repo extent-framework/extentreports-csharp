@@ -1,0 +1,41 @@
+@using AventStack.ExtentReports
+@{
+	var n = Model;
+	var level = n.Level;
+
+	if (level > 0) {
+		n = Model.Parent;
+		if (n.Level > 0) {
+			n = n.Parent;
+			if (n.Level > 0) {
+				n = n.Parent;
+			}
+		}
+	}
+}
+<tr class="s-@Model.Status,ToString().ToLower()" test-id="@Model.TestId" parent-id="@n.TestId">
+	<td><span class="w-32 avatar circle @Model.Status.ToString().ToLower()"><span class="badge">@Model.Status</span></span></td>
+	<td class="_600">@Model.Name @if (level > 0){<br/><span class="text-muted text-sm">@Model.Parent.Name</span>}</td>
+	<td>@Model.RunDuration</td>
+	<td>@Include("CommonsAttributes", Model)</td>
+	<td>
+		@Include("CommonsMedia", Model)
+		@foreach (var log in Model.LogContext.All())
+		{
+			@Include("CommonsMedia", log)
+		}
+	</td>
+	<td class="static"><i class="static fa fa-external-link"></i></td>
+</tr>
+@if (Model.Status == Status.Fail || Model.Status == Status.Skip)
+{
+<tr class="details">
+	<td colspan="5">
+	@foreach (var log in Model.LogContext.All())
+	{
+		if (log.HasException){<textarea disabled class="code-block">${log.exceptionInfo.stackTrace}</textarea>}
+		else {<textarea disabled class="code-block">${log.details}</textarea>}
+	}
+	</td>
+</tr>
+}

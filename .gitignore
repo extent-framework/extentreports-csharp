@@ -1,0 +1,12 @@
+# vs
+.vs/
+
+# .net
+packages/
+ExtentReports/Program.cs
+ExtentReports/bin/
+ExtentReports/obj/
+ExtentReports/bin/debug/
+ExtentReports.Tests/bin/
+ExtentReports.Tests/obj/
+ExtentReports.Tests/Program.cs

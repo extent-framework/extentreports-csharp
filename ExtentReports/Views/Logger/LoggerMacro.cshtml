@@ -1,0 +1,36 @@
+@{
+	var spacer = "";
+	var level = Model.Level;
+
+	if (level >= 1) 
+	{
+		for (var ix = 2; ix <= level; ix++)
+		{
+			spacer = "&nbsp;&nbsp;&nbsp;&nbsp;";
+		}
+		spacer += "|---";
+	}
+}
+
+<div class="st @Model.Status.ToString().ToLower() test l${level}" 
+  test-id="@Model.TestId"
+  tags="@foreach (var category in @Model.CategoryContext.All()) {@category.Name}"
+  devices="@foreach (var device in @Model.DeviceContext.All()) {@device.Name}">
+	<span class="tt">@Model.StartTime</span>&nbsp;
+	<span class="ts">@Model.Status.ToString().Replace("ing", "")</span>@for (var ix = Model.Status.ToString().Length; ix <= 5; ix++) {@Raw("&nbsp;")}
+	<span class="tn">@(spacer)[@Model.Name] started</span>
+	
+	@Include("CommonsAttributes", Model)
+
+	@foreach (var log in Model.LogContext.All())
+	{
+	<div class="st @log.Status.ToString().ToLower()">
+		<span class="tt">@log.Timestamp</span>&nbsp;
+		<span class="ts">@log.Status.ToString().Replace("ing", "")</span>@for (var ix = log.Status.ToString().Length; ix <= 5; ix++) {@Raw("&nbsp;")}
+		<span class="tn">@(spacer)[@Model.Name]</span>
+		@if (log.HasScreenCapture) {<span class="tm">@log.ScreenCaptureContext.LastOrDefault().Source</span>}
+		<span class="td"> @if (log.HasException) { <textarea disabled class="code-block">@log.ExceptionInfo.Exception.StackTrace</textarea> } else { @Raw(log.Details) }</span>
+	</div>
+	}
+</div>
+										

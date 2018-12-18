@@ -1,0 +1,4 @@
+@if (Model.HasScreenCapture)
+{
+	@Raw(Model.ScreenCaptureContext.FirstOrDefault().SourceIcon)
+}

@@ -1,4 +1,5 @@
-﻿using AventStack.ExtentReports.Reporter.Configuration;
+﻿using AventStack.ExtentReports.Core;
+using AventStack.ExtentReports.Reporter.Configuration;
 using AventStack.ExtentReports.Views.Commons;
 using AventStack.ExtentReports.Views.Logger;
 

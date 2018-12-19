@@ -1,4 +1,5 @@
-﻿using AventStack.ExtentReports.Model;
+﻿using AventStack.ExtentReports.Core;
+using AventStack.ExtentReports.Model;
 
 namespace AventStack.ExtentReports.Reporter
 {

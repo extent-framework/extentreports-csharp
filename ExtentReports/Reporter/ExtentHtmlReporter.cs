@@ -1,4 +1,5 @@
-﻿using AventStack.ExtentReports.Views.Html;
+﻿using AventStack.ExtentReports.Core;
+using AventStack.ExtentReports.Views.Html;
 using AventStack.ExtentReports.Reporter.Configuration;
 
 using RazorEngine.Templating;

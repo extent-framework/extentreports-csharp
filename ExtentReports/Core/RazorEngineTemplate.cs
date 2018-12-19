@@ -1,6 +1,6 @@
 ﻿using RazorEngine.Templating;
 
-namespace AventStack.ExtentReports
+namespace AventStack.ExtentReports.Core
 {
     public class RazorEngineTemplate<T> : TemplateBase<T>
     {

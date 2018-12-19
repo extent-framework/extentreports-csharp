@@ -1,4 +1,5 @@
 ﻿using AventStack.ExtentReports.Configuration;
+using AventStack.ExtentReports.Core;
 using AventStack.ExtentReports.Model;
 using AventStack.ExtentReports.Reporter.Configuration;
 using AventStack.ExtentReports.Reporter.Configuration.Default;

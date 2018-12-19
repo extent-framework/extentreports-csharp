@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AventStack.ExtentReports
+namespace AventStack.ExtentReports.Core
 {
     public abstract class ExtentObservable
     {

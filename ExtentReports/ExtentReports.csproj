@@ -73,13 +73,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\AnalysisStrategy.cs" />
+    <Compile Include="AnalysisStrategy.cs" />
     <Compile Include="Configuration\Config.cs" />
     <Compile Include="Configuration\ConfigurationManager.cs" />
     <Compile Include="Core\ExtentObservable.cs" />
-    <Compile Include="Core\ExtentReports.cs" />
-    <Compile Include="Core\ExtentTest.cs" />
-    <Compile Include="Core\GherkinKeyword.cs" />
+    <Compile Include="ExtentReports.cs" />
+    <Compile Include="ExtentTest.cs" />
+    <Compile Include="GherkinKeyword.cs" />
     <Compile Include="Core\GherkinKeywordNotFoundException.cs" />
     <Compile Include="Gherkin\GherkinDialect.cs" />
     <Compile Include="Gherkin\GherkinDialectProvider.cs" />
@@ -111,8 +111,8 @@
     <Compile Include="MarkupUtils\Label.cs" />
     <Compile Include="MarkupUtils\MarkupHelper.cs" />
     <Compile Include="MarkupUtils\Table.cs" />
-    <Compile Include="Core\MediaEntityBuilder.cs" />
-    <Compile Include="Core\MediaEntityModelProvider.cs" />
+    <Compile Include="MediaEntityBuilder.cs" />
+    <Compile Include="MediaEntityModelProvider.cs" />
     <Compile Include="Model\AbstractStructure.cs" />
     <Compile Include="Model\Attribute.cs" />
     <Compile Include="Model\Author.cs" />
@@ -155,7 +155,7 @@
     <Compile Include="Reporter\TemplateEngine\RazorEngineManager.cs" />
     <Compile Include="Reporter\TemplateInfo.cs" />
     <Compile Include="Core\ReportStatusStats.cs" />
-    <Compile Include="Core\Status.cs" />
+    <Compile Include="Status.cs" />
     <Compile Include="Core\SystemAttributeContext.cs" />
     <Compile Include="Core\TestAttributeTestContextProvider.cs" />
     <Compile Include="Core\TestRemoveService.cs" />

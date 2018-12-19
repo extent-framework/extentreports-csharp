@@ -1,6 +1,6 @@
 ﻿using AventStack.ExtentReports.Model;
 
-namespace AventStack.ExtentReports
+namespace AventStack.ExtentReports.Core
 {
     public interface ITestListener
     {

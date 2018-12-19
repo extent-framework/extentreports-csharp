@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace AventStack.ExtentReports
+namespace AventStack.ExtentReports.Core
 {
     [Serializable]
     internal class InvalidAnalysisStrategyException : Exception

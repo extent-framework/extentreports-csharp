@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 
+using AventStack.ExtentReports;
 using AventStack.ExtentReports.Gherkin.Model;
 
 namespace AventStack.ExtentReports.Tests.APITests

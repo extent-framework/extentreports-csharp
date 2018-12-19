@@ -1,4 +1,5 @@
-﻿using AventStack.ExtentReports.Gherkin.Model;
+﻿using AventStack.ExtentReports.Core;
+using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.MarkupUtils;
 using AventStack.ExtentReports.Model;
 

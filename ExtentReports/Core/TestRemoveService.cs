@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 using AventStack.ExtentReports.Model;
 
-namespace AventStack.ExtentReports
+namespace AventStack.ExtentReports.Core
 {
     internal class TestRemoveService
     {

@@ -1,4 +1,4 @@
-﻿namespace AventStack.ExtentReports
+﻿namespace AventStack.ExtentReports.Core
 {
     public interface IExtentReporter : ITestListener, IAnalysisStrategyService
     {

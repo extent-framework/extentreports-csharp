@@ -1,4 +1,4 @@
-﻿namespace AventStack.ExtentReports
+﻿namespace AventStack.ExtentReports.Core
 {
     /// <summary>
     /// Marker interface for execution's result providing a Status

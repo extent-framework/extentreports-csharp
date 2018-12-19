@@ -3,7 +3,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AventStack.ExtentReports
+namespace AventStack.ExtentReports.Core
 {
     public class TestAttributeTestContextProvider<T> where T : TestAttribute
     {

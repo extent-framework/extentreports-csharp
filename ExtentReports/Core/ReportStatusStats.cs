@@ -4,7 +4,7 @@ using AventStack.ExtentReports.Model;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AventStack.ExtentReports
+namespace AventStack.ExtentReports.Core
 {
     public class ReportStatusStats
     {

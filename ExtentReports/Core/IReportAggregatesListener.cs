@@ -3,7 +3,7 @@ using AventStack.ExtentReports.Model;
 
 using System.Collections.Generic;
 
-namespace ExtentReports
+namespace AventStack.ExtentReports.Core
 {
     public interface IReportAggregatesListener
     {

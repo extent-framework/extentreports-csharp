@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 
-namespace AventStack.ExtentReports
+namespace AventStack.ExtentReports.Core
 {
     public class SystemAttributeContext
     {

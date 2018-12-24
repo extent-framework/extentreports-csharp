@@ -4,7 +4,6 @@
 	var bdd = false;
 	if (Model.TestList.Count > 0)
 	{
-		
 		bdd = Model.TestList[0].IsBehaviorDrivenType || (Model.TestList[0].HasChildren && Model.TestList[0].NodeContext.FirstOrDefault().IsBehaviorDrivenType);
 	}
 }

@@ -1,0 +1,32 @@
+﻿@if (Model.HasChildren)
+{
+	<div class="accordion">
+		@foreach (var node in Model.NodeContext.All())
+		{
+			<div class="card">
+				<div class="card-header" role="tab">
+					<h5 class="card-title">
+						<div class="node">@node.Name</div>
+						<a data-toggle="collapse">
+							<div class="status-avatar @node.Status.ToString().ToLower()-bg">
+							    @node.Status
+							</div>
+						</a>
+					</h5>
+				</div>
+				@if (node.HasLog)
+				{
+					<div class="collapse">
+						<div class="card-body">
+							@Include("Log", node)
+						</div>
+					</div>
+				}
+				@if (node.HasChildren)
+				{
+					@Include("RecurseNodes", node)
+				}
+			</div>
+		}
+	</div>
+}

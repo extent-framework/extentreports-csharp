@@ -1,0 +1,456 @@
+﻿@using AventStack.ExtentReports
+
+@{
+  var bdd = Model.TestList[0].IsBehaviorDrivenType;
+
+  var boxSize = "col-md-12";
+  if (Model.ReportStatusStats.ChildCount > 0) {
+	boxSize = "col-sm-12 col-md-6";
+  }
+  if (bdd || Model.ReportStatusStats.GrandChildCount > 0) {
+	boxSize = "col-sm-12 col-md-4";
+  }
+
+  var chartWidth="115";
+  var chartHeight="90";
+  var chartBoxHeight="94px";
+
+  var parentHeading="Classes";
+  var childHeading="Tests";  
+  var grandChildHeading="Steps";
+  var parentLabel="class(es)";
+  var childLabel = "test(s)";
+  var grandchildLabel="step(s)";
+
+  if (bdd) {
+    parentHeading="Features";
+    childHeading="Scenarios";
+    grandChildHeading="Steps";
+	parentLabel="feature(s)";
+	childLabel="scenario(s)";
+  } else {
+    if (Model.AnalysisStrategy == AnalysisStrategy.Test) {
+      parentHeading="Tests";
+      childHeading="Steps";
+      grandChildHeading="";
+	  parentLabel="test(s)";
+	  childLabel=grandchildLabel;
+    }
+  }
+  
+  var runDuration = DateTime.Now - Model.StartTime;
+}
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>Extent Framework</title>
+		<link rel="shortcut icon" href="https://cdn.rawgit.com/extent-framework/extent-github-cdn/d74480e/commons/img/logo.png">
+		<link rel="stylesheet" href="styles.css" />
+		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+	</head>
+	<body class="dashboard-view">
+		<div class="app">
+			<div class="layout">
+				<div class="header navbar">
+					<div class="header-container">
+						<div class="nav-logo">
+							<a href="index.html">
+							<img src="https://cdn.rawgit.com/extent-framework/extent-github-cdn/d74480e/commons/img/logo.png">
+							</a>
+						</div>
+						<ul class="nav-left">
+							<!--<li>
+								<a class="sidenav-fold-toggler" href="#">
+								    <i class="fa fa-arrow-left"></i>
+								</a>
+								<a class="sidenav-expand-toggler" href="#">
+								    <i class="fa fa-arrow-right"></i>
+								</a>
+								</li>-->
+						</ul>
+						<ul class="nav-right">
+							<li class="m-r-10">
+								<a href="#">
+								<span class="badge badge-primary">@Model.StartTime</span>
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				@Include("Sidenav")
+				<div class="page-container">
+					<div class="main-content">
+						<div class="container-fluid">
+							<div class="row">
+								<div class="@boxSize">
+									<div class="card">
+										<div class="card-header">
+											<h6 class="card-title">@parentHeading</h6>
+										</div>
+										<div class="card-body">
+	                                        <div class="">
+	                                            <canvas id='parent-analysis' width='@chartWidth' height='@chartHeight'></canvas>
+	                                        </div>
+	                                    </div>
+	                                    <div class="card-footer">
+	                                    	<div><small data-tooltip='@Model.ReportStatusStats.ParentPercentagePass%'>
+	                                    		<b>@Model.ReportStatusStats.ParentCountPass</b> @parentHeading.ToLower() passed
+                                    		</small></div>
+	                                    	<div>
+	                                    		<small data-tooltip='@Model.ReportStatusStats.ParentPercentageFail%'><b>@(Model.ReportStatusStats.ParentCountFail + Model.ReportStatusStats.ParentCountFatal)</b> @parentHeading.ToLower() failed, 
+	                                    		<b data-tooltip='@Model.ReportStatusStats.ParentPercentageOthers%'>@(Model.ReportStatusStats.ParentCountError + Model.ReportStatusStats.ParentCountWarning + Model.ReportStatusStats.ParentCountSkip)</b> others
+	                                    		</small>
+                                    		</div>
+	                                    </div>
+									</div>
+								</div>
+								@if (Model.ReportStatusStats.ChildCount > 0)
+								{
+								<div class="@boxSize">
+									<div class="card">
+										<div class="card-header">
+											<h6 class="card-title">@childHeading</h6>
+										</div>
+										<div class="card-body">
+	                                        <div class="">
+	                                            <canvas id='child-analysis' width='@chartWidth' height='@chartHeight'></canvas>
+	                                        </div>
+	                                    </div>
+	                                    <div class="card-footer">
+	                                    	<div><small data-tooltip='@Model.ReportStatusStats.ChildPercentagePass%'><b>@Model.ReportStatusStats.ChildCountPass</b> @childHeading.ToLower() passed</small></div>
+	                                    	<div>
+	                                    		<small data-tooltip='@Model.ReportStatusStats.ChildPercentageFail%'><b>@(Model.ReportStatusStats.ChildCountFail + Model.ReportStatusStats.ChildCountFatal)</b> @childHeading.ToLower() failed, 
+	                                    		<b data-tooltip='@Model.ReportStatusStats.ChildPercentageOthers%'>@(Model.ReportStatusStats.ChildCountError + Model.ReportStatusStats.ChildCountWarning + Model.ReportStatusStats.ChildCountSkip + Model.ReportStatusStats.ChildCountInfo)</b> others
+	                                    		</small>
+                                    		</div>
+	                                    </div>
+									</div>
+								</div>
+								}
+								@if (Model.ReportStatusStats.GrandChildCount > 0)
+								{
+								<div class="@boxSize">
+									<div class="card">
+										<div class="card-header">
+											<h6 class="card-title">@grandChildHeading}</h6>
+										</div>
+										<div class="card-body">
+	                                        <div class="">
+	                                            <canvas id='grandchild-analysis' width='@chartWidth' height='@chartHeight'></canvas>
+	                                        </div>
+	                                    </div>
+	                                    <div class="card-footer">
+	                                    	<div><small data-tooltip='@Model.ReportStatusStats.GrandChildPercentagePass%'><b>@Model.ReportStatusStats.GrandChildCountPass</b> @grandChildHeading.ToLower() passed</small></div>
+	                                    	<div>
+	                                    		<small data-tooltip='@Model.ReportStatusStats.GrandChildPercentageFail%'><b>@(Model.ReportStatusStats.GrandChildCountFail + Model.ReportStatusStats.GrandChildCountFatal)</b> @grandChildHeading.ToLower() failed, 
+	                                    		<b data-tooltip='@Model.ReportStatusStats.GrandChildPercentageOthers%'>@(Model.ReportStatusStats.GrandChildCountError + Model.ReportStatusStats.GrandChildCountWarning + Model.ReportStatusStats.GrandChildCountSkip + Model.ReportStatusStats.GrandChildCountInfo)</b> others
+	                                    		</small>
+                                    		</div>
+	                                    </div>
+									</div>
+								</div>
+								}
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<div class="card">
+										<div class="card-body box-height-150">
+	                                        <div class="media justify-content-between">
+												<div>
+													<p class="">@parentHeading</p>
+													<h2 class="font-size-28 font-weight-light">@Model.ReportStatusStats.ParentCount</h2>
+													<span class="text-semibold text-success font-size-15">
+													<i class="ti-arrow-up font-size-11"></i> 
+														<span>@Math.Round(Model.ReportStatusStats.ParentPercentagePass, 2)%</span>
+													</span>
+												</div>
+												<div class="align-self-end">
+													<i class="fa fa-align-left font-size-70 opacity-01"></i>
+												</div>
+											</div>
+	                                    </div>
+									</div>
+								</div>
+								@if (Model.ReportStatusStats.ChildCount > 0)
+								{
+								<div class="col-md-2">
+									<div class="card">
+										<div class="card-body box-height-150">
+	                                        <div class="media justify-content-between">
+												<div>
+													<p class="">@childHeading</p>
+													<h2 class="font-size-28 font-weight-light">@Model.ReportStatusStats.ChildCount</h2>
+													<span class="text-semibold text-success font-size-15">
+													<i class="ti-arrow-up font-size-11"></i> 
+														<span>@Math.Round(Model.ReportStatusStats.ChildPercentagePass, 2)%</span>
+													</span>
+												</div>
+												<div class="align-self-end">
+													<i class="fa fa-align-left font-size-70 opacity-01"></i>
+												</div>
+											</div>
+	                                    </div>
+									</div>
+								</div>
+								}
+								<div class="col-md-3">
+									<div class="card">
+										<div class="card-body box-height-150">
+	                                        <div class="media justify-content-between">
+												<div>
+													<p class="">Start</p>
+													<h6 class="font-weight-light">@Model.StartTime</h6>
+													<span class="text-semibold text-success font-size-15">
+												</div>
+												<div class="align-self-end">
+													<i class="fa fa-clock-o font-size-70 text-success opacity-01"></i>
+												</div>
+											</div>
+	                                    </div>
+									</div>
+								</div>
+								<div class="col-md-3">
+									<div class="card">
+										<div class="card-body box-height-150">
+	                                        <div class="media justify-content-between">
+												<div>
+													<p class="">End</p>
+													<h6 class="font-weight-light">@Model.EndTime</h6>
+													<span class="text-semibold text-danger font-size-15">
+												</div>
+												<div class="align-self-end">
+													<i class="fa fa-clock-o font-size-70 text-danger opacity-01"></i>
+												</div>
+											</div>
+	                                    </div>
+									</div>
+								</div>
+								<div class="col-md-2">
+									<div class="card">
+										<div class="card-body box-height-150">
+	                                        <div class="media justify-content-between">
+												<div>
+													<p class="">Duration</p>
+													<h6 class="font-weight-light">@runDuration</h6>
+													<span class="text-semibold font-size-15">
+												</div>
+												<div class="align-self-end">
+													<i class="fa fa-clock-o font-size-70 opacity-01"></i>
+												</div>
+											</div>
+	                                    </div>
+									</div>
+								</div>
+							</div>
+							@if (Model.MasterConfig.GetValue("enableTimeline") == "true")
+							{
+							<div class="row">
+								<div class="col-md-12">
+									<div class="card timeline">
+										<div class="card-header">
+											<h6 class="card-title">Timeline</h6>
+										</div>
+										<div class="card-body">
+	                                        <div class="">
+	                                            <canvas id="timeline" height="120"></canvas>
+	                                        </div>
+	                                    </div>
+									</div>
+								</div>
+							</div>
+							}
+							<div class="row">
+								@if (Model.AuthorContext.Context.Count > 0)
+								{
+								<div class="col-md-6">
+									<div class="card">
+										<div class="card-header">
+											<h6 class="card-title">Author</h6>
+										</div>
+										<div class="table-overflow">
+											<table class="table table-sm">
+												<thead>
+													<tr class="bg-gray">
+														<th>Name</th>
+														<th>Passed</th>
+														<th>Failed</th>
+														<th>Others</th>
+														<th>Passed %</th>
+													</tr>
+												</thead>
+												<tbody>
+													@foreach(var context in Model.AuthorContext.Context)
+													{
+													<tr>
+														<td>@context.Name</td>
+														<td>@context.Passed</td>
+														<td>@context.Failed</td>
+														<td>@context.Others</td>
+														<td>@(Math.Round(((double)context.Passed/(double)context.Count)*100, 2))%</td>
+													</tr>
+													}
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								}
+								@if (Model.CategoryContext.Context.Count > 0)
+								{
+								<div class="col-md-6">
+									<div class="card">
+										<div class="card-header">
+											<h6 class="card-title">Tags</h6>
+										</div>
+										<div class="table-overflow">
+											<table class="table table-sm">
+												<thead>
+													<tr class="bg-gray">
+														<th>Name</th>
+														<th>Passed</th>
+														<th>Failed</th>
+														<th>Others</th>
+														<th>Passed %</th>
+													</tr>
+												</thead>
+												<tbody>
+													@foreach(var context in Model.CategoryContext.Context)
+													{
+													<tr>
+														<td>@context.Name</td>
+														<td>@context.Passed</td>
+														<td>@context.Failed</td>
+														<td>@context.Others</td>
+														<td>@(Math.Round(((double)context.Passed/(double)context.Count)*100, 2))%</td>
+													</tr>
+													}
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								}
+								@if (Model.DeviceContext.Context.Count > 0)
+								{
+								<div class="col-md-6">
+									<div class="card">
+										<div class="card-header">
+											<h6 class="card-title">Device</h6>
+										</div>
+										<div class="table-overflow">
+											<table class="table table-sm">
+												<thead>
+													<tr class="bg-gray">
+														<th>Name</th>
+														<th>Passed</th>
+														<th>Failed</th>
+														<th>Others</th>
+														<th>Passed %</th>
+													</tr>
+												</thead>
+												<tbody>
+													@foreach(var context in Model.DeviceContext.Context)
+													{
+													<tr>
+														<td>@context.Name</td>
+														<td>@context.Passed</td>
+														<td>@context.Failed</td>
+														<td>@context.Others</td>
+														<td>@(Math.Round(((double)context.Passed/(double)context.Count)*100, 2))%</td>
+													</tr>
+													}
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								}
+								@if (Model.SystemAttributeContext.Count > 0)
+								{
+								<div class="col-md-4">
+									<div class="card">
+										<div class="card-header">
+											<h6 class="card-title">Environment</h6>
+										</div>
+										<div class="table-overflow">
+											<table class="table table-sm">
+												<thead>
+													<tr class="bg-gray">
+														<th>Name</th>
+														<th>Value</th>
+													</tr>
+												</thead>
+												<tbody>
+													@foreach (var attr in Model.SystemAttributeContext.SystemAttributeCollection)
+													{
+														<tr>
+															<td>@attr.Name</td>
+															<td>@attr.Value</td>
+														</tr>
+													}
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			var statusGroup = {
+                ParentCount: @Model.ReportStatusStats.ParentCount,
+				passParent: @Model.ReportStatusStats.ParentCountPass,
+				failParent: @Model.ReportStatusStats.ParentCountFail,
+				fatalParent: @Model.ReportStatusStats.ParentCountFatal,
+				errorParent: @Model.ReportStatusStats.ParentCountError,
+				warningParent: @Model.ReportStatusStats.ParentCountWarning,
+				skipParent: @Model.ReportStatusStats.ParentCountSkip,
+				exceptionsParent: @Model.ReportStatusStats.ParentCountExceptions,
+				ChildCount: @Model.ReportStatusStats.ChildCount,
+				passChild: @Model.ReportStatusStats.ChildCountPass,
+				failChild: @Model.ReportStatusStats.ChildCountFail,
+				fatalChild: @Model.ReportStatusStats.ChildCountFatal,
+				errorChild: @Model.ReportStatusStats.ChildCountError,
+				warningChild: @Model.ReportStatusStats.ChildCountWarning,
+				skipChild: @Model.ReportStatusStats.ChildCountSkip,
+				infoChild: @Model.ReportStatusStats.ChildCountInfo,
+				debugChild: @Model.ReportStatusStats.ChildCountDebug,
+				exceptionsChild: @Model.ReportStatusStats.ChildCountExceptions,
+				GrandChildCount: @Model.ReportStatusStats.GrandChildCount,
+				passGrandChild: @Model.ReportStatusStats.GrandChildCountPass,
+				failGrandChild: @Model.ReportStatusStats.GrandChildCountFail,
+				fatalGrandChild: @Model.ReportStatusStats.GrandChildCountFatal,
+				errorGrandChild: @Model.ReportStatusStats.GrandChildCountError,
+				warningGrandChild: @Model.ReportStatusStats.GrandChildCountWarning,
+				skipGrandChild: @Model.ReportStatusStats.GrandChildCountSkip,
+				infoGrandChild: @Model.ReportStatusStats.GrandChildCountInfo,
+				debugGrandChild: @Model.ReportStatusStats.GrandChildCountDebug,
+				exceptionsGrandChild: @Model.ReportStatusStats.GrandChildCountExceptions,
+			};
+		</script>
+		@if (Model.MasterConfig.GetValue("enableTimeline") == "true")
+		{
+				var json = "";
+				for (int ix = 0; ix < Model.TestList.Count; ix++) {
+					json += "\"" + Model.TestList[ix].Name + "\"" + ":" + Model.TestList[ix].RunDuration.TotalSeconds;
+					if (ix != Model.TestList.Count-1) {
+						json += ",";
+					}
+				}
+			<script>
+				var timeline = { @json };
+			</script>
+		}
+		<script type='text/javascript'>
+			@Model.MasterConfig.GetValue("js")
+		</script>
+		<script src="scripts.js"></script>
+	</body>
+</html>

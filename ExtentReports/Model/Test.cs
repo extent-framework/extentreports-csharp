@@ -110,6 +110,14 @@ namespace AventStack.ExtentReports.Model
             }
         }
 
+        public bool HasAttributes
+        {
+            get
+            {
+                return HasAuthor || HasCategory || HasDevice;
+            }
+        }
+
         public GenericStructure<TestAttribute> CategoryContext
         {
             get

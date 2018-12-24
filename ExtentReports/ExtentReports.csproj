@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{783324EC-3D15-46A1-B34E-A1F15B97DD59}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>AventStack.ExtentReports</RootNamespace>
     <AssemblyName>ExtentReports</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -150,6 +150,7 @@
     <Compile Include="Reporter\Configuration\Protocol.cs" />
     <Compile Include="Reporter\Configuration\RichViewReporterConfiguration.cs" />
     <Compile Include="Reporter\Configuration\Theme.cs" />
+    <Compile Include="Reporter\ExtentHtml2Reporter.cs" />
     <Compile Include="Reporter\ExtentHtmlReporter.cs" />
     <Compile Include="Reporter\ExtentLoggerReporter.cs" />
     <Compile Include="Reporter\TemplateEngine\RazorEngineManager.cs" />
@@ -167,8 +168,11 @@
     <Compile Include="Utils\ExceptionUtil.cs" />
     <Compile Include="Utils\ListUtil.cs" />
     <Compile Include="Utils\ResourceUtils.cs" />
+    <Compile Include="ViewDefs\TWBSIcon.cs" />
     <Compile Include="ViewDefs\MaterialIcon.cs" />
     <Compile Include="Views\Commons\ICommonsMarker.cs" />
+    <Compile Include="Views\Html2\IHtml2Marker.cs" />
+    <EmbeddedResource Include="Views\Html2\Partials\Attributes.cshtml" />
     <Compile Include="Views\Html\IHtmlMarker.cs" />
     <Compile Include="Views\Logger\ILoggerMarker.cs" />
   </ItemGroup>
@@ -224,6 +228,16 @@
     <EmbeddedResource Include="Views\Commons\CommonsAttributes.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsMedia.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsRow.cshtml" />
+    <EmbeddedResource Include="Views\Html2\Tag.cshtml" />
+    <EmbeddedResource Include="Views\Html2\Dashboard.cshtml" />
+    <EmbeddedResource Include="Views\Html2\Index.cshtml" />
+    <EmbeddedResource Include="Views\Html2\Partials\Sidenav.cshtml" />
+    <EmbeddedResource Include="Views\Html2\Partials\Log.cshtml" />
+    <EmbeddedResource Include="Views\Html2\Partials\RecurseNodes.cshtml" />
+    <EmbeddedResource Include="Views\Html2\Partials\AttributesView.cshtml" />
+    <EmbeddedResource Include="Views\Html2\Partials\Navbar.cshtml" />
+    <EmbeddedResource Include="Views\Html2\Author.cshtml" />
+    <EmbeddedResource Include="Views\Html2\Device.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Languages.txt" />

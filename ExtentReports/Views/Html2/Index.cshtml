@@ -39,13 +39,15 @@
 											<a href="dropdown-toggle" data-toggle="dropdown">
 												<i class="fa fa-warning"></i>
 											</a>
-											<div class="dropdown-menu">
-												@if (Model.ContainsStatus(Status.Pass)) {<a class="dropdown-item" href="#"><span>Pass</span><span class="status success pull-right"></span></a>}
-												@if (Model.ContainsStatus(Status.Fail)) {<a class="dropdown-item" href="#"><span>Fail</span><span class="status danger pull-right"></span></a>}
-												@if (Model.ContainsStatus(Status.Fatal)) {<a class="dropdown-item" href="#"><span>Fatal</span><span class="status danger pull-right"></span></a>}
-												@if (Model.ContainsStatus(Status.Error)) {<a class="dropdown-item" href="#"><span>Error</span><span class="status warning pull-right"></span></a>}
-												@if (Model.ContainsStatus(Status.Warning)) {<a class="dropdown-item" href="#"><span>Warning</span><span class="status warning pull-right"></span></a>}
-												@if (Model.ContainsStatus(Status.Skip)) {<a class="dropdown-item" href="#"><span>Skip</span><span class="status warning pull-right"></span></a>}
+											<div id="status-toggle" class="dropdown-menu">
+												@if (Model.ContainsStatus(Status.Pass)) {<a status="pass" class="dropdown-item" href="#"><span>Pass</span><span class="status success pull-right"></span></a>}
+												@if (Model.ContainsStatus(Status.Fail)) {<a status="fail" class="dropdown-item" href="#"><span>Fail</span><span class="status danger pull-right"></span></a>}
+												@if (Model.ContainsStatus(Status.Fatal)) {<a status="fatal" class="dropdown-item" href="#"><span>Fatal</span><span class="status danger pull-right"></span></a>}
+												@if (Model.ContainsStatus(Status.Error)) {<a status="error" class="dropdown-item" href="#"><span>Error</span><span class="status warning pull-right"></span></a>}
+												@if (Model.ContainsStatus(Status.Warning)) {<a status="warning" class="dropdown-item" href="#"><span>Warning</span><span class="status warning pull-right"></span></a>}
+												@if (Model.ContainsStatus(Status.Skip)) {<a status="skip" class="dropdown-item" href="#"><span>Skip</span><span class="status warning pull-right"></span></a>}
+												<div class="dropdown-divider"></div>
+												<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
 											</div>
 										</div>
                                     </li>
@@ -56,7 +58,7 @@
 											<a href="dropdown-toggle" data-toggle="dropdown">
 												<i class="fa fa-user"></i>
 											</a>
-											<div class="dropdown-menu">
+											<div id="author-toggle" class="dropdown-menu">
 												@foreach (var author in Model.AuthorContext.Context) 
 												{
 													<a class="dropdown-item" href="#">@author.Name</a>
@@ -72,7 +74,7 @@
 											<a href="dropdown-toggle" data-toggle="dropdown">
 												<i class="fa fa-tag"></i>
 											</a>
-											<div class="dropdown-menu">
+											<div id="tag-toggle" class="dropdown-menu">
 												@foreach (var category in Model.CategoryContext.Context) 
 												{
 													<a class="dropdown-item" href="#">@category.Name</a>
@@ -88,7 +90,7 @@
 											<a href="dropdown-toggle" data-toggle="dropdown">
 												<i class="fa fa-tablet"></i>
 											</a>
-                                            <div class="dropdown-menu">
+                                            <div id="device-toggle" class="dropdown-menu">
                                                 @foreach (var device in Model.DeviceContext.Context) 
 												{
 													<a class="dropdown-item" href="#">@device.Name</a>
@@ -103,7 +105,20 @@
                                 <ul id="test-list-item" class="test-list-item">
                                 	@foreach (var test in Model.TestList)
 									{
-                                    <li class="test">
+									string authors = "", devices = "", tags = "";
+									foreach (var author in test.AuthorContext.All())
+									{
+										authors += author.Name + " ";
+									}
+									foreach (var device in test.DeviceContext.All())
+									{
+										devices += device.Name + " ";
+									}
+									foreach (var tag in test.CategoryContext.All())
+									{
+										tags += tag.Name + " ";
+									}
+                                    <li class="test" status="@test.Status.ToString().ToLower()" author="@authors.Trim()" device="@devices.Trim()" tag="@tags.Trim()">
                                         <div class="status-avatar @test.Status.ToString().ToLower()-bg">
                                             @test.Status
                                         </div> 

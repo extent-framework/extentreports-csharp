@@ -4,7 +4,6 @@
 	var bdd = false;
 	if (Model.TestList.Count > 0)
 	{
-		
 		bdd = Model.TestList[0].IsBehaviorDrivenType || (Model.TestList[0].HasChildren && Model.TestList[0].NodeContext.FirstOrDefault().IsBehaviorDrivenType);
 	}
 }
@@ -95,7 +94,7 @@
 			<!-- search -->
 		</div>
 	</section>
-	@Include("Charts")
+	@Include("V3Charts")
 	<div class='subview-left left'>
 		<div class='view-summary'>
 			<ul id='test-collection' class='test-collection'>

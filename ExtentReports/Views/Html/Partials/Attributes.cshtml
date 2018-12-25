@@ -1,0 +1,26 @@
+﻿@if (Model.HasAttributes)
+{
+	<div class="attributes">
+		@if (Model.HasAuthor)
+		{
+			foreach (var author in Model.AuthorContext.All()) 
+			{
+				<span class="badge badge-pill badge-default"><i class="fa fa-user-o"></i> @author.Name</span> 
+			}
+		}
+		@if (Model.HasCategory)
+		{
+			foreach (var category in Model.CategoryContext.All()) 
+			{
+				<span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> @category.Name</span> 	
+			}
+		}
+		@if (Model.HasDevice)
+		{
+			foreach (var device in Model.DeviceContext.All())
+			{
+				<span class="badge badge-pill badge-default"><i class="fa fa-tablet"></i> @device.Name</span> 
+			}
+		}
+	</div>
+}

@@ -26,6 +26,8 @@ namespace AventStack.ExtentReports.Reporter
 
         public List<Test> TestList { get; protected internal set; }
 
+        public List<Status> StatusList { get; protected internal set; }
+
         public TestAttributeTestContextProvider<Author> AuthorContext { get; protected internal set; }
 
         public TestAttributeTestContextProvider<Category> CategoryContext { get; protected internal set; }
@@ -62,6 +64,7 @@ namespace AventStack.ExtentReports.Reporter
         public override void Flush(ReportAggregates reportAggregates)
         {
             TestList = reportAggregates.TestList;
+            StatusList = reportAggregates.StatusList;
             ReportStatusStats = reportAggregates.ReportStatusStats;
             AuthorContext = reportAggregates.AuthorContext;
             CategoryContext = reportAggregates.CategoryContext;
@@ -144,12 +147,7 @@ namespace AventStack.ExtentReports.Reporter
 
         public bool ContainsStatus(Status status)
         {
-            return true;
-        }
-
-        public bool ContainsStatus(string status)
-        {
-            return true;
+            return StatusList.Contains(status);
         }
     }
 }

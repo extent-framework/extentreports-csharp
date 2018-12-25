@@ -1,0 +1,32 @@
+﻿@using AventStack.ExtentReports.ViewDefs
+
+<table class="table table-sm">
+	<thead><tr>
+		<th class="status-col">Status</th>
+		<th class="timestamp-col">Timestamp</th>
+		<th class="details-col">Details</th>
+	</tr></thead>
+	<tbody>
+		@foreach (var log in Model.LogContext.All())
+		{
+			<tr class="event-row">
+				<td><i class="fa fa-@TWBSIcon.GetIcon(log.Status) text-@log.Status.ToString().ToLower()"></i></td>
+				<td>@log.Timestamp.ToString("HH:mm:ss")</td>
+				<td>
+					@if (log.HasException)
+					{
+						<textarea disabled class="code-block">@log.ExceptionInfo.Exception.StackTrace</textarea>
+					}
+					else
+					{
+						@Raw(log.Details)
+					}
+					@if (log.HasScreenCapture)
+					{
+						<span class="badge badge-primary">@Raw(log.ScreenCaptureContext.FirstOrDefault().SourceIcon)</span>
+					}
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>

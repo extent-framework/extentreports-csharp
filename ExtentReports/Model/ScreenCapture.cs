@@ -32,5 +32,21 @@ namespace AventStack.ExtentReports.Model
                     "</a>";
             }
         }
+
+        public string ScreenCapturePath
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(base.Path) ? base.Path : Base64String;
+            }
+        }
+
+        public bool IsBase64
+        {
+            get
+            {
+                return !string.IsNullOrEmpty(Base64String);
+            }
+        }
     }
 }

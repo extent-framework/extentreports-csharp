@@ -206,9 +206,16 @@ namespace AventStack.ExtentReports.Core
                     return;
                 }
 
-                _statusMap.Clear();
                 var distinctStatusList = testList.Select(x => x.Status).Distinct();
-                distinctStatusList.ToList().ForEach(x => _statusMap.Add(x, false));
+
+                foreach (var s in distinctStatusList)
+                {
+                    if (!_statusMap.ContainsKey(s))
+                    {
+                        _statusMap.Add(s, false);
+                    }
+                }
+                
                 // recursively, do the same for child tests
                 foreach (var test in testList.ToList())
                 {
@@ -350,6 +357,7 @@ namespace AventStack.ExtentReports.Core
             var reportAggregates = new ReportAggregates
             {
                 TestList = _testList,
+                StatusList = _statusList,
                 ReportStatusStats = this.ReportStatusStats,
                 AuthorContext = this.AuthorContext,
                 CategoryContext = this.CategoryContext,

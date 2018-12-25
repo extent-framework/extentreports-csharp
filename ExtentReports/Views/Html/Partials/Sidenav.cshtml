@@ -1,0 +1,66 @@
+﻿<div class="side-nav expand-lg">
+  <div class="side-nav-inner">
+    <ul class="side-nav-menu scrollable">
+      <li class="nav-item">
+        <a href="index.html">
+          <span class="icon-holder">
+            <i class="fa fa-align-left"></i>
+          </span>
+          <span class="title">Tests</span>
+        </a>
+      </li>
+      @if (Model.AuthorContext.Context.Count > 0)
+      {
+      <li class="nav-item">
+        <a href="author.html">
+          <span class="icon-holder">
+            <i class="fa fa-user-o"></i>
+          </span>
+          <span class="title">Author</span>
+        </a>
+      </li>
+      }
+      @if (Model.CategoryContext.Context.Count > 0)
+      {
+      <li class="nav-item">
+        <a href="tag.html">
+          <span class="icon-holder">
+            <i class="fa fa-tag"></i>
+          </span>
+          <span class="title">Tag</span>
+        </a>
+      </li>
+      }
+      @if (Model.DeviceContext.Context.Count > 0)
+      {
+      <li class="nav-item">
+        <a href="device.html">
+          <span class="icon-holder">
+            <i class="fa fa-tablet"></i>
+          </span>
+          <span class="title">Device</span>
+        </a>
+      </li>
+      }
+      @if (Model.ExceptionInfoContext.Context.Count > 0)
+      {
+      <li class="nav-item">
+        <a href="exception.html">
+          <span class="icon-holder">
+            <i class="fa fa-bug"></i>
+          </span>
+          <span class="title">Exception</span>
+        </a>
+      </li>
+      }
+      <li class="nav-item">
+        <a href="dashboard.html">
+          <span class="icon-holder">
+            <i class="fa fa-dashboard"></i>
+          </span>
+          <span class="title">Dashboard</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>

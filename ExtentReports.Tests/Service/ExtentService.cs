@@ -15,7 +15,7 @@ namespace AventStack.ExtentReports.Tests.Parallel
 
         static ExtentService()
         {
-            var htmlReporter = new ExtentHtmlReporter(TestContext.CurrentContext.TestDirectory + "\\Extent.html");
+            var htmlReporter = new ExtentV3HtmlReporter(TestContext.CurrentContext.TestDirectory + "\\Extent.html");
             htmlReporter.Config.DocumentTitle = "Extent/NUnit Samples";
             htmlReporter.Config.ReportName = "Extent/NUnit Samples";
             htmlReporter.Config.Theme = Theme.Standard;

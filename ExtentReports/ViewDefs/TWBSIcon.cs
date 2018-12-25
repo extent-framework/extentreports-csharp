@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AventStack.ExtentReports.ViewDefs
 {
-    public static class MaterialIcon
+    public static class TWBSIcon
     {
         private static Dictionary<Status, string> _dic = new Dictionary<Status, string>();
 
@@ -20,21 +19,21 @@ namespace AventStack.ExtentReports.ViewDefs
             switch (status)
             {
                 case Status.Fail:
-                    return "cancel";
+                    return "times";
                 case Status.Fatal:
-                    return "cancel";
+                    return "times";
                 case Status.Error:
-                    return "error";
+                    return "exclamation";
                 case Status.Warning:
                     return"warning";
                 case Status.Skip:
-                    return "redo";
+                    return "long-arrow-right";
                 case Status.Pass:
-                    return "check_circle";
+                    return "check";
                 case Status.Debug:
                     return "low_priority";
                 case Status.Info:
-                    return "info_outline";
+                    return "info";
                 default:
                     return "help";
             }

@@ -17,7 +17,7 @@ namespace AventStack.ExtentReports.Tests
         {
             string dir = TestContext.CurrentContext.TestDirectory + "\\";
             var fileName = this.GetType().ToString() + ".html";
-            ExtentHtmlReporter htmlReporter = new ExtentHtmlReporter(dir + fileName);
+            ExtentV3HtmlReporter htmlReporter = new ExtentV3HtmlReporter(dir + fileName);
 
             _extent = new ExtentReports();
             _extent.AttachReporter(htmlReporter);

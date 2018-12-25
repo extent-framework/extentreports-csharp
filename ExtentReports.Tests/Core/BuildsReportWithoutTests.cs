@@ -13,7 +13,7 @@ namespace AventStack.ExtentReports.Tests.APITests
         public void BuildReportWithoutTests()
         {
             var fileName = TestContext.CurrentContext.Test.Name + ".html";
-            var reporter = new ExtentHtmlReporter(fileName);
+            var reporter = new ExtentV3HtmlReporter(fileName);
             var extent = new ExtentReports();
             extent.AttachReporter(reporter);
             extent.Flush();

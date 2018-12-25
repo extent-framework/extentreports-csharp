@@ -32,34 +32,34 @@ namespace AventStack.ExtentReports.Reporter
         {
             base.Flush(reportAggregates);
 
-            Directory.CreateDirectory(SavePath);
+            Directory.CreateDirectory(FolderSavePath);
 
             var source = RazorEngineManager.Instance.Razor.RunCompile("Index", typeof(ExtentHtmlReporter), this);
-            File.WriteAllText(SavePath + "index.html", source);
+            File.WriteAllText(FolderSavePath + "index.html", source);
             source = RazorEngineManager.Instance.Razor.RunCompile("Dashboard", typeof(ExtentHtmlReporter), this);
-            File.WriteAllText(SavePath + "dashboard.html", source);
+            File.WriteAllText(FolderSavePath + "dashboard.html", source);
             if (AuthorContext.Context.Count > 0)
             {
                 source = RazorEngineManager.Instance.Razor.RunCompile("Author", typeof(ExtentHtmlReporter), this);
-                File.WriteAllText(SavePath + "author.html", source);
+                File.WriteAllText(FolderSavePath + "author.html", source);
             }
             if (CategoryContext.Context.Count > 0)
             {
                 source = RazorEngineManager.Instance.Razor.RunCompile("Tag", typeof(ExtentHtmlReporter), this);
-                File.WriteAllText(SavePath + "tag.html", source);
+                File.WriteAllText(FolderSavePath + "tag.html", source);
             }
             if (DeviceContext.Context.Count > 0)
             {
                 source = RazorEngineManager.Instance.Razor.RunCompile("Device", typeof(ExtentHtmlReporter), this);
-                File.WriteAllText(SavePath + "device.html", source);
+                File.WriteAllText(FolderSavePath + "device.html", source);
             }
             if (ExceptionInfoContext.Context.Count > 0)
             {
                 source = RazorEngineManager.Instance.Razor.RunCompile("Exception", typeof(ExtentHtmlReporter), this);
-                File.WriteAllText(SavePath + "exception.html", source);
+                File.WriteAllText(FolderSavePath + "exception.html", source);
             }
         }
-        
+
         public override void Start()
         {
             base.Start();
@@ -85,7 +85,7 @@ namespace AventStack.ExtentReports.Reporter
                 "Partials.Scripts",
                 "Partials.Sidenav"
             };
-            
+
             foreach (string template in templates)
             {
                 string resourceName = typeof(IHtmlMarker).Namespace + "." + template + ".cshtml";

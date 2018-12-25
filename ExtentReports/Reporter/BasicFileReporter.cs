@@ -7,6 +7,7 @@ using AventStack.ExtentReports.Reporter.Configuration.Default;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 
 namespace AventStack.ExtentReports.Reporter
 {
@@ -14,7 +15,8 @@ namespace AventStack.ExtentReports.Reporter
     {
         public override string ReporterName { get; }
 
-        public string SavePath { get; protected internal set; }
+        protected string SavePath { get; set; }
+        protected string FolderSavePath { get; set; }
 
         public override AnalysisStrategy AnalysisStrategy { get; set; }
 
@@ -45,6 +47,8 @@ namespace AventStack.ExtentReports.Reporter
         protected BasicFileReporter(string filePath)
         {
             SavePath = filePath;
+            FolderSavePath = Path.GetDirectoryName(filePath);
+            FolderSavePath = string.IsNullOrEmpty(FolderSavePath) ? "./" : FolderSavePath;
         }
 
         protected void Initialize(BasicFileConfiguration userConfig)
@@ -92,47 +96,47 @@ namespace AventStack.ExtentReports.Reporter
 
         public override void OnAuthorAssigned(Test test, Author author)
         {
-            
+
         }
 
         public override void OnCategoryAssigned(Test test, Category category)
         {
-            
+
         }
 
         public override void OnDeviceAssigned(Test test, Device device)
         {
-            
+
         }
 
         public override void OnLogAdded(Test test, Log log)
         {
-            
+
         }
 
         public override void OnNodeStarted(Test node)
         {
-            
+
         }
 
         public override void OnScreenCaptureAdded(Test test, ScreenCapture screenCapture)
         {
-            
+
         }
 
         public override void OnScreenCaptureAdded(Log log, ScreenCapture screenCapture)
         {
-            
+
         }
 
         public override void OnTestRemoved(Test test)
         {
-            
+
         }
 
         public override void OnTestStarted(Test test)
         {
-            
+
         }
 
         public override void Start()
@@ -142,7 +146,7 @@ namespace AventStack.ExtentReports.Reporter
 
         public override void Stop()
         {
-            
+
         }
 
         public bool ContainsStatus(Status status)

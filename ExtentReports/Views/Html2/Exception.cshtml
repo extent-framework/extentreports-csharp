@@ -1,0 +1,59 @@
+﻿@using RazorEngine
+@using RazorEngine.Templating
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>@Model.MasterConfig.GetValue("documentTitle")</title>
+    <link rel="shortcut icon" href="https://cdn.rawgit.com/extent-framework/extent-github-cdn/d74480e/commons/img/logo.png">
+    <link rel="stylesheet" href="styles.css" />
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body class="attributes-view">
+    <div class="app">
+        <div class="layout">
+            @Include("Navbar")
+            @Include("Sidenav")
+            <div class="page-container">
+                <div class="main-content">
+                    <div class="avt-container row">
+                        <div class="test-list">
+                            <div class="test-list-tools">
+                                <ul class="tools pull-left">
+                                    <li>
+                                        <a href="">
+                                            <span>Authors</span>
+                                        </a>
+                                    </li> 
+                                </ul>
+								<ul class="tools text-right">
+                                    <li>
+                                        <a href="#">
+                                            <span class="badge badge-primary">@Model.ExceptionInfoContext.Context.Count</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="avt-wrapper scrollable">
+                                <ul id="test-list-item" class="test-list-item">
+                                	@foreach (var ex in Model.ExceptionInfoContext.Context)
+									{
+										@Include("AttributesView", ex)
+                                    }
+                                </ul>    
+                            </div>
+                        </div>
+                        <div class="test-content scrollable"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<script type='text/javascript'>
+		@Model.MasterConfig.GetValue("js")
+	</script>
+    <script src="scripts.js"></script>
+</body>
+</html>

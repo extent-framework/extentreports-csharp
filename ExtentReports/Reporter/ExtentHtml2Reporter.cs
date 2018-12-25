@@ -53,6 +53,11 @@ namespace AventStack.ExtentReports.Reporter
                 source = RazorEngineManager.Instance.Razor.RunCompile("Device", typeof(ExtentHtml2Reporter), this);
                 File.WriteAllText(SavePath + "device.html", source);
             }
+            if (ExceptionInfoContext.Context.Count > 0)
+            {
+                source = RazorEngineManager.Instance.Razor.RunCompile("Exception", typeof(ExtentHtml2Reporter), this);
+                File.WriteAllText(SavePath + "exception.html", source);
+            }
         }
         
         public override void Start()
@@ -66,9 +71,10 @@ namespace AventStack.ExtentReports.Reporter
             string[] templates = new string[]
             {
                 "Author",
-                "Device",
-                "Index",
                 "Dashboard",
+                "Device",
+                "Exception",
+                "Index",
                 "Tag",
                 "Partials.Attributes",
                 "Partials.AttributesView",

@@ -35,28 +35,28 @@ namespace AventStack.ExtentReports.Reporter
             Directory.CreateDirectory(FolderSavePath);
 
             var source = RazorEngineManager.Instance.Razor.RunCompile("Index", typeof(ExtentHtmlReporter), this);
-            File.WriteAllText(FolderSavePath + "index.html", source);
+            File.WriteAllText(Path.Combine(FolderSavePath, "index.html"), source);
             source = RazorEngineManager.Instance.Razor.RunCompile("Dashboard", typeof(ExtentHtmlReporter), this);
-            File.WriteAllText(FolderSavePath + "dashboard.html", source);
+            File.WriteAllText(Path.Combine(FolderSavePath, "dashboard.html"), source);
             if (AuthorContext.Context.Count > 0)
             {
                 source = RazorEngineManager.Instance.Razor.RunCompile("Author", typeof(ExtentHtmlReporter), this);
-                File.WriteAllText(FolderSavePath + "author.html", source);
+                File.WriteAllText(Path.Combine(FolderSavePath, "author.html"), source);
             }
             if (CategoryContext.Context.Count > 0)
             {
                 source = RazorEngineManager.Instance.Razor.RunCompile("Tag", typeof(ExtentHtmlReporter), this);
-                File.WriteAllText(FolderSavePath + "tag.html", source);
+                File.WriteAllText(Path.Combine(FolderSavePath, "tag.html"), source);
             }
             if (DeviceContext.Context.Count > 0)
             {
                 source = RazorEngineManager.Instance.Razor.RunCompile("Device", typeof(ExtentHtmlReporter), this);
-                File.WriteAllText(FolderSavePath + "device.html", source);
+                File.WriteAllText(Path.Combine(FolderSavePath, "device.html"), source);
             }
             if (ExceptionInfoContext.Context.Count > 0)
             {
                 source = RazorEngineManager.Instance.Razor.RunCompile("Exception", typeof(ExtentHtmlReporter), this);
-                File.WriteAllText(FolderSavePath + "exception.html", source);
+                File.WriteAllText(Path.Combine(FolderSavePath, "exception.html"), source);
             }
         }
 

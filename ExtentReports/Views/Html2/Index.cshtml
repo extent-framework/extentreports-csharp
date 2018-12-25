@@ -56,7 +56,7 @@
                                 </ul>
                             </div>
                             <div class="avt-wrapper scrollable">
-                                <ul class="test-list-item">
+                                <ul id="test-list-item" class="test-list-item">
                                 	@foreach (var test in Model.TestList)
 									{
                                     <li class="test">
@@ -70,70 +70,76 @@
                                                 <span class="datetime">@test.StartTime.ToString("HH:mm:ss tt")</span>
                                             </div>
                                         </div>
-                                    </li>
-                                    <div class="test-content-detail">
-		                                <div class="detail-head">
-		                                    <div class="p-v-10 d-inline-block">	
-		                                        <div class="info">
-		                                            <h4 class="test-status text-test.Status.ToString().ToLower()">@test.Name</h4>
-		                                            <span class='badge badge-success'>@test.StartTime</span>
-													<span class='badge badge-danger'>@test.EndTime</span>
-													<span class='badge badge-default'>@test.RunDuration.ToString("''h'h:'m'm:'s's+'fff'ms'")</span>
-		                                        </div>
-		                                        @if (test.HasAttributes)
+										<div class="test-content-detail">
+											<div class="detail-head">
+												<div class="p-v-10 d-inline-block">	
+													<div class="info">
+														<h4 class="test-status text-test.Status.ToString().ToLower()">@test.Name</h4>
+														<span class='badge badge-success'>@test.StartTime</span>
+														<span class='badge badge-danger'>@test.EndTime</span>
+														<span class='badge badge-default'>@test.RunDuration.ToString("''h'h:'m'm:'s's+'fff'ms'")</span>
+													</div>
+													@if (test.HasAttributes)
+													{
+													<div class="m-t-15">
+		                                        		@Include("Attributes", test)
+													</div>
+													}
+													@if (!string.IsNullOrEmpty(test.Description))
+													{
+													<div class="m-t-10 m-l-5">
+														@test.Description
+													</div>
+													}
+												</div>
+												<!-- <ul class="tools">
+													<li>Fri 8:40 AM</li>
+													<li class="d-none d-md-inline-block">
+														<a href="">
+															<i class="fa fa-reply"></i>
+														</a>
+													</li>
+												</ul> -->
+											</div> 
+											<div class="detail-body m-t-20">
+												@if (test.HasLog)
 												{
-		                                        <div class="m-t-15">
-		                                        	@Include("Attributes", test)
-		                                        </div>
-		                                        }
-		                                    </div>
-		                                    <!-- <ul class="tools">
-		                                        <li>Fri 8:40 AM</li>
-		                                        <li class="d-none d-md-inline-block">
-		                                            <a href="">
-		                                                <i class="fa fa-reply"></i>
-		                                            </a>
-		                                        </li>
-		                                    </ul> -->
-		                                </div> 
-		                                <div class="detail-body m-t-20">
-	                                        @if (test.HasLog)
+													@Include("Log", test)
+												}
+											</div>    
+											@if (test.HasScreenCapture)
 											{
-												@Include("Log", test)
-	                                        }
-		                                </div>    
-		                                @if (test.HasScreenCapture)
-										{
-		                                <div class="detail-foot">
-		                                    <ul class="attachments">
-		                                    	@foreach (var sc in test.ScreenCaptureContext.All())
-												{
-		                                        <li>
-		                                            <a href="@sc.ScreenCapturePath" data-featherlight="image">
-		                                                <div class="file-icon">
-															<i class="fa fa-file-image-o"></i> 
-		                                                </div>
-		                                                <div class="file-info">
-		                                                	@if (sc.IsBase64)
-															{
-		                                                		<span class="file-name">base64</span>
-		                                                    	<span class="file-size">0Kb</span>
-		                                                	} else {
-		                                                		<span class="file-name">@sc.Name</span>
-		                                                    	<span class="file-size"> @(sc.FileSize)Kb</span>
-		                                                	}
-		                                                </div>
-		                                            </a>
-		                                        </li>
-		                                        }
-		                                    </ul>
-		                                </div>
-		                                }
-		                                @if (test.HasChildren)
-										{
-		                                	@Include("RecurseNodes", test)
-		                                }
-		                            </div>
+											<div class="detail-foot">
+												<ul class="attachments">
+		                                    		@foreach (var sc in test.ScreenCaptureContext.All())
+													{
+													<li>
+														<a href="@sc.ScreenCapturePath" data-featherlight="image">
+															<div class="file-icon">
+																<i class="fa fa-file-image-o"></i> 
+															</div>
+															<div class="file-info">
+		                                                		@if (sc.IsBase64)
+																{
+		                                                			<span class="file-name">base64</span>
+		                                                    		<span class="file-size">0Kb</span>
+		                                                		} else {
+		                                                			<span class="file-name">@sc.Name</span>
+		                                                    		<span class="file-size"> @(sc.FileSize)Kb</span>
+		                                                		}
+															</div>
+														</a>
+													</li>
+													}
+												</ul>
+											</div>
+											}
+											@if (test.HasChildren)
+											{
+		                                		@Include("RecurseNodes", test)
+											}
+										</div>
+                                    </li>
                                     }
                                 </ul>    
                             </div>

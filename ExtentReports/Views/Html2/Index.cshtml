@@ -1,4 +1,5 @@
-﻿@using RazorEngine
+﻿@using AventStack.ExtentReports
+@using RazorEngine
 @using RazorEngine.Templating
 
 <!DOCTYPE html>
@@ -34,25 +35,68 @@
                                 </ul>
                                 <ul class="tools text-right">
                                     <li>
-                                        <a href="">
-                                            <i class="fa fa-warning"></i>
-                                        </a>
+                                        <div class="dropdown">
+											<a href="dropdown-toggle" data-toggle="dropdown">
+												<i class="fa fa-warning"></i>
+											</a>
+											<div class="dropdown-menu">
+												@if (Model.ContainsStatus(Status.Pass)) {<a class="dropdown-item" href="#"><span>Pass</span><span class="status success pull-right"></span></a>}
+												@if (Model.ContainsStatus(Status.Fail)) {<a class="dropdown-item" href="#"><span>Fail</span><span class="status danger pull-right"></span></a>}
+												@if (Model.ContainsStatus(Status.Fatal)) {<a class="dropdown-item" href="#"><span>Fatal</span><span class="status danger pull-right"></span></a>}
+												@if (Model.ContainsStatus(Status.Error)) {<a class="dropdown-item" href="#"><span>Error</span><span class="status warning pull-right"></span></a>}
+												@if (Model.ContainsStatus(Status.Warning)) {<a class="dropdown-item" href="#"><span>Warning</span><span class="status warning pull-right"></span></a>}
+												@if (Model.ContainsStatus(Status.Skip)) {<a class="dropdown-item" href="#"><span>Skip</span><span class="status warning pull-right"></span></a>}
+											</div>
+										</div>
                                     </li>
+									@if (Model.AuthorContext.Context.Count > 0)
+									{
                                     <li>
-                                        <a href="">
-                                            <i class="fa fa-user"></i>
-                                        </a>
+                                        <div class="dropdown">
+											<a href="dropdown-toggle" data-toggle="dropdown">
+												<i class="fa fa-user"></i>
+											</a>
+											<div class="dropdown-menu">
+												@foreach (var author in Model.AuthorContext.Context) 
+												{
+													<a class="dropdown-item" href="#">@author.Name</a>
+												}
+											</div>
+										</div>
                                     </li>
+									}
+									@if (Model.CategoryContext.Context.Count > 0)
+									{
 									<li>
-                                        <a href="">
-                                            <i class="fa fa-tag"></i>
-                                        </a>
+                                        <div class="dropdown">
+											<a href="dropdown-toggle" data-toggle="dropdown">
+												<i class="fa fa-tag"></i>
+											</a>
+											<div class="dropdown-menu">
+												@foreach (var category in Model.CategoryContext.Context) 
+												{
+													<a class="dropdown-item" href="#">@category.Name</a>
+												}
+											</div>
+										</div>
                                     </li>
+									}
+									@if (Model.DeviceContext.Context.Count > 0)
+									{
 									<li>
-                                        <a href="">
-                                            <i class="fa fa-tablet"></i>
-                                        </a>
+										<div class="dropdown">
+											<a href="dropdown-toggle" data-toggle="dropdown">
+												<i class="fa fa-tablet"></i>
+											</a>
+                                            <div class="dropdown-menu">
+                                                @foreach (var device in Model.DeviceContext.Context) 
+												{
+													<a class="dropdown-item" href="#">@device.Name</a>
+												}
+                                            </div>
+                                        </div>
                                     </li>
+									}
                                 </ul>
                             </div>
                             <div class="avt-wrapper scrollable">
@@ -74,7 +118,7 @@
 											<div class="detail-head">
 												<div class="p-v-10 d-inline-block">	
 													<div class="info">
-														<h4 class="test-status text-test.Status.ToString().ToLower()">@test.Name</h4>
+														<h4 class="test-status text-@test.Status.ToString().ToLower()">@test.Name</h4>
 														<span class='badge badge-success'>@test.StartTime</span>
 														<span class='badge badge-danger'>@test.EndTime</span>
 														<span class='badge badge-default'>@test.RunDuration.ToString("''h'h:'m'm:'s's+'fff'ms'")</span>

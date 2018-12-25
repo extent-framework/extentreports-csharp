@@ -150,8 +150,8 @@
     <Compile Include="Reporter\Configuration\Protocol.cs" />
     <Compile Include="Reporter\Configuration\RichViewReporterConfiguration.cs" />
     <Compile Include="Reporter\Configuration\Theme.cs" />
-    <Compile Include="Reporter\ExtentHtml2Reporter.cs" />
     <Compile Include="Reporter\ExtentHtmlReporter.cs" />
+    <Compile Include="Reporter\ExtentV3HtmlReporter.cs" />
     <Compile Include="Reporter\ExtentLoggerReporter.cs" />
     <Compile Include="Reporter\TemplateEngine\RazorEngineManager.cs" />
     <Compile Include="Reporter\TemplateInfo.cs" />
@@ -171,9 +171,9 @@
     <Compile Include="ViewDefs\TWBSIcon.cs" />
     <Compile Include="ViewDefs\MaterialIcon.cs" />
     <Compile Include="Views\Commons\ICommonsMarker.cs" />
-    <Compile Include="Views\Html2\IHtml2Marker.cs" />
-    <EmbeddedResource Include="Views\Html2\Partials\Attributes.cshtml" />
-    <Compile Include="Views\Html\IHtmlMarker.cs" />
+    <Compile Include="Views\Html\IHtml2Marker.cs" />
+    <EmbeddedResource Include="Views\Html\Partials\Attributes.cshtml" />
+    <Compile Include="Views\V3Html\IV3HtmlMarker.cs" />
     <Compile Include="Views\Logger\ILoggerMarker.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -193,26 +193,26 @@
     <EmbeddedResource Include="Views\Commons\CommonsInjectCss.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsInjectJs.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsTag.cshtml" />
-    <EmbeddedResource Include="Views\Html\Author\Author.cshtml" />
-    <EmbeddedResource Include="Views\Html\Category\Category.cshtml" />
-    <EmbeddedResource Include="Views\Html\Dashboard\Dashboard.cshtml" />
-    <EmbeddedResource Include="Views\Html\Exception\Exception.cshtml">
+    <EmbeddedResource Include="Views\V3Html\Author\V3Author.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Category\V3Category.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Dashboard\V3Dashboard.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Exception\V3Exception.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Html\TestRunner\Logs.cshtml" />
-    <EmbeddedResource Include="Views\Html\Test\Charts.cshtml">
+    <EmbeddedResource Include="Views\V3Html\TestRunner\V3Logs.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Test\V3Charts.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Html\Test\Test.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Html\Head.cshtml">
+    <EmbeddedResource Include="Views\V3Html\Test\V3Test.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Html\Index.cshtml" />
-    <EmbeddedResource Include="Views\Html\Nav.cshtml">
+    <EmbeddedResource Include="Views\V3Html\V3Head.cshtml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\V3Html\V3Index.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\V3Nav.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Logger\LoggerDashboard.cshtml">
@@ -228,17 +228,17 @@
     <EmbeddedResource Include="Views\Commons\CommonsAttributes.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsMedia.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsRow.cshtml" />
-    <EmbeddedResource Include="Views\Html2\Tag.cshtml" />
-    <EmbeddedResource Include="Views\Html2\Dashboard.cshtml" />
-    <EmbeddedResource Include="Views\Html2\Index.cshtml" />
-    <EmbeddedResource Include="Views\Html2\Partials\Sidenav.cshtml" />
-    <EmbeddedResource Include="Views\Html2\Partials\Log.cshtml" />
-    <EmbeddedResource Include="Views\Html2\Partials\RecurseNodes.cshtml" />
-    <EmbeddedResource Include="Views\Html2\Partials\AttributesView.cshtml" />
-    <EmbeddedResource Include="Views\Html2\Partials\Navbar.cshtml" />
-    <EmbeddedResource Include="Views\Html2\Author.cshtml" />
-    <EmbeddedResource Include="Views\Html2\Device.cshtml" />
-    <EmbeddedResource Include="Views\Html2\Exception.cshtml" />
+    <EmbeddedResource Include="Views\Html\Tag.cshtml" />
+    <EmbeddedResource Include="Views\Html\Dashboard.cshtml" />
+    <EmbeddedResource Include="Views\Html\Index.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Sidenav.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Log.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\RecurseNodes.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\AttributesView.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Navbar.cshtml" />
+    <EmbeddedResource Include="Views\Html\Author.cshtml" />
+    <EmbeddedResource Include="Views\Html\Device.cshtml" />
+    <EmbeddedResource Include="Views\Html\Exception.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Languages.txt" />

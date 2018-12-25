@@ -1,6 +1,6 @@
 ﻿using AventStack.ExtentReports.Core;
-using AventStack.ExtentReports.Views.Html;
 using AventStack.ExtentReports.Reporter.Configuration;
+using AventStack.ExtentReports.Views.Html;
 
 using RazorEngine.Templating;
 
@@ -20,7 +20,7 @@ namespace AventStack.ExtentReports.Reporter
         private static readonly string TemplateFolderPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Views");
         private static readonly string HtmlTemplateFolderPath = Path.Combine(TemplateFolderPath, "Html");
 
-        public ExtentHtmlReporter(string filePath) : base(filePath)
+        public ExtentHtmlReporter(string folderPath) : base(folderPath)
         {
             Config = new ExtentHtmlReporterConfiguration(this);
             Initialize(Config);
@@ -31,8 +31,33 @@ namespace AventStack.ExtentReports.Reporter
         public override void Flush(ReportAggregates reportAggregates)
         {
             base.Flush(reportAggregates);
+
+            Directory.CreateDirectory(SavePath);
+
             var source = RazorEngineManager.Instance.Razor.RunCompile("Index", typeof(ExtentHtmlReporter), this);
-            File.WriteAllText(SavePath, source);
+            File.WriteAllText(SavePath + "index.html", source);
+            source = RazorEngineManager.Instance.Razor.RunCompile("Dashboard", typeof(ExtentHtmlReporter), this);
+            File.WriteAllText(SavePath + "dashboard.html", source);
+            if (AuthorContext.Context.Count > 0)
+            {
+                source = RazorEngineManager.Instance.Razor.RunCompile("Author", typeof(ExtentHtmlReporter), this);
+                File.WriteAllText(SavePath + "author.html", source);
+            }
+            if (CategoryContext.Context.Count > 0)
+            {
+                source = RazorEngineManager.Instance.Razor.RunCompile("Tag", typeof(ExtentHtmlReporter), this);
+                File.WriteAllText(SavePath + "tag.html", source);
+            }
+            if (DeviceContext.Context.Count > 0)
+            {
+                source = RazorEngineManager.Instance.Razor.RunCompile("Device", typeof(ExtentHtmlReporter), this);
+                File.WriteAllText(SavePath + "device.html", source);
+            }
+            if (ExceptionInfoContext.Context.Count > 0)
+            {
+                source = RazorEngineManager.Instance.Razor.RunCompile("Exception", typeof(ExtentHtmlReporter), this);
+                File.WriteAllText(SavePath + "exception.html", source);
+            }
         }
         
         public override void Start()
@@ -45,16 +70,18 @@ namespace AventStack.ExtentReports.Reporter
         {
             string[] templates = new string[]
             {
+                "Author",
+                "Dashboard",
+                "Device",
+                "Exception",
                 "Index",
-                "Head",
-                "Nav",
-                "Test.Test",
-                "Test.Charts",
-                "Author.Author",
-                "Category.Category",
-                "Dashboard.Dashboard",
-                "Exception.Exception",
-                "TestRunner.Logs"
+                "Tag",
+                "Partials.Attributes",
+                "Partials.AttributesView",
+                "Partials.Log",
+                "Partials.Navbar",
+                "Partials.RecurseNodes",
+                "Partials.Sidenav"
             };
 
             foreach (string template in templates)

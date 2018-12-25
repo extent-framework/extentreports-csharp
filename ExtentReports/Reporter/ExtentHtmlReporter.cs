@@ -78,12 +78,14 @@ namespace AventStack.ExtentReports.Reporter
                 "Tag",
                 "Partials.Attributes",
                 "Partials.AttributesView",
+                "Partials.Head",
                 "Partials.Log",
                 "Partials.Navbar",
                 "Partials.RecurseNodes",
+                "Partials.Scripts",
                 "Partials.Sidenav"
             };
-
+            
             foreach (string template in templates)
             {
                 string resourceName = typeof(IHtmlMarker).Namespace + "." + template + ".cshtml";

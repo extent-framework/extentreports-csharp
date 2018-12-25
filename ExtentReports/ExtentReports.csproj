@@ -239,6 +239,8 @@
     <EmbeddedResource Include="Views\Html\Author.cshtml" />
     <EmbeddedResource Include="Views\Html\Device.cshtml" />
     <EmbeddedResource Include="Views\Html\Exception.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Head.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Scripts.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Languages.txt" />

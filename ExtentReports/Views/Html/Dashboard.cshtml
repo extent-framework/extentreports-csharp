@@ -43,15 +43,7 @@
 
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-		<title>@Model.MasterConfig.GetValue("documentTitle")</title>
-		<link rel="shortcut icon" href="https://cdn.rawgit.com/extent-framework/extent-github-cdn/d74480e/commons/img/logo.png">
-		<link rel="stylesheet" href="styles.css" />
-		<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-		<style>@Model.MasterConfig.GetValue("css") @Model.MasterConfig.GetValue("styles")</style>
-	</head>
+	@Include("Head")
 	<body class="dashboard-view">
 		<div class="app">
 			<div class="layout">
@@ -449,9 +441,6 @@
 				var timeline = { @json };
 			</script>
 		}
-		<script type='text/javascript'>
-			@Model.MasterConfig.GetValue("js")
-		</script>
-		<script src="scripts.js"></script>
+		@Include("Scripts")
 	</body>
 </html>

@@ -238,6 +238,7 @@
     <EmbeddedResource Include="Views\Html2\Partials\Navbar.cshtml" />
     <EmbeddedResource Include="Views\Html2\Author.cshtml" />
     <EmbeddedResource Include="Views\Html2\Device.cshtml" />
+    <EmbeddedResource Include="Views\Html2\Exception.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Languages.txt" />

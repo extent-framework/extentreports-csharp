@@ -18,7 +18,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -154,6 +154,7 @@
     <Compile Include="Reporter\ExtentV3HtmlReporter.cs" />
     <Compile Include="Reporter\ExtentLoggerReporter.cs" />
     <Compile Include="Reporter\TemplateEngine\RazorEngineManager.cs" />
+    <Compile Include="Reporter\TemplateEngine\TemplateLoadService.cs" />
     <Compile Include="Reporter\TemplateInfo.cs" />
     <Compile Include="Core\ReportStatusStats.cs" />
     <Compile Include="Status.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Views\Commons\ICommonsMarker.cs" />
     <Compile Include="Views\Html\IHtml2Marker.cs" />
     <EmbeddedResource Include="Views\Html\Partials\Attributes.cshtml" />
+    <Compile Include="Views\IViewsMarker.cs" />
     <Compile Include="Views\V3Html\IV3HtmlMarker.cs" />
     <Compile Include="Views\Logger\ILoggerMarker.cs" />
   </ItemGroup>

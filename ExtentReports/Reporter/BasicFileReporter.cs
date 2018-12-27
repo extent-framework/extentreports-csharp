@@ -49,6 +49,11 @@ namespace AventStack.ExtentReports.Reporter
             SavePath = filePath;
             FolderSavePath = Path.GetDirectoryName(filePath);
             FolderSavePath = string.IsNullOrEmpty(FolderSavePath) ? "./" : FolderSavePath;
+
+            if (!Directory.Exists(FolderSavePath))
+            {
+                Directory.CreateDirectory(FolderSavePath);
+            }
         }
 
         protected void Initialize(BasicFileConfiguration userConfig)

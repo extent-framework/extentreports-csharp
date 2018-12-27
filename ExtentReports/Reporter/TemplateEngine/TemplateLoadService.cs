@@ -21,7 +21,6 @@ namespace AventStack.ExtentReports.Reporter.TemplateEngine
                 using (var resourceStream = typeof(T).Assembly.GetManifestResourceStream(resourceName))
                 {
                     using (var reader = new StreamReader(resourceStream))
-
                     {
                         if (resourceStream != null)
                         {

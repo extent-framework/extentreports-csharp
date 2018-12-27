@@ -10,10 +10,6 @@ using System.IO;
 
 namespace AventStack.ExtentReports.Reporter
 {
-    /// <summary>
-    /// The ExtentHtmlReporter creates a rich standalone HTML file. It allows several configuration options
-    /// via the <code>Configuration()</code> method.
-    /// </summary>
     public class ExtentHtmlReporter : BasicFileReporter
     {
         public new string ReporterName => "html";
@@ -32,8 +28,6 @@ namespace AventStack.ExtentReports.Reporter
         public override void Flush(ReportAggregates reportAggregates)
         {
             base.Flush(reportAggregates);
-
-            Directory.CreateDirectory(FolderSavePath);
 
             var source = RazorEngineManager.Instance.Razor.RunCompile("Index", typeof(ExtentHtmlReporter), this);
             File.WriteAllText(Path.Combine(FolderSavePath, "index.html"), source);

@@ -31,7 +31,6 @@ namespace AventStack.ExtentReports.Reporter
 
         public override void Flush(ReportAggregates reportAggregates)
         {
-            Directory.CreateDirectory(Path.GetDirectoryName(SavePath));
             base.Flush(reportAggregates);
             var source = RazorEngineManager.Instance.Razor.RunCompile("V3Index", typeof(ExtentV3HtmlReporter), this);
             File.WriteAllText(SavePath, source);

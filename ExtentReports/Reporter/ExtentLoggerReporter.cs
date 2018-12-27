@@ -30,8 +30,6 @@ namespace AventStack.ExtentReports.Reporter
         {
             base.Flush(reportAggregates);
 
-            Directory.CreateDirectory(SavePath);
-
             var source = RazorEngineManager.Instance.Razor.RunCompile("LoggerTest", typeof(ExtentLoggerReporter), this);
             File.WriteAllText(SavePath + "Index.html", source);
             source = RazorEngineManager.Instance.Razor.RunCompile("LoggerDashboard", typeof(ExtentLoggerReporter), this);

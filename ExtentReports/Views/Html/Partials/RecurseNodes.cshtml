@@ -9,7 +9,7 @@
 						<div class="node">@node.Name</div>
 						<a data-toggle="collapse">
 							<div class="status-avatar @node.Status.ToString().ToLower()-bg">
-							    @node.Status
+							    @node.Status.ToString().Replace("ing","")
 							</div>
 						</a>
 					</h5>

@@ -113,7 +113,7 @@
 									}
                                     <li class="test" status="@test.Status.ToString().ToLower()" author="@authors.Trim()" device="@devices.Trim()" tag="@tags.Trim()">
                                         <div class="status-avatar @test.Status.ToString().ToLower()-bg">
-                                            @test.Status
+                                            @test.Status.ToString().Replace("ing","")
                                         </div> 
                                         <div>
                                             <div class="test-detail"> 

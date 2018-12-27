@@ -1,6 +1,6 @@
 ﻿namespace AventStack.ExtentReports.Views.Commons
 {
-    public interface ICommonsMarker
+    internal interface ICommonsMarker : IViewsMarker
     {
     }
 }

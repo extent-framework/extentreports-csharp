@@ -1,6 +1,6 @@
 ﻿namespace AventStack.ExtentReports.Views.Html
 {
-    internal interface IHtmlMarker
+    internal interface IHtmlMarker : IViewsMarker
     {
     }
 }

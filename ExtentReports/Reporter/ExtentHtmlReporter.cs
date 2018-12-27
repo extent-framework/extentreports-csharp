@@ -1,5 +1,6 @@
 ﻿using AventStack.ExtentReports.Core;
 using AventStack.ExtentReports.Reporter.Configuration;
+using AventStack.ExtentReports.Reporter.TemplateEngine;
 using AventStack.ExtentReports.Views.Html;
 
 using RazorEngine.Templating;
@@ -86,22 +87,7 @@ namespace AventStack.ExtentReports.Reporter
                 "Partials.Sidenav"
             };
 
-            foreach (string template in templates)
-            {
-                string resourceName = typeof(IHtmlMarker).Namespace + "." + template + ".cshtml";
-                using (var resourceStream = typeof(IHtmlMarker).Assembly.GetManifestResourceStream(resourceName))
-                {
-                    using (var reader = new StreamReader(resourceStream))
-                    {
-                        if (resourceStream != null)
-                        {
-                            var arr = template.Split('.');
-                            var name = arr.Length > 1 ? arr[arr.Length - 1] : arr[0];
-                            RazorEngineManager.Instance.Razor.AddTemplate(name, reader.ReadToEnd());
-                        }
-                    }
-                }
-            }
+            TemplateLoadService.LoadTemplate<IHtmlMarker>(templates);
         }
     }
 }

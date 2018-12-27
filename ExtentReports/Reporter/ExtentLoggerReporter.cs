@@ -1,5 +1,6 @@
 ﻿using AventStack.ExtentReports.Core;
 using AventStack.ExtentReports.Reporter.Configuration;
+using AventStack.ExtentReports.Reporter.TemplateEngine;
 using AventStack.ExtentReports.Views.Commons;
 using AventStack.ExtentReports.Views.Logger;
 
@@ -35,10 +36,16 @@ namespace AventStack.ExtentReports.Reporter
             File.WriteAllText(SavePath + "Index.html", source);
             source = RazorEngineManager.Instance.Razor.RunCompile("LoggerDashboard", typeof(ExtentLoggerReporter), this);
             File.WriteAllText(SavePath + "Dashboard.html", source);
-            source = RazorEngineManager.Instance.Razor.RunCompile("LoggerTag", typeof(ExtentLoggerReporter), this);
-            File.WriteAllText(SavePath + "Tag.html", source);
-            source = RazorEngineManager.Instance.Razor.RunCompile("LoggerException", typeof(ExtentLoggerReporter), this);
-            File.WriteAllText(SavePath + "Exception.html", source);
+            if (CategoryContext.Context.Count > 0)
+            {
+                source = RazorEngineManager.Instance.Razor.RunCompile("LoggerTag", typeof(ExtentLoggerReporter), this);
+                File.WriteAllText(SavePath + "Tag.html", source);
+            }
+            if (ExceptionInfoContext.Context.Count > 0)
+            {
+                source = RazorEngineManager.Instance.Razor.RunCompile("LoggerException", typeof(ExtentLoggerReporter), this);
+                File.WriteAllText(SavePath + "Exception.html", source);
+            }
         }
 
         public override void Start()
@@ -47,7 +54,7 @@ namespace AventStack.ExtentReports.Reporter
             AddTemplates();
         }
 
-        private void AddTemplates()
+        private static void AddTemplates()
         {
             string[] templates = new string[]
             {
@@ -60,7 +67,7 @@ namespace AventStack.ExtentReports.Reporter
                 "Partials.LoggerNavRight",
                 "LoggerMacro"
             };
-            AddTemplates<ILoggerMarker>(templates);
+            TemplateLoadService.LoadTemplate<ILoggerMarker>(templates);
 
             templates = new string[]
             {
@@ -74,27 +81,7 @@ namespace AventStack.ExtentReports.Reporter
                 "CommonsRow",
                 "CommonsTag"
             };
-            AddTemplates<ICommonsMarker>(templates);
-        }
-
-        private void AddTemplates<T>(string[] templates)
-        {
-            foreach (string template in templates)
-            {
-                var resourceName = typeof(T).Namespace + "." + template + ".cshtml";
-                using (var resourceStream = typeof(T).Assembly.GetManifestResourceStream(resourceName))
-                {
-                    using (var reader = new StreamReader(resourceStream))
-                    {
-                        if (resourceStream != null)
-                        {
-                            var arr = template.Split('.');
-                            var name = arr.Length > 1 ? arr[arr.Length - 1] : arr[0];
-                            RazorEngineManager.Instance.Razor.AddTemplate(name, reader.ReadToEnd());
-                        }
-                    }
-                }
-            }
+            TemplateLoadService.LoadTemplate<ICommonsMarker>(templates);
         }
     }
 }

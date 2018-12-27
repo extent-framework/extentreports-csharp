@@ -5,7 +5,7 @@ using RazorEngine.Text;
 
 using System;
 
-namespace AventStack.ExtentReports.Reporter
+namespace AventStack.ExtentReports.Reporter.TemplateEngine
 {
     internal sealed class RazorEngineManager
     {

@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{783324EC-3D15-46A1-B34E-A1F15B97DD59}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>AventStack.ExtentReports</RootNamespace>
     <AssemblyName>ExtentReports</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
@@ -230,17 +230,12 @@
     <EmbeddedResource Include="Views\Commons\CommonsAttributes.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsMedia.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsRow.cshtml" />
-    <EmbeddedResource Include="Views\Html\Tag.cshtml" />
     <EmbeddedResource Include="Views\Html\Dashboard.cshtml" />
     <EmbeddedResource Include="Views\Html\Index.cshtml" />
     <EmbeddedResource Include="Views\Html\Partials\Sidenav.cshtml" />
     <EmbeddedResource Include="Views\Html\Partials\Log.cshtml" />
     <EmbeddedResource Include="Views\Html\Partials\RecurseNodes.cshtml" />
-    <EmbeddedResource Include="Views\Html\Partials\AttributesView.cshtml" />
     <EmbeddedResource Include="Views\Html\Partials\Navbar.cshtml" />
-    <EmbeddedResource Include="Views\Html\Author.cshtml" />
-    <EmbeddedResource Include="Views\Html\Device.cshtml" />
-    <EmbeddedResource Include="Views\Html\Exception.cshtml" />
     <EmbeddedResource Include="Views\Html\Partials\Head.cshtml" />
     <EmbeddedResource Include="Views\Html\Partials\Scripts.cshtml" />
   </ItemGroup>

@@ -171,6 +171,9 @@
     <Compile Include="Utils\ResourceUtils.cs" />
     <Compile Include="ViewDefs\TWBSIcon.cs" />
     <Compile Include="ViewDefs\MaterialIcon.cs" />
+    <EmbeddedResource Include="Views\Commons\CommonsNav.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsNavRight.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsHead.cshtml" />
     <Compile Include="Views\Commons\ICommonsMarker.cs" />
     <Compile Include="Views\Html\IHtml2Marker.cs" />
     <EmbeddedResource Include="Views\Html\Partials\Attributes.cshtml" />
@@ -189,7 +192,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>GherkinLangs.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Commons\CommonsDashboardScripts.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsDashboard.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsException.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsInjectCss.cshtml" />
@@ -217,15 +219,7 @@
     <EmbeddedResource Include="Views\V3Html\V3Nav.cshtml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Logger\LoggerDashboard.cshtml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Logger\LoggerException.cshtml" />
-    <EmbeddedResource Include="Views\Logger\LoggerTag.cshtml" />
     <EmbeddedResource Include="Views\Logger\LoggerTest.cshtml" />
-    <EmbeddedResource Include="Views\Logger\Partials\LoggerHead.cshtml" />
-    <EmbeddedResource Include="Views\Logger\Partials\LoggerNavRight.cshtml" />
-    <EmbeddedResource Include="Views\Logger\Partials\LoggerNav.cshtml" />
     <EmbeddedResource Include="Views\Logger\LoggerMacro.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsAttributes.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsMedia.cshtml" />

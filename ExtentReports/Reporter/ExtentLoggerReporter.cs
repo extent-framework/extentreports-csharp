@@ -32,16 +32,16 @@ namespace AventStack.ExtentReports.Reporter
 
             var source = RazorEngineManager.Instance.Razor.RunCompile("LoggerTest", typeof(ExtentLoggerReporter), this);
             File.WriteAllText(SavePath + "Index.html", source);
-            source = RazorEngineManager.Instance.Razor.RunCompile("LoggerDashboard", typeof(ExtentLoggerReporter), this);
+            source = RazorEngineManager.Instance.Razor.RunCompile("CommonsDashboard", typeof(ExtentLoggerReporter), this);
             File.WriteAllText(SavePath + "Dashboard.html", source);
             if (CategoryContext.Context.Count > 0)
             {
-                source = RazorEngineManager.Instance.Razor.RunCompile("LoggerTag", typeof(ExtentLoggerReporter), this);
+                source = RazorEngineManager.Instance.Razor.RunCompile("CommonsTag", typeof(ExtentLoggerReporter), this);
                 File.WriteAllText(SavePath + "Tag.html", source);
             }
             if (ExceptionInfoContext.Context.Count > 0)
             {
-                source = RazorEngineManager.Instance.Razor.RunCompile("LoggerException", typeof(ExtentLoggerReporter), this);
+                source = RazorEngineManager.Instance.Razor.RunCompile("CommonsException", typeof(ExtentLoggerReporter), this);
                 File.WriteAllText(SavePath + "Exception.html", source);
             }
         }
@@ -56,13 +56,7 @@ namespace AventStack.ExtentReports.Reporter
         {
             string[] templates = new string[]
             {
-                "LoggerDashboard",
-                "LoggerException",
-                "LoggerTag",
                 "LoggerTest",
-                "Partials.LoggerHead",
-                "Partials.LoggerNav",
-                "Partials.LoggerNavRight",
                 "LoggerMacro"
             };
             TemplateLoadService.LoadTemplate<ILoggerMarker>(templates);
@@ -71,11 +65,13 @@ namespace AventStack.ExtentReports.Reporter
             {
                 "CommonsAttributes",
                 "CommonsDashboard",
-                "CommonsDashboardScripts",
                 "CommonsException",
+                "CommonsHead",
                 "CommonsInjectCss",
                 "CommonsInjectJs",
                 "CommonsMedia",
+                "CommonsNav",
+                "CommonsNavRight",
                 "CommonsRow",
                 "CommonsTag"
             };

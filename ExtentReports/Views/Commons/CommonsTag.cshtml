@@ -1,57 +1,128 @@
-<div class="fade aside aside-sm b-r" id="content-aside">
-	<div class="modal-dialog d-flex flex-column h-100">
-		<div class="navbar box-shadow">
-			<div class="input-group flex mr-1">
-              	<input id="qt" type="text" class="form-control px-0 no-bg no-border no-shadow search" placeholder="Search..." required="">
-              	<span class="input-group-btn">
-                	<button class="btn no-bg no-border no-shadow" type="button"><i class="fa fa-search text-muted text-xs"></i></button>
-              	</span>
-            </div>
-		</div>
-		<div class="scrollable hover">
-			<div class="list inset">
-				<div class="p-2 px-3 text-muted text-sm">Tags</div>
-				@foreach (var category in Model.CategoryContext.Context) 
-        {
-					<div class="list-item attr">
-						<div class="list-body">
-							<a href="#" class="item-title _500">@category.Name</a>
-							<div class="item-except text-sm text-muted h-1x">
-								@category.Count tests
-							</div>
-							<div class="tc d-none">
-								<h5>@category.Name</h5>
-								<div class="mb-4">
-									<span class="badge pass text-pass">@category.Passed passed</span>
-									<span class="badge pass text-fail">@category.Failed failed</span>
-									<span class="badge pass text-skip">@category.Skipped skipped</span>
-								</div>
-								<table class="table">
-									<thead><tr>
-										<th id="status-col"></th>
-										<th>Test</th>
-										<th>Duration</th>
-										<th>Attributes</th>
-										<th>Media</th>
-										<th>Source</th>
-									</tr></thead>
-									<tbody>
-										@foreach (var test in category.TestCollection) 
-                    {
-										  @Include("CommonsRow", test)
-										}
-									</tbody>
-								</table>
-							</div>
-						</div>
-						<div>
-							<span class="item-meta text-xs lt">
-							<span class="badge pass text-pass">@category.Passed</span> <span class="badge fail text-fail">@category.Failed</span> <span class="badge skip text-skip">@category.Skipped</span>
-							</span>
-						</div>
+<!DOCTYPE html>
+<html lang="en">
+  @Include("CommonsHead")
+  <body class="@Model.MasterConfig.GetValue("theme")">
+    <div class="app" id="app">
+      @Include("CommonsNav")
+      <div id="content" class="app-content box-shadow-0" role="main">
+        <div class="content-header white box-shadow d-lg-none" id="content-header">
+          <div class="navbar navbar-expand-lg">
+            <a class="d-lg-none mx-2" data-toggle="modal" data-target="#aside">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                <path d="M80 304h352v16H80zM80 248h352v16H80zM80 192h352v16H80z"/>
+              </svg>
+            </a>
+            <div class="navbar-text nav-title flex" id="pageTitle">
+              <img src="https://cdn.rawgit.com/extent-framework/extent-github-cdn/d74480e/commons/img/logo.png">
 					</div>
-				}
-			</div>
-		</div>
-	</div>
-</div>
+          </div>
+        </div>
+        <div class="content-main d-flex flex" id="content-main">
+          <div class="d-flex flex fixed-height">
+            <div class="fade aside aside-sm b-r" id="content-aside">
+              <div class="modal-dialog d-flex flex-column h-100">
+                <div class="navbar box-shadow">
+                  <div class="input-group flex mr-1">
+                    <input id="qt" type="text" class="form-control px-0 no-bg no-border no-shadow search" placeholder="Search..." required="">
+                      <span class="input-group-btn">
+                        <button class="btn no-bg no-border no-shadow" type="button">
+                          <i class="fa fa-search text-muted text-xs"></i>
+                        </button>
+                      </span>
+                    </div>
+                </div>
+                <div class="scrollable hover">
+                  <div class="list inset">
+                    <div class="p-2 px-3 text-muted text-sm">Tags</div>
+                    @foreach (var category in Model.CategoryContext.Context)
+                    {
+                    <div class="list-item attr">
+                      <div class="list-body">
+                        <a href="#" class="item-title _500">@category.Name</a>
+                        <div class="item-except text-sm text-muted h-1x">
+                          @category.Count tests
+                        </div>
+                        <div class="tc d-none">
+                          <h5>@category.Name</h5>
+                          <div class="mb-4">
+                            <span class="badge pass text-pass">@category.Passed passed</span>
+                            <span class="badge pass text-fail">@category.Failed failed</span>
+                            <span class="badge pass text-skip">@category.Skipped skipped</span>
+                          </div>
+                          <table class="table">
+                            <thead>
+                              <tr>
+                                <th id="status-col"></th>
+                                <th>Test</th>
+                                <th>Duration</th>
+                                <th>Attributes</th>
+                                <th>Media</th>
+                                <th>Source</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              @foreach (var test in category.TestCollection)
+                              {
+                              @Include("CommonsRow", test)
+                              }
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <div>
+                        <span class="item-meta text-xs lt">
+                          <span class="badge pass text-pass">@category.Passed</span>
+                          <span class="badge fail text-fail">@category.Failed</span>
+                          <span class="badge skip text-skip">@category.Skipped</span>
+                        </span>
+                      </div>
+                    </div>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex flex" id="content-body">
+              <div class="d-flex flex-column flex white">
+                <div class="navbar flex-nowrap box-shadow">
+                  <a data-toggle="modal" data-target="#content-aside" data-modal="" class="mr-1 d-md-none">
+                    <span class="btn btn-sm btn-icon primary">
+                      <i class="fa fa-th"></i>
+                    </span>
+                  </a>
+                  <div class="input-group flex mr-1 hidden-sm-down">
+                    <input id="qc" type="text" class="form-control px-0 no-bg no-border no-shadow search" placeholder="Search..." required="">
+                      <span class="input-group-btn">
+                        <button class="btn no-bg no-border no-shadow" type="button">
+                          <i class="fa fa-search text-muted text-xs"></i>
+                        </button>
+                      </span>
+                    </div>
+                  <ul class="nav nav-xs flex-row no-border pull-right">
+                    <li class="nav-item dropdown">
+                      <a class="nav-link b-l" data-toggle="dropdown">
+                        <span class="text-xs ">
+                          <i class="fa fa-warning"></i>
+                          <i class="fa fa-caret-down"></i>
+                        </span>
+                      </a>
+                    </li>
+                    @Include("CommonsNavRight")
+                  </ul>
+                </div>
+                <div class="scroll-y">
+                  <div id="tcp" class="p-3"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    @{
+    var p = "https://cdn.rawgit.com/extent-framework/extent-github-cdn/d74480e/commons/js/";
+    }
+    <script src="@(p)attr.js"></script>
+    @Include("CommonsInjectJs")
+  </body>
+</html>

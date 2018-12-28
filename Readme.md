@@ -1,8 +1,3 @@
-### Important
-
-With the release of version 4, the office repository for [Extent Framework](https://github.com/extent-framework) project has moved to its [dedicated org](https://github.com/extent-framework).
-
-
 ## Extent Framework 4 - Community Edition
 
 [![Join the chat at https://gitter.im/anshooarora/extentreports-csharp](https://badges.gitter.im/anshooarora/extentreports-csharp.svg)](https://gitter.im/anshooarora/extentreports-csharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

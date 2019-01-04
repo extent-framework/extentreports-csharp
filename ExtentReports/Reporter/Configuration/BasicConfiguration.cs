@@ -15,14 +15,14 @@ namespace AventStack.ExtentReports.Reporter.Configuration
             }
             set
             {
-                UserConfigurationMap.Add("reportName", _reportName);
+                UserConfigurationMap.Add("reportName", value);
                 _reportName = value;
             }
         }
 
         private string _reportName;
 
-        public BasicConfiguration(AbstractReporter reporter)
+        protected BasicConfiguration(AbstractReporter reporter)
         {
             Reporter = reporter;
         }

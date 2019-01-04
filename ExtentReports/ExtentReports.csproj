@@ -232,6 +232,9 @@
     <EmbeddedResource Include="Views\Html\Partials\Navbar.cshtml" />
     <EmbeddedResource Include="Views\Html\Partials\Head.cshtml" />
     <EmbeddedResource Include="Views\Html\Partials\Scripts.cshtml" />
+    <EmbeddedResource Include="Views\Html\Exception.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\AttributesView.cshtml" />
+    <EmbeddedResource Include="Views\Html\Tag.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Languages.txt" />

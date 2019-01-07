@@ -44,7 +44,7 @@
 <!DOCTYPE html>
 <html>
 	@Include("Head")
-	<body class="dashboard-view">
+	<body class="dashboard-view @Model.MasterConfig.GetValue("theme")">
 		<div class="app">
 			<div class="layout">
 				@Include("Navbar")
@@ -123,7 +123,7 @@
 								}
 							</div>
 							<div class="row">
-								<div class="col-md-2">
+								<div class="col-md-3">
 									<div class="card">
 										<div class="card-body box-height-150">
 	                                        <div class="media justify-content-between">
@@ -144,7 +144,7 @@
 								</div>
 								@if (Model.ReportStatusStats.ChildCount > 0)
 								{
-								<div class="col-md-2">
+								<div class="col-md-3">
 									<div class="card">
 										<div class="card-body box-height-150">
 	                                        <div class="media justify-content-between">
@@ -196,7 +196,9 @@
 	                                    </div>
 									</div>
 								</div>
-								<div class="col-md-2">
+								@if (Model.ReportStatusStats.ChildCount == 0)
+								{
+								<div class="col-md-3">
 									<div class="card">
 										<div class="card-body box-height-150">
 	                                        <div class="media justify-content-between">
@@ -206,12 +208,13 @@
 													<span class="text-semibold font-size-15">
 												</div>
 												<div class="align-self-end">
-													<i class="fa fa-clock-o font-size-70 opacity-01"></i>
+													<i class="fa fa-clock-o font-size-70 text-danger opacity-01"></i>
 												</div>
 											</div>
 	                                    </div>
 									</div>
 								</div>
+								}
 							</div>
 							@if (Model.MasterConfig.GetValue("enableTimeline") == "true")
 							{

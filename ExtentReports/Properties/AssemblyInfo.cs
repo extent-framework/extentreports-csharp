@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Extent Framework")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Extent Reporting Framework, Community Edition Version 4")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("AventStack")]
 [assembly: AssemblyProduct("ExtentReports")]

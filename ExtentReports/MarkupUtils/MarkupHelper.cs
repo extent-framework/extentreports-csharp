@@ -37,6 +37,15 @@
         {
             var t = new Table
             {
+                ArrayData = data
+            };
+            return t;
+        }
+
+        public static IMarkup CreateTable(string[,] data)
+        {
+            var t = new Table
+            {
                 Data = data
             };
             return t;

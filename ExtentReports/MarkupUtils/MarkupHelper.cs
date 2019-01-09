@@ -12,6 +12,17 @@
             return label;
         }
 
+        public static IMarkup CreateLabel(string text, ExtentColor color, ExtentColor textColor)
+        {
+            var label = new Label
+            {
+                Text = text,
+                Color = color,
+                TextColor = textColor
+            };
+            return label;
+        }
+
         public static IMarkup CreateCodeBlock(string code, CodeLanguage lang = CodeLanguage.Xml)
         {
             var cb = new CodeBlock

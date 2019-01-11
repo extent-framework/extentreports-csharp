@@ -7,7 +7,18 @@
 <html>
 @Include("Head")
 <script src="https://cdn.rawgit.com/extent-framework/extent-github-cdn/7cc78ce/spark/js/jsontree.js"></script>
-<body class="test-view @Model.MasterConfig.GetValue("theme")">
+
+@{
+	var isbdd = false;
+	var cls = "";
+	if (Model.TestList.Count > 0 && Model.TestList[0].IsBehaviorDrivenType)
+	{
+		isbdd = true;
+		cls = "bdd-report";
+	}
+}
+
+<body class="test-view @cls @Model.MasterConfig.GetValue("theme")">
     <div class="app header-dark side-nav-folded">
         <div class="layout">
             @Include("Navbar")
@@ -134,22 +145,16 @@
 														</div>
 														}
 													</div>
-													<!-- <ul class="tools">
-														<li>Fri 8:40 AM</li>
-														<li class="d-none d-md-inline-block">
-															<a href="">
-																<i class="fa fa-reply"></i>
-															</a>
-														</li>
-													</ul> -->
-												</div> 
-												@if (test.HasLog)
+												</div>
+											@if (!isbdd)
+											{
+												if (test.HasLog)
 												{
 												<div class="detail-body mt-4">												
 													@Include("Log", test)
 												</div>    
 												}
-												@if (test.HasScreenCapture)
+												if (test.HasScreenCapture)
 												{
 												<div class="detail-foot">
 													<ul class="attachments">
@@ -176,12 +181,61 @@
 													</ul>
 												</div>
 												}
-												@if (test.HasChildren)
+												if (test.HasChildren)
 												{
-													<div class="mt-4">
-		                                				@Include("RecurseNodes", test)
+												<div class="mt-4">
+		                                			@Include("RecurseNodes", test)
+												</div>
+												}
+											}
+											else 
+											{
+												if (test.HasChildren)
+												{
+													<div class="accordion mt-4">
+														@foreach (var node in test.NodeContext.All())
+														{
+															<div class="card">
+																<div class="card-header" role="tab">
+																	<h5 class="card-title pl-3">
+																		<div class="node">@node.Name</div>
+																		<div class="status-avatar float-left @node.Status.ToString().ToLower()-bg">
+																			<i class="fa fa-@TWBSIcon.GetIcon(node.Status) text-white"></i>
+																		</div>
+																	</h5>
+																</div>
+																@if (node.HasChildren)
+																{
+																	<div class="collapse">
+																		<div class="card-body">
+																			@foreach (var child in node.NodeContext.All())
+																			{
+																				<div class="">
+																					<div class="node">@child.BehaviorDrivenTypeName: @child.Name</div>
+																					<div class="status-avatar float-left @child.Status.ToString().ToLower()-bg">
+																						<i class="fa fa-@TWBSIcon.GetIcon(child.Status) text-white"></i>
+																					</div>
+																					@if (!string.IsNullOrEmpty(child.Description))
+																					{
+																					<div class="node-description">@child.Description</div>
+																					}
+																					@if (child.HasLog)
+																					{
+																						foreach (var log in child.LogContext.All())
+																						{
+																						<div class="node-description">@log.Details</div>
+																						}
+																					}
+																				</div>
+																			}
+																		</div>
+																	</div>
+																}
+															</div>
+														}
 													</div>
 												}
+											}
 											</div>
 										</li>
 									}

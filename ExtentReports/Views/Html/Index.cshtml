@@ -1,202 +1,207 @@
 ﻿@using AventStack.ExtentReports
+@using AventStack.ExtentReports.ViewDefs
 @using RazorEngine
 @using RazorEngine.Templating
 
 <!DOCTYPE html>
 <html>
 @Include("Head")
-<script type="text/javascript">
-	/*! json-tree - v0.2.2 - 2017-09-25, MIT LICENSE */
-	var JSONTree=function(){var n={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#x27;","/":"&#x2F;"},t=0,r=0;this.create=function(n,t){return r+=1,N(u(n,0,!1),{class:"jstValue"})};var e=function(t){return t.replace(/[&<>'"]/g,function(t){return n[t]})},s=function(){return r+"_"+t++},u=function(n,t,r){if(null===n)return f(r?t:0);switch(typeof n){case"boolean":return l(n,r?t:0);case"number":return i(n,r?t:0);case"string":return o(n,r?t:0);default:return n instanceof Array?a(n,t,r):c(n,t,r)}},c=function(n,t,r){var e=s(),u=Object.keys(n).map(function(r){return j(r,n[r],t+1,!0)}).join(m()),c=[g("{",r?t:0,e),N(u,{id:e}),p("}",t)].join("\n");return N(c,{})},a=function(n,t,r){var e=s(),c=n.map(function(n){return u(n,t+1,!0)}).join(m());return[g("[",r?t:0,e),N(c,{id:e}),p("]",t)].join("\n")},o=function(n,t){var r=e(JSON.stringify(n));return N(v(r,t),{class:"jstStr"})},i=function(n,t){return N(v(n,t),{class:"jstNum"})},l=function(n,t){return N(v(n,t),{class:"jstBool"})},f=function(n){return N(v("null",n),{class:"jstNull"})},j=function(n,t,r){var s=v(e(JSON.stringify(n))+": ",r),c=N(u(t,r,!1),{});return N(s+c,{class:"jstProperty"})},m=function(){return N(",\n",{class:"jstComma"})},N=function(n,t){return d("span",t,n)},d=function(n,t,r){return"<"+n+Object.keys(t).map(function(n){return" "+n+'="'+t[n]+'"'}).join("")+">"+r+"</"+n+">"},g=function(n,t,r){return N(v(n,t),{class:"jstBracket"})+N("",{class:"jstFold",onclick:"JSONTree.toggle('"+r+"')"})};this.toggle=function(n){var t=document.getElementById(n),r=t.parentNode,e=t.previousElementSibling;""===t.className?(t.className="jstHiddenBlock",r.className="jstFolded",e.className="jstExpand"):(t.className="",r.className="",e.className="jstFold")};var p=function(n,t){return N(v(n,t),{})},v=function(n,t){return Array(2*t+1).join(" ")+n};return this}();
-</script>
+<script src="https://cdn.rawgit.com/extent-framework/extent-github-cdn/7cc78ce/spark/js/jsontree.js"></script>
 <body class="test-view @Model.MasterConfig.GetValue("theme")">
-    <div class="app">
+    <div class="app header-dark side-nav-folded">
         <div class="layout">
             @Include("Navbar")
             @Include("Sidenav")
             <div class="page-container">
                 <div class="main-content">
-                    <div class="avt-container row">
+                    <div class="test-wrapper row">
                         <div class="test-list">
                             <div class="test-list-tools">
                                 <ul class="tools pull-left">
                                     <li>
                                         <a href="">
-                                            <span>Tests</span>
+                                            <span class="font-size-14">Tests</span>
                                         </a>
                                     </li> 
                                 </ul>
                                 <ul class="tools text-right">
-                                    <li>
-                                        <div class="dropdown">
-											<a href="dropdown-toggle" data-toggle="dropdown">
-												<i class="fa fa-warning"></i>
-											</a>
-											<div id="status-toggle" class="dropdown-menu">
-												@if (Model.ContainsStatus(Status.Pass)) {<a status="pass" class="dropdown-item" href="#"><span>Pass</span><span class="status success pull-right"></span></a>}
-												@if (Model.ContainsStatus(Status.Fail)) {<a status="fail" class="dropdown-item" href="#"><span>Fail</span><span class="status danger pull-right"></span></a>}
-												@if (Model.ContainsStatus(Status.Fatal)) {<a status="fatal" class="dropdown-item" href="#"><span>Fatal</span><span class="status danger pull-right"></span></a>}
-												@if (Model.ContainsStatus(Status.Error)) {<a status="error" class="dropdown-item" href="#"><span>Error</span><span class="status warning pull-right"></span></a>}
-												@if (Model.ContainsStatus(Status.Warning)) {<a status="warning" class="dropdown-item" href="#"><span>Warning</span><span class="status warning pull-right"></span></a>}
-												@if (Model.ContainsStatus(Status.Skip)) {<a status="skip" class="dropdown-item" href="#"><span>Skip</span><span class="status warning pull-right"></span></a>}
-												<div class="dropdown-divider"></div>
-												<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
-											</div>
-										</div>
-                                    </li>
+									<li class="user-profile dropdown dropdown-animated scale-left">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-exclamation-circle"></i>
+										</a>
+										<ul id="status-toggle" class="dropdown-menu dropdown-md p-v-0">
+											@if (Model.ContainsStatus(Status.Pass)) {<a status="pass" class="dropdown-item" href="#"><span>Pass</span><span class="status success pull-right"></span></a>}
+											@if (Model.ContainsStatus(Status.Fail)) {<a status="fail" class="dropdown-item" href="#"><span>Fail</span><span class="status danger pull-right"></span></a>}
+											@if (Model.ContainsStatus(Status.Fatal)) {<a status="fatal" class="dropdown-item" href="#"><span>Fatal</span><span class="status danger pull-right"></span></a>}
+											@if (Model.ContainsStatus(Status.Error)) {<a status="error" class="dropdown-item" href="#"><span>Error</span><span class="status warning pull-right"></span></a>}
+											@if (Model.ContainsStatus(Status.Warning)) {<a status="warning" class="dropdown-item" href="#"><span>Warning</span><span class="status warning pull-right"></span></a>}
+											@if (Model.ContainsStatus(Status.Skip)) {<a status="skip" class="dropdown-item" href="#"><span>Skip</span><span class="status warning pull-right"></span></a>}
+											<div class="dropdown-divider"></div>
+											<a status="clear" class="dropdown-item" href="#"><span>Clear</span><span class="pull-right"><i class="fa fa-close"></i></span></a>
+										</ul>
+									</li>
 									@if (Model.AuthorContext.Context.Count > 0)
 									{
-                                    <li>
-                                        <div class="dropdown">
-											<a href="dropdown-toggle" data-toggle="dropdown">
-												<i class="fa fa-user"></i>
-											</a>
-											<div id="author-toggle" class="dropdown-menu">
-												@foreach (var author in Model.AuthorContext.Context) 
-												{
-													<a class="dropdown-item" href="#">@author.Name</a>
-												}
-											</div>
-										</div>
+                                    <li class="user-profile dropdown dropdown-animated scale-left">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-user"></i>
+										</a>
+										<ul id="author-toggle" class="dropdown-menu dropdown-md p-v-0">
+											@foreach (var author in Model.AuthorContext.Context) 
+											{
+												<a class="dropdown-item" href="#">@author.Name</a>
+											}
+										</ul>
                                     </li>
 									}
 									@if (Model.CategoryContext.Context.Count > 0)
 									{
-									<li>
-                                        <div class="dropdown">
-											<a href="dropdown-toggle" data-toggle="dropdown">
-												<i class="fa fa-tag"></i>
-											</a>
-											<div id="tag-toggle" class="dropdown-menu">
-												@foreach (var category in Model.CategoryContext.Context) 
-												{
-													<a class="dropdown-item" href="#">@category.Name</a>
-												}
-											</div>
-										</div>
+									<li class="user-profile dropdown dropdown-animated scale-left">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-tag"></i>
+										</a>
+										<ul id="tag-toggle" class="dropdown-menu dropdown-md p-v-0">
+											@foreach (var category in Model.CategoryContext.Context) 
+											{
+												<a class="dropdown-item" href="#">@category.Name</a>
+											}
+										</ul>
                                     </li>
 									}
 									@if (Model.DeviceContext.Context.Count > 0)
 									{
-									<li>
-										<div class="dropdown">
-											<a href="dropdown-toggle" data-toggle="dropdown">
-												<i class="fa fa-tablet"></i>
-											</a>
-                                            <div id="device-toggle" class="dropdown-menu">
-                                                @foreach (var device in Model.DeviceContext.Context) 
-												{
-													<a class="dropdown-item" href="#">@device.Name</a>
-												}
-                                            </div>
-                                        </div>
+									<li class="user-profile dropdown dropdown-animated scale-left">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+											<i class="fa fa-tablet"></i>
+										</a>
+										<ul id="device-toggle" class="dropdown-menu dropdown-md p-v-0">
+                                            @foreach (var device in Model.DeviceContext.Context) 
+											{
+												<a class="dropdown-item" href="#">@device.Name</a>
+											}
+                                        </ul>
                                     </li>
 									}
                                 </ul>
                             </div>
-                            <div class="avt-wrapper scrollable">
-                                <ul id="test-list-item" class="test-list-item">
-                                	@foreach (var test in Model.TestList)
+                            <div class="test-list-wrapper scrollable">
+                                <ul class="test-list-item">
+									@foreach (var test in Model.TestList)
 									{
-									string authors = "", devices = "", tags = "";
-									foreach (var author in test.AuthorContext.All())
-									{
-										authors += author.Name + " ";
-									}
-									foreach (var device in test.DeviceContext.All())
-									{
-										devices += device.Name + " ";
-									}
-									foreach (var tag in test.CategoryContext.All())
-									{
-										tags += tag.Name + " ";
-									}
-                                    <li class="test" status="@test.Status.ToString().ToLower()" author="@authors.Trim()" device="@devices.Trim()" tag="@tags.Trim()">
-                                        <div class="status-avatar @test.Status.ToString().ToLower()-bg">
-                                            @test.Status.ToString().Replace("ing","")
-                                        </div> 
-                                        <div>
-                                            <div class="test-detail"> 
-                                                <p class="name">@test.Name</p> 
-                                                <p class="duration">@test.RunDuration.ToString("''h'h:'m'm:'s's+'fff'ms'")</p> 
-                                                <span class="datetime">@test.StartTime.ToString("HH:mm:ss tt")</span>
-                                            </div>
-                                        </div>
-										<div class="test-content-detail">
-											<div class="detail-head">
-												<div class="p-v-10 d-inline-block">	
-													<div class="info">
-														<h4 class="test-status text-@test.Status.ToString().ToLower()">@test.Name</h4>
-														<span class='badge badge-success'>@test.StartTime</span>
-														<span class='badge badge-danger'>@test.EndTime</span>
-														<span class='badge badge-default'>@test.RunDuration.ToString("''h'h:'m'm:'s's+'fff'ms'")</span>
-													</div>
-													@if (test.HasAttributes)
-													{
-													<div class="m-t-15">
-		                                        		@Include("Attributes", test)
-													</div>
-													}
-													@if (!string.IsNullOrEmpty(test.Description))
-													{
-													<div class="m-t-10 m-l-5">
-														@test.Description
-													</div>
-													}
+										string authors = "", devices = "", tags = "";
+										foreach (var author in test.AuthorContext.All())
+										{
+											authors += author.Name + " ";
+										}
+										foreach (var device in test.DeviceContext.All())
+										{
+											devices += device.Name + " ";
+										}
+										foreach (var tag in test.CategoryContext.All())
+										{
+											tags += tag.Name + " ";
+										}
+										<li class="test-item" status="@test.Status.ToString().ToLower()" author="@authors.Trim()" device="@devices.Trim()" tag="@tags.Trim()"> 
+											<div class="status-avatar @test.Status.ToString().ToLower()-bg">
+												<i class="fa fa-@TWBSIcon.GetIcon(test.Status) text-white"></i>
+											</div>
+											<div class="open-test">
+												<div class="test-detail"> 
+													<p class="name">@test.Name</p> 
+													<p class="duration text-sm">@test.RunDuration.ToString("''h'h:'m'm:'s's+'fff'ms'")</p> 
+													<span class="datetime">@test.StartTime.ToString("HH:mm:ss tt")</span>
 												</div>
-												<!-- <ul class="tools">
-													<li>Fri 8:40 AM</li>
-													<li class="d-none d-md-inline-block">
-														<a href="">
-															<i class="fa fa-reply"></i>
-														</a>
-													</li>
-												</ul> -->
-											</div> 
-											<div class="detail-body m-t-20">
+											</div>
+											<div class="test-contents d-none">
+												<div class="detail-head">
+													<div class="p-v-10 d-inline-block">	
+														<div class="info">
+															<h5 class="test-status text-@test.Status.ToString().ToLower()">@test.Name</h5>
+															<span class='badge badge-success'>@test.StartTime</span>
+															<span class='badge badge-danger'>@test.EndTime</span>
+															<span class='badge badge-default'>@test.RunDuration.ToString("''h'h:'m'm:'s's+'fff'ms'")</span>
+														</div>
+														@if (test.HasAttributes)
+														{
+														<div class="m-t-15">
+		                                        			@Include("Attributes", test)
+														</div>
+														}
+														@if (!string.IsNullOrEmpty(test.Description))
+														{
+														<div class="m-t-10 m-l-5">
+															@test.Description
+														</div>
+														}
+													</div>
+													<!-- <ul class="tools">
+														<li>Fri 8:40 AM</li>
+														<li class="d-none d-md-inline-block">
+															<a href="">
+																<i class="fa fa-reply"></i>
+															</a>
+														</li>
+													</ul> -->
+												</div> 
 												@if (test.HasLog)
 												{
+												<div class="detail-body mt-4">												
 													@Include("Log", test)
+												</div>    
 												}
-											</div>    
-											@if (test.HasScreenCapture)
-											{
-											<div class="detail-foot">
-												<ul class="attachments">
-		                                    		@foreach (var sc in test.ScreenCaptureContext.All())
-													{
-													<li>
-														<a href="@sc.ScreenCapturePath" data-featherlight="image">
-															<div class="file-icon">
-																<i class="fa fa-file-image-o"></i> 
-															</div>
-															<div class="file-info">
-		                                                		@if (sc.IsBase64)
-																{
-		                                                			<span class="file-name">base64</span>
-		                                                    		<span class="file-size">0Kb</span>
-		                                                		} else {
-		                                                			<span class="file-name">@sc.Name</span>
-		                                                    		<span class="file-size"> @(sc.FileSize)Kb</span>
-		                                                		}
-															</div>
-														</a>
-													</li>
-													}
-												</ul>
+												@if (test.HasScreenCapture)
+												{
+												<div class="detail-foot">
+													<ul class="attachments">
+		                                    			@foreach (var sc in test.ScreenCaptureContext.All())
+														{
+														<li>
+															<a href="@sc.ScreenCapturePath" data-featherlight="image">
+																<div class="file-icon">
+																	<i class="fa fa-file-image-o"></i> 
+																</div>
+																<div class="file-info">
+		                                                			@if (sc.IsBase64)
+																	{
+		                                                				<span class="file-name">base64</span>
+		                                                    			<span class="file-size">0Kb</span>
+		                                                			} else {
+		                                                				<span class="file-name">@sc.Name</span>
+		                                                    			<span class="file-size"> @(sc.FileSize)Kb</span>
+		                                                			}
+																</div>
+															</a>
+														</li>
+														}
+													</ul>
+												</div>
+												}
+												@if (test.HasChildren)
+												{
+													<div class="mt-4">
+		                                				@Include("RecurseNodes", test)
+													</div>
+												}
 											</div>
-											}
-											@if (test.HasChildren)
-											{
-		                                		@Include("RecurseNodes", test)
-											}
-										</div>
-                                    </li>
-                                    }
+										</li>
+									}
                                 </ul>    
                             </div>
                         </div>
-                        <div class="test-content scrollable"></div>
+                        <div class="test-content scrollable">
+                            <div class="test-content-tools">
+                                <ul>
+                                    <li>
+                                        <a class="back-to-test" href="javascript:void(0)">
+                                            <i class="fa fa-arrow-left"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="test-content-detail">
+                                <div class="detail-body"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -204,4 +209,5 @@
     </div>
 	@Include("Scripts")
 </body>
+
 </html>

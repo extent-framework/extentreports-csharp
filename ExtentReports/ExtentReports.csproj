@@ -226,11 +226,15 @@
     <EmbeddedResource Include="Views\Commons\CommonsRow.cshtml" />
     <EmbeddedResource Include="Views\Html\Dashboard.cshtml" />
     <EmbeddedResource Include="Views\Html\Index.cshtml" />
-    <EmbeddedResource Include="Views\Html\Partials\Sidenav.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Sidenav.cshtml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Html\Partials\Log.cshtml" />
     <EmbeddedResource Include="Views\Html\Partials\RecurseNodes.cshtml" />
     <EmbeddedResource Include="Views\Html\Partials\Navbar.cshtml" />
-    <EmbeddedResource Include="Views\Html\Partials\Head.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Head.cshtml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Html\Partials\Scripts.cshtml" />
     <EmbeddedResource Include="Views\Html\Exception.cshtml" />
     <EmbeddedResource Include="Views\Html\Partials\AttributesView.cshtml" />

@@ -45,13 +45,13 @@
 <html>
 	@Include("Head")
 	<body class="dashboard-view @Model.MasterConfig.GetValue("theme")">
-		<div class="app">
+		<div class="app header-dark side-nav-folded">
 			<div class="layout">
 				@Include("Navbar")
 				@Include("Sidenav")
 				<div class="page-container">
 					<div class="main-content">
-						<div class="container-fluid">
+						<div class="container-fluid p-4">
 							<div class="row">
 								<div class="@boxSize">
 									<div class="card">
@@ -420,5 +420,153 @@
 			</script>
 		}
 		@Include("Scripts")
+		<script>
+			/* -- [ chart options ] -- */
+			var options = {
+			  responsive: true,
+			  maintainAspectRatio: false,
+			  legend: {
+				  position: "right",
+				  labels: {
+					  boxWidth: 10,
+					  fontSize: 11,
+					  lineHeight: 1,
+					  fontFamily: "Source Sans Pro",
+					  padding: 1
+				  }
+			  },
+			  cutoutPercentage: 65
+			};
+
+			function drawChart(ctx, config) {
+				ctx.width = 100;
+				ctx.height = 80;
+				new Chart(ctx, config);
+			}
+
+			/* -- [ parent chart ] -- */
+			(function drawParentChart() {
+				if (typeof statusGroup !== "undefined") {
+					var config = {
+						type: 'doughnut',
+							data: {
+								datasets: [{
+									borderColor: 'transparent',
+									data: [
+										statusGroup.passParent, statusGroup.failParent, statusGroup.fatalParent, statusGroup.errorParent, statusGroup.warningParent, statusGroup.skipParent
+									],
+									backgroundColor: [
+										"#00af00", "#F7464A", "#8b0000", "#ff6347", "#FDB45C", "#1e90ff"
+									]
+								}],
+								labels: [ "Pass", "Fail", "Fatal", "Error", "Warning", "Skip" ]
+							},
+							options: options
+						};
+
+						var ctx = document.getElementById("parent-analysis").getContext('2d');
+						drawChart(ctx, config);
+				}
+			})();
+
+			/* -- [ children chart ] -- */
+			(function drawChildChart() {
+				if (typeof statusGroup !== "undefined") {
+					var config = {
+						type: 'doughnut',
+						data: {
+							datasets: [{
+								borderColor: 'transparent',
+								data: [
+									statusGroup.passChild, statusGroup.failChild, statusGroup.fatalChild, statusGroup.errorChild, statusGroup.warningChild, statusGroup.skipChild,statusGroup.infoChild
+								],
+								backgroundColor: [
+									"#00af00", "#F7464A", "#8b0000", "#ff6347", "#FDB45C", "#1e90ff", "#46BFBD"
+								]
+							}],
+							labels: [ "Pass", "Fail", "Fatal", "Error", "Warning", "Skip", "Info" ]
+						},
+						options: options
+					};
+
+					var ctx = document.getElementById("child-analysis").getContext('2d');
+					drawChart(ctx, config);
+				}
+			})();
+
+			/* -- [ grand-children chart ] -- */
+			(function drawGrandChildChart() {
+				if ($('#grandchild-analysis').length > 0 && typeof statusGroup !== "undefined") {
+					var config = {
+						type: 'doughnut',
+						data: {
+							datasets: [{
+								borderColor: 'transparent',
+								data: [
+									statusGroup.passGrandChild, statusGroup.failGrandChild, statusGroup.fatalGrandChild, statusGroup.errorGrandChild, statusGroup.warningGrandChild, statusGroup.skipGrandChild, statusGroup.infoGrandChild
+								],
+								backgroundColor: [
+									"#00af00", "#F7464A", "#8b0000", "#ff6347", "#FDB45C", "#1e90ff", "#46BFBD"
+								]
+							}],
+							labels: [ "Pass", "Fail", "Fatal", "Error", "Warning", "Skip", "Info" ]
+						},
+						options: options
+					};
+
+					var ctx = document.getElementById("grandchild-analysis").getContext('2d');
+					drawChart(ctx, config);
+				}
+			})();
+
+			/* -- [ timeline ] -- */
+			function getRandomColor() {
+				var letters = '0123456789ABCDEF';
+				var color = '#';
+				for (var i = 0; i < 6; i++) {
+				color += letters[Math.floor(Math.random() * 16)];
+				}
+				return color;
+			}
+
+			(function drawTimelineChart() {
+				if (typeof timeline !== "undefined") {
+					var datasets = [];
+					for (var key in timeline) {
+						datasets.push({ label:key, data: [ timeline[key] ], backgroundColor: getRandomColor(), borderWidth: 1 });
+					}
+
+					var ctx = document.getElementById('timeline').getContext('2d');
+
+					new Chart(ctx, {
+						type: 'horizontalBar',
+						data: {
+							datasets: datasets
+						},
+						options: {
+							responsive: true,
+							maintainAspectRatio: false,
+							tooltips: {
+								mode: 'point'
+							},
+							scales: {
+								xAxes: [{
+									stacked: true,
+									gridLines: false
+								}],
+								yAxes: [{
+									stacked: true,
+									gridLines: false,
+									barThickness: 25
+								}]
+							},
+							legend: {
+								display: false
+							}
+						}
+					});
+				}
+			})();
+		</script>
 	</body>
 </html>

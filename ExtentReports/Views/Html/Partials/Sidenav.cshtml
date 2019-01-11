@@ -1,8 +1,8 @@
-﻿<div class="side-nav expand-lg">
+﻿<div class="side-nav side-nav-folded">
   <div class="side-nav-inner">
     <ul class="side-nav-menu scrollable">
-      <li class="nav-item">
-        <a id="nav-test" href="index.html">
+      <li class="nav-item dropdown">
+        <a id="nav-test" class="dropdown-toggle" href="index.html">
           <span class="icon-holder">
             <i class="fa fa-align-left"></i>
           </span>
@@ -11,19 +11,19 @@
       </li>
       @if (Model.CategoryContext.Context.Count > 0)
       {
-      <li class="nav-item">
-        <a id="nav-tag" href="tag.html">
+      <li class="nav-item dropdown">
+        <a id="nav-tag" class="dropdown-toggle" href="tag.html">
           <span class="icon-holder">
             <i class="fa fa-tag"></i>
           </span>
-          <span class="title">Tag</span>
+          <span class="title">Tags</span>
         </a>
       </li>
       }
       @if (Model.ExceptionInfoContext.Context.Count > 0)
       {
-      <li class="nav-item">
-        <a id="nav-ex" href="exception.html">
+      <li class="nav-item dropdown">
+        <a id="nav-ex" class="dropdown-toggle" href="exception.html">
           <span class="icon-holder">
             <i class="fa fa-bug"></i>
           </span>
@@ -31,10 +31,10 @@
         </a>
       </li>
       }
-      <li class="nav-item">
-        <a id="nav-dashboard" href="dashboard.html">
+      <li class="nav-item dropdown">
+        <a id="nav-dashboard" class="dropdown-toggle" href="dashboard.html">
           <span class="icon-holder">
-            <i class="fa fa-dashboard"></i>
+            <i class="fa fa-bar-chart"></i>
           </span>
           <span class="title">Dashboard</span>
         </a>

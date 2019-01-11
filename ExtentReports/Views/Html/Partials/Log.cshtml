@@ -23,7 +23,7 @@
 					}
 					@if (log.HasScreenCapture)
 					{
-						<br/> @Raw(log.ScreenCaptureContext.FirstOrDefault().Source)
+						@Raw(log.ScreenCaptureContext.FirstOrDefault().Source)
 					}
 				</td>
 			</tr>

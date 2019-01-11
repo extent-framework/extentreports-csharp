@@ -5,23 +5,23 @@
 <html>
 @Include("Head")
 <body class="attributes-view @Model.MasterConfig.GetValue("theme")">
-    <div class="app">
+    <div class="app header-dark side-nav-folded">
         <div class="layout">
             @Include("Navbar")
             @Include("Sidenav")
             <div class="page-container">
                 <div class="main-content">
-                    <div class="avt-container row">
+                    <div class="test-wrapper row">
                         <div class="test-list">
                             <div class="test-list-tools">
                                 <ul class="tools pull-left">
                                     <li>
                                         <a href="">
-                                            <span>Tags</span>
+                                            <span class="font-size-14">Tags</span>
                                         </a>
                                     </li> 
                                 </ul>
-								<ul class="tools text-right">
+                                <ul class="tools text-right">
                                     <li>
                                         <a href="#">
                                             <span class="badge badge-primary">@Model.CategoryContext.Context.Count</span>
@@ -29,8 +29,8 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="avt-wrapper scrollable">
-                                <ul id="test-list-item" class="test-list-item">
+                            <div class="test-list-wrapper scrollable">
+                                <ul class="test-list-item">
                                 	@foreach (var category in Model.CategoryContext.Context)
 									{
 										@Include("AttributesView", category)
@@ -38,7 +38,20 @@
                                 </ul>    
                             </div>
                         </div>
-                        <div class="test-content scrollable"></div>
+                        <div class="test-content scrollable">
+                            <div class="test-content-tools">
+                                <ul>
+                                    <li>
+                                        <a class="back-to-test" href="javascript:void(0)">
+                                            <i class="fa fa-arrow-left"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="test-content-detail">
+                                <div class="detail-body"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

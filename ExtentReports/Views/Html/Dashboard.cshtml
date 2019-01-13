@@ -376,7 +376,7 @@
 		</div>
 		<script>
 			var statusGroup = {
-                ParentCount: @Model.ReportStatusStats.ParentCount,
+                parentCount: @Model.ReportStatusStats.ParentCount,
 				passParent: @Model.ReportStatusStats.ParentCountPass,
 				failParent: @Model.ReportStatusStats.ParentCountFail,
 				fatalParent: @Model.ReportStatusStats.ParentCountFatal,
@@ -384,7 +384,7 @@
 				warningParent: @Model.ReportStatusStats.ParentCountWarning,
 				skipParent: @Model.ReportStatusStats.ParentCountSkip,
 				exceptionsParent: @Model.ReportStatusStats.ParentCountExceptions,
-				ChildCount: @Model.ReportStatusStats.ChildCount,
+				childCount: @Model.ReportStatusStats.ChildCount,
 				passChild: @Model.ReportStatusStats.ChildCountPass,
 				failChild: @Model.ReportStatusStats.ChildCountFail,
 				fatalChild: @Model.ReportStatusStats.ChildCountFatal,
@@ -394,7 +394,7 @@
 				infoChild: @Model.ReportStatusStats.ChildCountInfo,
 				debugChild: @Model.ReportStatusStats.ChildCountDebug,
 				exceptionsChild: @Model.ReportStatusStats.ChildCountExceptions,
-				GrandChildCount: @Model.ReportStatusStats.GrandChildCount,
+				grandChildCount: @Model.ReportStatusStats.GrandChildCount,
 				passGrandChild: @Model.ReportStatusStats.GrandChildCountPass,
 				failGrandChild: @Model.ReportStatusStats.GrandChildCountFail,
 				fatalGrandChild: @Model.ReportStatusStats.GrandChildCountFatal,
@@ -471,7 +471,7 @@
 
 			/* -- [ children chart ] -- */
 			(function drawChildChart() {
-				if (typeof statusGroup !== "undefined") {
+				if (typeof statusGroup !== "undefined" && statusGroup.childCount > 0) {
 					var config = {
 						type: 'doughnut',
 						data: {
@@ -496,7 +496,7 @@
 
 			/* -- [ grand-children chart ] -- */
 			(function drawGrandChildChart() {
-				if ($('#grandchild-analysis').length > 0 && typeof statusGroup !== "undefined") {
+				if ($('#grandchild-analysis').length > 0 && typeof statusGroup !== "undefined" && statusGroup.grandChildCount > 0) {
 					var config = {
 						type: 'doughnut',
 						data: {
@@ -533,9 +533,8 @@
 				if (typeof timeline !== "undefined") {
 					var datasets = [];
 					for (var key in timeline) {
-						datasets.push({ label:key, data: [ timeline[key] ], backgroundColor: getRandomColor(), borderWidth: 1 });
+						datasets.push({ label:key, data:[timeline[key]], backgroundColor: getRandomColor(), borderWidth: 1 });
 					}
-
 					var ctx = document.getElementById('timeline').getContext('2d');
 
 					new Chart(ctx, {

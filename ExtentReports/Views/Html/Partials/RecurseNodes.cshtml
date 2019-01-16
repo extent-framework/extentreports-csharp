@@ -16,6 +16,10 @@
 				</div>
 				<div class="collapse">
 					<div class="card-body">
+						@if (!string.IsNullOrEmpty(node.Description))
+						{
+							<div class="description">@node.Description</div>
+						}
 						@if (node.HasLog) 
 						{
 							@Include("Log", node)

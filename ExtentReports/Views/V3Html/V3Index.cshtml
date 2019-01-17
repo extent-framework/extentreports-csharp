@@ -1,12 +1,22 @@
 @using RazorEngine
 @using RazorEngine.Templating
 
+ @{
+	var isbdd = false;
+	var cls = "";
+	if (Model.TestList.Count > 0 && Model.TestList[0].IsBehaviorDrivenType)
+	{
+		isbdd = true;
+		cls = "bdd-report";
+	}
+}
+
 <!DOCTYPE html>
 <html>
 	
 	@Include("V3Head")
 
-	<body class='extent ${ theme } default hide-overflow ${ bddClass }'>
+	<body class='extent default hide-overflow @cls @Model.MasterConfig.GetValue("theme")'>
 		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
 			<span><i class='material-icons'>desktop_windows</i></span>
 		</div>

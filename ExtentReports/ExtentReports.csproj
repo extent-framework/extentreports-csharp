@@ -241,6 +241,9 @@
     <EmbeddedResource Include="Views\Html\Exception.cshtml" />
     <EmbeddedResource Include="Views\Html\Partials\AttributesView.cshtml" />
     <EmbeddedResource Include="Views\Html\Tag.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkStandard.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkBDD.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkStepDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Languages.txt" />

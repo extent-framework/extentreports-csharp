@@ -269,7 +269,7 @@
 							<span class='label end-time'>@test.EndTime</span>
 							<span class='label time-taken grey lighten-1 white-text'>@test.RunDuration.ToString("''h'h:'m'm:'s's.'fff'ms'")</span>
 						</div>
-						if (string.IsNullOrEmpty(test.Description))
+						if (!string.IsNullOrEmpty(test.Description))
 						{
 						<div class='test-desc'>@test.Description</div>
 						}

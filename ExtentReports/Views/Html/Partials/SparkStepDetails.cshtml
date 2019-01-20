@@ -1,0 +1,18 @@
+﻿@if (Model.HasLog)
+{
+	foreach (var log in Model.LogContext.All())
+	{
+		if (log.HasException)
+		{
+			<textarea disabled class="code-block">@log.ExceptionInfo.Exception.StackTrace</textarea>
+		}
+		else
+		{
+			<div class="details">@Raw(log.Details)</div>
+		}
+		if (log.HasScreenCapture)
+		{
+			<span class="badge badge-primary">@Raw(log.ScreenCaptureContext.FirstOrDefault().Source)</span>
+		}
+	}
+}

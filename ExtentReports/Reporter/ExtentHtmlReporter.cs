@@ -66,7 +66,10 @@ namespace AventStack.ExtentReports.Reporter
                 "Partials.Navbar",
                 "Partials.RecurseNodes",
                 "Partials.Scripts",
-                "Partials.Sidenav"
+                "Partials.Sidenav",
+                "Partials.SparkBDD",
+                "Partials.SparkStandard",
+                "Partials.SparkStepDetails",
             };
 
             TemplateLoadService.LoadTemplate<IHtmlMarker>(templates);

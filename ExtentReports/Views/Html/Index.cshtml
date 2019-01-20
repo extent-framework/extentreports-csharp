@@ -148,93 +148,11 @@
 												</div>
 											@if (!isbdd)
 											{
-												if (test.HasLog)
-												{
-												<div class="detail-body mt-4">												
-													@Include("Log", test)
-												</div>    
-												}
-												if (test.HasScreenCapture)
-												{
-												<div class="detail-foot">
-													<ul class="attachments">
-		                                    			@foreach (var sc in test.ScreenCaptureContext.All())
-														{
-														<li>
-															<a href="@sc.ScreenCapturePath" data-featherlight="image">
-																<div class="file-icon">
-																	<i class="fa fa-file-image-o"></i> 
-																</div>
-																<div class="file-info">
-		                                                			@if (sc.IsBase64)
-																	{
-		                                                				<span class="file-name">base64</span>
-		                                                    			<span class="file-size">0Kb</span>
-		                                                			} else {
-		                                                				<span class="file-name">@sc.Name</span>
-		                                                    			<span class="file-size"> @(sc.FileSize)Kb</span>
-		                                                			}
-																</div>
-															</a>
-														</li>
-														}
-													</ul>
-												</div>
-												}
-												if (test.HasChildren)
-												{
-												<div class="mt-4">
-		                                			@Include("RecurseNodes", test)
-												</div>
-												}
+												@Include("SparkStandard", test)
 											}
 											else 
 											{
-												if (test.HasChildren)
-												{
-													<div class="accordion mt-4">
-														@foreach (var node in test.NodeContext.All())
-														{
-															<div class="card">
-																<div class="card-header" role="tab">
-																	<h5 class="card-title pl-3">
-																		<div class="node">@node.Name</div>
-																		<div class="status-avatar float-left @node.Status.ToString().ToLower()-bg">
-																			<i class="fa fa-@TWBSIcon.GetIcon(node.Status) text-white"></i>
-																		</div>
-																	</h5>
-																</div>
-																@if (node.HasChildren)
-																{
-																	<div class="collapse">
-																		<div class="card-body">
-																			@foreach (var child in node.NodeContext.All())
-																			{
-																				<div class="">
-																					<div class="node">@child.BehaviorDrivenTypeName: @child.Name</div>
-																					<div class="status-avatar float-left @child.Status.ToString().ToLower()-bg">
-																						<i class="fa fa-@TWBSIcon.GetIcon(child.Status) text-white"></i>
-																					</div>
-																					@if (!string.IsNullOrEmpty(child.Description))
-																					{
-																					<div class="node-description">@child.Description</div>
-																					}
-																					@if (child.HasLog)
-																					{
-																						foreach (var log in child.LogContext.All())
-																						{
-																						<div class="node-description">@log.Details</div>
-																						}
-																					}
-																				</div>
-																			}
-																		</div>
-																	</div>
-																}
-															</div>
-														}
-													</div>
-												}
+												@Include("SparkBDD", test)
 											}
 											</div>
 										</li>

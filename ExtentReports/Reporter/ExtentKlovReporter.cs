@@ -8,8 +8,6 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AventStack.ExtentReports.Reporter
 {
@@ -29,6 +27,54 @@ namespace AventStack.ExtentReports.Reporter
         private const string DefaultProjectName = "Default";
         private const string DefaultKlovServerName = "klov";
         private const string DatabaseName = "klov";
+
+        public ExtentKlovReporter(string projectName, string reportName)
+        {
+            if (string.IsNullOrEmpty(projectName) || string.IsNullOrEmpty(reportName))
+            {
+                throw new ArgumentNullException("At least one of the passed arguments is null but should never be null");
+            }
+
+            ProjectName = projectName;
+            ReportName = reportName;
+
+            _startTime = DateTime.Now;
+        }
+
+        /// <summary>
+        /// Connects to MongoDB default settings, localhost:27017
+        /// </summary>
+        public void InitMongoDbConnection()
+        {
+            _mongoClient = new MongoClient();
+        }
+
+        public void InitMongoDbConnection(string host, int port = -1)
+        {
+            var conn = "mongodb://" + host;
+            conn += port > -1 ? ":" + port : "";
+            _mongoClient = new MongoClient(conn);
+        }
+
+        /// <summary>
+        /// Connects to MongoDB using a connection string.
+        /// Example: mongodb://host:27017,host2:27017/?replicaSet=rs0
+        /// </summary>
+        /// <param name="connectionString"></param>
+        public void InitMongoDbConnection(string connectionString)
+        {
+            _mongoClient = new MongoClient(connectionString);
+        }
+
+        public void InitMongoDbConnection(MongoClientSettings settings)
+        {
+            _mongoClient = new MongoClient(settings);
+        }
+
+        public void InitKlovServerConnection(string url)
+        {
+            _url = url;
+        }
 
         public override void Start()
         {
@@ -91,16 +137,6 @@ namespace AventStack.ExtentReports.Reporter
         }
 
         public override void Stop() { }
-
-        public ExtentKlovReporter(string projectName, string reportName)
-        {
-            if (projectName == null || reportName == null)
-            {
-                throw new ArgumentNullException("At least one of the passed arguments is null but should never be null");
-            }
-
-            _startTime = DateTime.Now;
-        }
 
         public override void Flush(ReportAggregates reportAggregates)
         {
@@ -350,41 +386,6 @@ namespace AventStack.ExtentReports.Reporter
             var update = Builders<BsonDocument>.Update
                 .Set("description", test.Description);
             _testCollection.FindOneAndUpdate(filter, update);
-        }
-
-        /// <summary>
-        /// Connects to MongoDB default settings, localhost:27017
-        /// </summary>
-        public void InitMongoDbConnection()
-        {
-            _mongoClient = new MongoClient();
-        }
-
-        public void InitMongoDbConnection(string host, int port = -1)
-        {
-            var conn = "mongodb://" + host;
-            conn += port > -1 ? ":" + port : "";
-            _mongoClient = new MongoClient(conn);
-        }
-
-        /// <summary>
-        /// Connects to MongoDB using a connection string.
-        /// Example: mongodb://host:27017,host2:27017/?replicaSet=rs0
-        /// </summary>
-        /// <param name="connectionString"></param>
-        public void InitMongoDbConnection(string connectionString)
-        {
-            _mongoClient = new MongoClient(connectionString);
-        }
-
-        public void InitMongoDbConnection(MongoClientSettings settings)
-        {
-            _mongoClient = new MongoClient(settings);
-        }
-
-        public void InitKlovServerConnection(string url)
-        {
-            _url = url;
         }
 
         private string _url;

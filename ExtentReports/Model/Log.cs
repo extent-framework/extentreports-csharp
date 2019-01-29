@@ -14,7 +14,7 @@ namespace AventStack.ExtentReports.Model
         public Status Status { get; set; }
         public ObjectId ObjectId { get => _objectId; set => _objectId = value; }
         public Test Test { get; private set; }
-        public string Details { get; set; }
+        public string Details { get; set; } = string.Empty;
         public int Sequence = 0;
         public IMarkup Markup { get; set; }
         public ExceptionInfo ExceptionInfo { get; set; }

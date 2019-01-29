@@ -30,11 +30,6 @@ namespace AventStack.ExtentReports.Reporter
 
         public ExtentKlovReporter(string projectName, string reportName)
         {
-            if (string.IsNullOrEmpty(projectName) || string.IsNullOrEmpty(reportName))
-            {
-                throw new ArgumentNullException("At least one of the passed arguments is null but should never be null");
-            }
-
             ProjectName = projectName;
             ReportName = reportName;
 
@@ -145,12 +140,12 @@ namespace AventStack.ExtentReports.Reporter
                 return;
             }
             this._reportAggregates = reportAggregates;
-
+            
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ReportId);
             var update = Builders<BsonDocument>.Update
                 .Set("endTime", DateTime.Now)
-                .Set("duration", DateTime.Now - _startTime)
-                .Set("status", StatusHierarchy.GetHighestStatus(reportAggregates.StatusList))
+                .Set("duration", (DateTime.Now - _startTime).Milliseconds)
+                .Set("status", StatusHierarchy.GetHighestStatus(reportAggregates.StatusList).ToString().ToLower())
                 .Set("parentLength", reportAggregates.ReportStatusStats.ParentCount)
                 .Set("passParentLength", reportAggregates.ReportStatusStats.ParentCountPass)
                 .Set("failParentLength", reportAggregates.ReportStatusStats.ParentCountFail)
@@ -176,7 +171,7 @@ namespace AventStack.ExtentReports.Reporter
                 .Set("warningGrandChildLength", reportAggregates.ReportStatusStats.GrandChildCountWarning)
                 .Set("skipGrandChildLength", reportAggregates.ReportStatusStats.GrandChildCountSkip)
                 .Set("exceptionsGrandChildLength", reportAggregates.ReportStatusStats.GrandChildCountExceptions)
-                .Set("analysisStrategy", AnalysisStrategy.ToString());
+                .Set("analysisStrategy", AnalysisStrategy.ToString().ToUpper());
 
             _reportCollection.UpdateOne(filter, update);
         }
@@ -343,7 +338,7 @@ namespace AventStack.ExtentReports.Reporter
             {
                 { "project", ProjectId },
                 { "report", ReportId },
-                { "reportName", ReportId },
+                { "reportName", ReportName },
                 { "level", test.Level },
                 { "name", test.Name },
                 { "status", test.Status.ToString().ToLower() },

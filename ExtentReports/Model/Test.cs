@@ -13,7 +13,7 @@ namespace AventStack.ExtentReports.Model
     public class Test : BasicMongoReportElement, IRunResult
     {
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
         public int TestId { get; } = Interlocked.Increment(ref _cntr);
         public ObjectId ObjectId { get; set; }
         public Status Status { get; set; } = Status.Pass;

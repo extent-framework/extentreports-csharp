@@ -65,7 +65,7 @@ namespace AventStack.ExtentReports
             reporter.ToList().ForEach(x => Register(x));
         }
 
-        public ExtentTest CreateTest<T>(string name, string description = null) where T : IGherkinFormatterModel
+        public ExtentTest CreateTest<T>(string name, string description = "") where T : IGherkinFormatterModel
         {
             Type type = typeof(T);
             var obj = (IGherkinFormatterModel)Activator.CreateInstance(type);
@@ -76,7 +76,7 @@ namespace AventStack.ExtentReports
             return test;
         }
 
-        public ExtentTest CreateTest(GherkinKeyword keyword, string name, string description = null)
+        public ExtentTest CreateTest(GherkinKeyword keyword, string name, string description = "")
         {
             var test = new ExtentTest(this, name, description);
             test.Model.BehaviorDrivenType = keyword.Model;
@@ -84,7 +84,7 @@ namespace AventStack.ExtentReports
             return test;
         }
 
-        public ExtentTest CreateTest(string name, string description = null)
+        public ExtentTest CreateTest(string name, string description = "")
         {
             var test = new ExtentTest(this, name, description);
             base.SaveTest(test.Model);

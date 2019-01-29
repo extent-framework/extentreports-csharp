@@ -113,6 +113,9 @@
     <Compile Include="MarkupUtils\Table.cs" />
     <Compile Include="MediaEntityBuilder.cs" />
     <Compile Include="MediaEntityModelProvider.cs" />
+    <Compile Include="MediaStorage\KlovHttpMediaManager.cs" />
+    <Compile Include="MediaStorage\KlovMedia.cs" />
+    <Compile Include="MediaStorage\KlovMediaStorageHandler.cs" />
     <Compile Include="Model\AbstractStructure.cs" />
     <Compile Include="Model\Attribute.cs" />
     <Compile Include="Model\Author.cs" />

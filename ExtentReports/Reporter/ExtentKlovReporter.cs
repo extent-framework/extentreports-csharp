@@ -1,4 +1,5 @@
 ﻿using AventStack.ExtentReports.Core;
+using AventStack.ExtentReports.MediaStorage;
 using AventStack.ExtentReports.Model;
 
 using MongoDB.Bson;
@@ -16,13 +17,90 @@ namespace AventStack.ExtentReports.Reporter
     {
         public override string ReporterName => "klov";
 
-        public override AnalysisStrategy AnalysisStrategy { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public override ReportStatusStats ReportStatusStats { get => throw new NotImplementedException(); protected internal set => throw new NotImplementedException(); }
+        public override AnalysisStrategy AnalysisStrategy { get; set; }
+
+        public override ReportStatusStats ReportStatusStats { get; protected internal set; }
 
         public string ReportName { get; private set; }
         public ObjectId ReportId { get; private set; }
         public string ProjectName { get; private set; }
         public ObjectId ProjectId { get; private set; }
+
+        private const string DefaultProjectName = "Default";
+        private const string DefaultKlovServerName = "klov";
+        private const string DatabaseName = "klov";
+
+        public override void Start()
+        {
+            var db = _mongoClient.GetDatabase(DatabaseName);
+            InitializeCollections(db);
+            SetupProject();
+        }
+
+        private void InitializeCollections(IMongoDatabase db)
+        {
+            // collections
+            _projectCollection = db.GetCollection<BsonDocument>("project");
+            _reportCollection = db.GetCollection<BsonDocument>("report");
+            _testCollection = db.GetCollection<BsonDocument>("test");
+            _logCollection = db.GetCollection<BsonDocument>("log");
+            _exceptionCollection = db.GetCollection<BsonDocument>("exception");
+            _mediaCollection = db.GetCollection<BsonDocument>("media");
+            _categoryCollection = db.GetCollection<BsonDocument>("category");
+            _authorCollection = db.GetCollection<BsonDocument>("author");
+            _environmentCollection = db.GetCollection<BsonDocument>("environment");
+        }
+
+        private void SetupProject()
+        {
+            ProjectName = string.IsNullOrEmpty(ProjectName) ? DefaultProjectName : ProjectName;
+            var document = new BsonDocument
+            {
+                { "name", ProjectName }
+            };
+
+            var bsonProject = _projectCollection.Find(document).FirstOrDefault();
+            if (bsonProject != null)
+            {
+                ProjectId = bsonProject["_id"].AsObjectId;
+            }
+            else
+            {
+                document.Add("createdAt", DateTime.Now);
+                _projectCollection.InsertOne(document);
+                ProjectId = document["_id"].AsObjectId;
+            }
+
+            SetupReport();
+        }
+
+        private void SetupReport()
+        {
+            ReportName = string.IsNullOrEmpty(ReportName) ? "Build " + DateTime.Now : ReportName;
+
+            var document = new BsonDocument
+            {
+                { "name", ReportName },
+                { "project", ProjectId },
+                { "projectName", ProjectName },
+                { "startTime", DateTime.Now }
+            };
+            
+            _reportCollection.InsertOne(document);
+            ReportId = document["_id"].AsObjectId;
+        }
+
+        public override void Stop() { }
+
+        public ExtentKlovReporter(string projectName, string reportName)
+        {
+            if (projectName == null || reportName == null)
+            {
+                throw new ArgumentNullException("At least one of the passed arguments is null but should never be null");
+            }
+
+            _startTime = DateTime.Now;
+        }
 
         public override void Flush(ReportAggregates reportAggregates)
         {
@@ -30,19 +108,13 @@ namespace AventStack.ExtentReports.Reporter
             {
                 return;
             }
+            this._reportAggregates = reportAggregates;
 
-            //var duration = DateTime.Now.Subtract(reportAggregates.Ti).TotalMilliseconds;
-
-            //if (duration.ToString().Contains("."))
-            //    duration = Convert.ToDouble(duration.ToString().Split('.')[0]);
-
-            List<String> categoryNameList = null;
-            List<ObjectId> categoryIdList = null;
-
-            //var filter = Builders<BsonDocument>.Filter.Eq("_id", _reportId);
+            var filter = Builders<BsonDocument>.Filter.Eq("_id", ReportId);
             var update = Builders<BsonDocument>.Update
                 .Set("endTime", DateTime.Now)
-                //.Set("duration", duration)
+                .Set("duration", DateTime.Now - _startTime)
+                .Set("status", StatusHierarchy.GetHighestStatus(reportAggregates.StatusList))
                 .Set("parentLength", reportAggregates.ReportStatusStats.ParentCount)
                 .Set("passParentLength", reportAggregates.ReportStatusStats.ParentCountPass)
                 .Set("failParentLength", reportAggregates.ReportStatusStats.ParentCountFail)
@@ -68,11 +140,9 @@ namespace AventStack.ExtentReports.Reporter
                 .Set("warningGrandChildLength", reportAggregates.ReportStatusStats.GrandChildCountWarning)
                 .Set("skipGrandChildLength", reportAggregates.ReportStatusStats.GrandChildCountSkip)
                 .Set("exceptionsGrandChildLength", reportAggregates.ReportStatusStats.GrandChildCountExceptions)
-                .Set("categoryIdList", categoryIdList);
+                .Set("analysisStrategy", AnalysisStrategy.ToString());
 
-            //_reportCollection.UpdateOne(filter, update);
-
-            //InsertUpdateSystemAttribute();
+            _reportCollection.UpdateOne(filter, update);
         }
 
         public override void OnAuthorAssigned(Test test, Author author)
@@ -92,8 +162,8 @@ namespace AventStack.ExtentReports.Reporter
             var document = new BsonDocument
             {
                 { "test", test.ObjectId },
-                { "project", _projectId },
-                { "report", _reportId },
+                { "project", ProjectId },
+                { "report", ReportId },
                 { "testName", test.Name },
                 { "sequence", log.Sequence },
                 { "status", log.Status.ToString().ToLower() },
@@ -120,8 +190,8 @@ namespace AventStack.ExtentReports.Reporter
 
                 document = new BsonDocument
                 {
-                    { "report", _reportId },
-                    { "project", _projectId },
+                    { "report", ReportId },
+                    { "project", ProjectId },
                     { "name", ex.Name }
                 };
 
@@ -137,10 +207,10 @@ namespace AventStack.ExtentReports.Reporter
                     {
                         document = new BsonDocument
                         {
-                            { "project", _projectId },
-                            { "report", _reportId },
+                            { "project", ProjectId },
+                            { "report", ReportId },
                             { "name", ex.Name },
-                            { "stacktrace", ex.StackTrace },
+                            { "stacktrace", ((ExceptionInfo)ex).Exception.StackTrace },
                             { "testCount", 0 }
                         };
 
@@ -193,17 +263,32 @@ namespace AventStack.ExtentReports.Reporter
 
         public override void OnScreenCaptureAdded(Test test, ScreenCapture screenCapture)
         {
-            throw new NotImplementedException();
+            SaveScreenCapture(test, screenCapture);
         }
 
         public override void OnScreenCaptureAdded(Log log, ScreenCapture screenCapture)
         {
-            throw new NotImplementedException();
+            SaveScreenCapture(log, screenCapture);
+        }
+
+        private void SaveScreenCapture(BasicMongoReportElement el, ScreenCapture screenCapture)
+        {
+            if (_mediaStorageHandler == null)
+            {
+                KlovMedia klovMedia = new KlovMedia()
+                {
+                    ProjectId = ProjectId,
+                    ReportId = ReportId,
+                    MediaCollection = _mediaCollection
+                };
+                _mediaStorageHandler = new KlovMediaStorageHandler(_url, klovMedia);
+            }
+
+            _mediaStorageHandler.SaveScreenCapture(el, screenCapture);
         }
 
         public override void OnTestRemoved(Test test)
         {
-            throw new NotImplementedException();
         }
 
         public override void OnTestStarted(Test test)
@@ -220,9 +305,9 @@ namespace AventStack.ExtentReports.Reporter
         {
             var document = new BsonDocument
             {
-                { "project", _projectId },
-                { "report", _reportId },
-                { "reportName", _reportId },
+                { "project", ProjectId },
+                { "report", ReportId },
+                { "reportName", ReportId },
                 { "level", test.Level },
                 { "name", test.Name },
                 { "status", test.Status.ToString().ToLower() },
@@ -267,23 +352,6 @@ namespace AventStack.ExtentReports.Reporter
             _testCollection.FindOneAndUpdate(filter, update);
         }
 
-        public override void Start()
-        {
-            throw new NotImplementedException();
-        }
-
-        public override void Stop() { }
-
-        public ExtentKlovReporter(string projectName, string reportName)
-        {
-            if (projectName == null || reportName == null)
-            {
-                throw new ArgumentNullException("At least one of the passed arguments is null but should never be null");
-            }
-
-            _startTime = DateTime.Now;
-        }
-
         /// <summary>
         /// Connects to MongoDB default settings, localhost:27017
         /// </summary>
@@ -316,11 +384,14 @@ namespace AventStack.ExtentReports.Reporter
 
         public void InitKlovServerConnection(string url)
         {
-
+            _url = url;
         }
 
-        private const string DefaultProjectName = "Default";
-        private const string DefaultKlovServerName = "klov";
+        private string _url;
+
+        private KlovMediaStorageHandler _mediaStorageHandler;
+
+        private ReportAggregates _reportAggregates;
 
         private DateTime _startTime;
         private MongoClient _mongoClient;

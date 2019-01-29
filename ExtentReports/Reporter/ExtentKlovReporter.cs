@@ -19,21 +19,24 @@ namespace AventStack.ExtentReports.Reporter
 
         public override ReportStatusStats ReportStatusStats { get; protected internal set; }
 
-        public string ReportName { get; private set; }
+        public string ReportName { get; set; }
         public ObjectId ReportId { get; private set; }
-        public string ProjectName { get; private set; }
+        public string ProjectName { get; set; }
         public ObjectId ProjectId { get; private set; }
 
         private const string DefaultProjectName = "Default";
         private const string DefaultKlovServerName = "klov";
         private const string DatabaseName = "klov";
 
-        public ExtentKlovReporter(string projectName, string reportName)
+        public ExtentKlovReporter()
         {
-            ProjectName = projectName;
-            ReportName = reportName;
-
             _startTime = DateTime.Now;
+        }
+
+        public ExtentKlovReporter(string projectName, string reportName) : this()
+        {
+            ProjectName = string.IsNullOrEmpty(projectName) ? DefaultProjectName : projectName;
+            ReportName = string.IsNullOrEmpty(reportName) ? "Build " + DateTime.Now : reportName;
         }
 
         /// <summary>
@@ -80,7 +83,6 @@ namespace AventStack.ExtentReports.Reporter
 
         private void InitializeCollections(IMongoDatabase db)
         {
-            // collections
             _projectCollection = db.GetCollection<BsonDocument>("project");
             _reportCollection = db.GetCollection<BsonDocument>("report");
             _testCollection = db.GetCollection<BsonDocument>("test");
@@ -89,6 +91,7 @@ namespace AventStack.ExtentReports.Reporter
             _mediaCollection = db.GetCollection<BsonDocument>("media");
             _categoryCollection = db.GetCollection<BsonDocument>("category");
             _authorCollection = db.GetCollection<BsonDocument>("author");
+            _deviceCollection = db.GetCollection<BsonDocument>("device");
             _environmentCollection = db.GetCollection<BsonDocument>("environment");
         }
 
@@ -204,7 +207,7 @@ namespace AventStack.ExtentReports.Reporter
 
             if (log.HasScreenCapture && log.ScreenCaptureContext.FirstOrDefault().IsBase64)
             {
-                document.Add("details", log.Details + log.ScreenCaptureContext.FirstOrDefault().Source);
+                document["details"] = log.Details + log.ScreenCaptureContext.FirstOrDefault().Source;
             }
 
             _logCollection.InsertOne(document);
@@ -402,7 +405,6 @@ namespace AventStack.ExtentReports.Reporter
         private IMongoCollection<BsonDocument> _deviceCollection;
         private IMongoCollection<BsonDocument> _environmentCollection;
 
-        private Dictionary<string, ObjectId> _categoryNameObjectIdCollection;
         private Dictionary<string, ObjectId> _exceptionNameObjectIdCollection;
     }
 }

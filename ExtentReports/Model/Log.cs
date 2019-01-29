@@ -8,7 +8,7 @@ using System;
 namespace AventStack.ExtentReports.Model
 {
     [Serializable]
-    public class Log : IRunResult
+    public class Log : BasicMongoReportElement, IRunResult
     {
         public DateTime Timestamp { get => _timestamp; set => _timestamp = value; }
         public Status Status { get; set; }

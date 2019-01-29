@@ -16,7 +16,7 @@ namespace AventStack.ExtentReports.Model
                     return "<a href='" + Base64StringDataType + Base64String + "' data-featherlight='image'><span class='label grey badge white-text text-white'>base64-img</span></a>";
                 }
 
-                return "<img class='r-img' onerror='this.style.display=\"none\"' data-featherlight='" + Path + "' src='" + Path + "' data-src='" + Path + "'>";
+                return "<img class='r-img' title='" + Title + "' onerror='this.style.display=\"none\"' data-featherlight='" + Path + "' src='" + Path + "' data-src='" + Path + "'>";
             }
         }
 

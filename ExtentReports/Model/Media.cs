@@ -16,7 +16,7 @@ namespace AventStack.ExtentReports.Model
         public long FileSize { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
-        public string Title { get; set; }
+        public string Title { get; set; } = string.Empty;
         public string Base64String { get; set; }        
         public int Sequence { get; private set; } = Interlocked.Increment(ref _seq);
 

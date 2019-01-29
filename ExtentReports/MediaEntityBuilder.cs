@@ -26,7 +26,7 @@ namespace AventStack.ExtentReports
             if (string.IsNullOrEmpty(path))
                 throw new IOException("ScreenCapture path cannot be null or empty.");
 
-            return CreateScreenCapture(path, null, false);
+            return CreateScreenCapture(path, title, false);
         }
 
         /// <summary>

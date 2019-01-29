@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using AventStack.ExtentReports.Utils;
+
+using System.Collections.Generic;
 
 namespace AventStack.ExtentReports.Model
 {
@@ -18,6 +20,21 @@ namespace AventStack.ExtentReports.Model
         public static List<Status> GetStatusHierarchy()
         {
             return _statusHierarchy;
+        }
+
+        public static Status GetHighestStatus(List<Status> list)
+        {
+            var highestStatus = Status.Pass;
+            if (list.IsNullOrEmpty())
+            {
+                return highestStatus;
+            }
+
+            foreach (var status in list)
+            {
+                highestStatus = GetStatusHierarchy().IndexOf(status) < GetStatusHierarchy().IndexOf(highestStatus)? status: highestStatus;
+            }
+            return highestStatus;
         }
     }
 }

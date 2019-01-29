@@ -8,13 +8,13 @@ using System;
 namespace AventStack.ExtentReports.Model
 {
     [Serializable]
-    public class Log : IRunResult
+    public class Log : BasicMongoReportElement, IRunResult
     {
         public DateTime Timestamp { get => _timestamp; set => _timestamp = value; }
         public Status Status { get; set; }
         public ObjectId ObjectId { get => _objectId; set => _objectId = value; }
         public Test Test { get; private set; }
-        public string Details { get; set; }
+        public string Details { get; set; } = string.Empty;
         public int Sequence = 0;
         public IMarkup Markup { get; set; }
         public ExceptionInfo ExceptionInfo { get; set; }

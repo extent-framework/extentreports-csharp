@@ -29,11 +29,11 @@ namespace AventStack.ExtentReports
             };
         }
 
-        internal ExtentTest(ExtentReports extent, string name, string description = null)
+        internal ExtentTest(ExtentReports extent, string name, string description = "")
             : this(extent, null, name, description)
         { }
 
-        public ExtentTest CreateNode<T>(string name, string description = null) where T : IGherkinFormatterModel
+        public ExtentTest CreateNode<T>(string name, string description = "") where T : IGherkinFormatterModel
         {
             if (string.IsNullOrEmpty(name))
                 throw new ArgumentException("Test name cannot be null or empty");
@@ -58,14 +58,14 @@ namespace AventStack.ExtentReports
             Extent.AddNode(node.Model);
         }
 
-        public ExtentTest CreateNode(string name, string description = null)
+        public ExtentTest CreateNode(string name, string description = "")
         {
             var node = new ExtentTest(Extent, name, description);
             ApplyCommonNodeSettings(node);
             return node;
         }
 
-        public ExtentTest CreateNode(GherkinKeyword keyword, string name, string description = null)
+        public ExtentTest CreateNode(GherkinKeyword keyword, string name, string description = "")
         {
             var node = new ExtentTest(Extent, name, description);
             node.Model.BehaviorDrivenType = keyword.Model;

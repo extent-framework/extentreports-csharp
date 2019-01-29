@@ -1,4 +1,5 @@
-﻿using AventStack.ExtentReports.Gherkin.Model;
+﻿using AventStack.ExtentReports.Core;
+using AventStack.ExtentReports.Gherkin.Model;
 
 using MongoDB.Bson;
 
@@ -9,10 +10,10 @@ using System.Threading;
 namespace AventStack.ExtentReports.Model
 {
     [Serializable]
-    public class Test
+    public class Test : BasicMongoReportElement, IRunResult
     {
         public string Name { get; set; }
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
         public int TestId { get; } = Interlocked.Increment(ref _cntr);
         public ObjectId ObjectId { get; set; }
         public Status Status { get; set; } = Status.Pass;

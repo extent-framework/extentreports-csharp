@@ -25,7 +25,7 @@ namespace AventStack.ExtentReports.MediaStorage
             }
             _host = host;
         }
-
+        
         [MethodImpl(MethodImplOptions.Synchronized)]
         public void StoreMedia(Media m)
         {
@@ -75,10 +75,8 @@ namespace AventStack.ExtentReports.MediaStorage
                         }
 
                         var imageContent = new ByteArrayContent(file);
-                        content.Add(imageContent,
-                            '"' + "f" + '"',
-                            '"' + fileName + '"');
-
+                        content.Add(imageContent, "f", fileName);
+                        
                         var result = client.PostAsync(_host + Route, content).Result;
 
                         if (result.StatusCode != HttpStatusCode.OK)

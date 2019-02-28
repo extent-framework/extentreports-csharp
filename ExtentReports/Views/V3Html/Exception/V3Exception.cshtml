@@ -44,7 +44,7 @@
 										<td>@test.StartTime</td>
 										<td class='linked' test-id='@test.TestId'>@test.HierarchicalName</td>
 										<td>
-											<textarea disabled class="code-block">@(((ExceptionInfo)test.ExceptionInfoContext.FirstOrDefault()).Exception.StackTrace)</textarea>
+											<textarea readonly class="code-block">@(((ExceptionInfo)test.ExceptionInfoContext.FirstOrDefault()).Exception.StackTrace)</textarea>
 										</td>
 									</tr>
 									}

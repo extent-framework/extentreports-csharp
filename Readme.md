@@ -1,4 +1,4 @@
-## Extent Framework 4 - Community Edition
+## Extent Framework 4 - .Net Core / .Net Standard - Community Edition
 
 [![NuGet](https://img.shields.io/nuget/v/extentreports.svg)](https://www.nuget.org/packages/ExtentReports.Core)
 [![Join the chat at https://gitter.im/anshooarora/extentreports-csharp](https://badges.gitter.im/anshooarora/extentreports-csharp.svg)](https://gitter.im/anshooarora/extentreports-csharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)

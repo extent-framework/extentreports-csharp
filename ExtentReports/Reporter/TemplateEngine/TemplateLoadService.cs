@@ -17,7 +17,7 @@ namespace AventStack.ExtentReports.Reporter.TemplateEngine
         {
             foreach (string template in templates)
             {
-                string resourceName = typeof(T).Namespace + "." + template + ".cshtml";
+                string resourceName = typeof(T).Assembly.ManifestModule.Name.Replace(".dll", "") + "." + template + ".cshtml";
                 using (var resourceStream = typeof(T).Assembly.GetManifestResourceStream(resourceName))
                 {
                     using (var reader = new StreamReader(resourceStream))

@@ -55,21 +55,21 @@ namespace AventStack.ExtentReports.Reporter
         {
             string[] templates = new string[]
             {
-                "Dashboard",
-                "Exception",
-                "Index",
-                "Tag",
-                "Partials.Attributes",
-                "Partials.AttributesView",
-                "Partials.Head",
-                "Partials.Log",
-                "Partials.Navbar",
-                "Partials.RecurseNodes",
-                "Partials.Scripts",
-                "Partials.Sidenav",
-                "Partials.SparkBDD",
-                "Partials.SparkStandard",
-                "Partials.SparkStepDetails",
+                "Views.Html.Dashboard",
+                "Views.Html.Exception",
+                "Views.Html.Index",
+                "Views.Html.Tag",
+                "Views.Html.Partials.Attributes",
+                "Views.Html.Partials.AttributesView",
+                "Views.Html.Partials.Head",
+                "Views.Html.Partials.Log",
+                "Views.Html.Partials.Navbar",
+                "Views.Html.Partials.RecurseNodes",
+                "Views.Html.Partials.Scripts",
+                "Views.Html.Partials.Sidenav",
+                "Views.Html.Partials.SparkBDD",
+                "Views.Html.Partials.SparkStandard",
+                "Views.Html.Partials.SparkStepDetails",
             };
 
             TemplateLoadService.LoadTemplate<IHtmlMarker>(templates);

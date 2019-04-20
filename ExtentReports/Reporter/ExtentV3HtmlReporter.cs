@@ -46,16 +46,16 @@ namespace AventStack.ExtentReports.Reporter
         {
             string[] templates = new string[]
             {
-                "V3Index",
-                "V3Head",
-                "V3Nav",
-                "Test.V3Test",
-                "Test.V3Charts",
-                "Author.V3Author",
-                "Category.V3Category",
-                "Dashboard.V3Dashboard",
-                "Exception.V3Exception",
-                "TestRunner.V3Logs"
+                "Views.V3Html.V3Index",
+                "Views.V3Html.V3Head",
+                "Views.V3Html.V3Nav",
+                "Views.V3Html.Test.V3Test",
+                "Views.V3Html.Test.V3Charts",
+                "Views.V3Html.Author.V3Author",
+                "Views.V3Html.Category.V3Category",
+                "Views.V3Html.Dashboard.V3Dashboard",
+                "Views.V3Html.Exception.V3Exception",
+                "Views.V3Html.TestRunner.V3Logs"
             };
 
             TemplateLoadService.LoadTemplate<IV3HtmlMarker>(templates);

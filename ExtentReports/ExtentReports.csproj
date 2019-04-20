@@ -1,256 +1,113 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{783324EC-3D15-46A1-B34E-A1F15B97DD59}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <RootNamespace>AventStack.ExtentReports</RootNamespace>
-    <AssemblyName>ExtentReports</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-    <TargetFrameworkProfile />
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <PropertyGroup>
-    <StartupObject />
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="DnsClient, Version=1.0.7.0, Culture=neutral, PublicKeyToken=4574bb5573c51424, processorArchitecture=MSIL">
-      <HintPath>..\packages\DnsClient.1.0.7\lib\net45\DnsClient.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Bson, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Bson.2.7.2\lib\net45\MongoDB.Bson.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.2.7.2\lib\net45\MongoDB.Driver.dll</HintPath>
-    </Reference>
-    <Reference Include="MongoDB.Driver.Core, Version=2.7.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MongoDB.Driver.Core.2.7.2\lib\net45\MongoDB.Driver.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="RazorEngine, Version=3.10.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
-      <HintPath>..\packages\RazorEngine.3.10.0\lib\net45\RazorEngine.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.3.0\lib\netstandard1.1\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.0.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.0.0\lib\net45\System.Web.Razor.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
+    <None Remove="Views\Commons\CommonsAttributes.cshtml" />
+    <None Remove="Views\Commons\CommonsDashboard.cshtml" />
+    <None Remove="Views\Commons\CommonsException.cshtml" />
+    <None Remove="Views\Commons\CommonsHead.cshtml" />
+    <None Remove="Views\Commons\CommonsInjectCss.cshtml" />
+    <None Remove="Views\Commons\CommonsInjectJs.cshtml" />
+    <None Remove="Views\Commons\CommonsMedia.cshtml" />
+    <None Remove="Views\Commons\CommonsNav.cshtml" />
+    <None Remove="Views\Commons\CommonsNavRight.cshtml" />
+    <None Remove="Views\Commons\CommonsRow.cshtml" />
+    <None Remove="Views\Commons\CommonsTag.cshtml" />
+    <None Remove="Views\Html\Dashboard.cshtml" />
+    <None Remove="Views\Html\Exception.cshtml" />
+    <None Remove="Views\Html\Index.cshtml" />
+    <None Remove="Views\Html\Partials\Attributes.cshtml" />
+    <None Remove="Views\Html\Partials\AttributesView.cshtml" />
+    <None Remove="Views\Html\Partials\Head.cshtml" />
+    <None Remove="Views\Html\Partials\Log.cshtml" />
+    <None Remove="Views\Html\Partials\Navbar.cshtml" />
+    <None Remove="Views\Html\Partials\RecurseNodes.cshtml" />
+    <None Remove="Views\Html\Partials\Scripts.cshtml" />
+    <None Remove="Views\Html\Partials\Sidenav.cshtml" />
+    <None Remove="Views\Html\Partials\SparkBDD.cshtml" />
+    <None Remove="Views\Html\Partials\SparkStandard.cshtml" />
+    <None Remove="Views\Html\Partials\SparkStepDetails.cshtml" />
+    <None Remove="Views\Html\Tag.cshtml" />
+    <None Remove="Views\Logger\LoggerMacro.cshtml" />
+    <None Remove="Views\Logger\LoggerTest.cshtml" />
+    <None Remove="Views\V3Html\Author\V3Author.cshtml" />
+    <None Remove="Views\V3Html\Category\V3Category.cshtml" />
+    <None Remove="Views\V3Html\Dashboard\V3Dashboard.cshtml" />
+    <None Remove="Views\V3Html\Exception\V3Exception.cshtml" />
+    <None Remove="Views\V3Html\TestRunner\V3Logs.cshtml" />
+    <None Remove="Views\V3Html\Test\V3Charts.cshtml" />
+    <None Remove="Views\V3Html\Test\V3Test.cshtml" />
+    <None Remove="Views\V3Html\V3Head.cshtml" />
+    <None Remove="Views\V3Html\V3Index.cshtml" />
+    <None Remove="Views\V3Html\V3Nav.cshtml" />
   </ItemGroup>
+
   <ItemGroup>
-    <Compile Include="AnalysisStrategy.cs" />
-    <Compile Include="Configuration\Config.cs" />
-    <Compile Include="Configuration\ConfigurationManager.cs" />
-    <Compile Include="Core\ExtentObservable.cs" />
-    <Compile Include="ExtentReports.cs" />
-    <Compile Include="ExtentTest.cs" />
-    <Compile Include="GherkinKeyword.cs" />
-    <Compile Include="Core\GherkinKeywordNotFoundException.cs" />
-    <Compile Include="Gherkin\GherkinDialect.cs" />
-    <Compile Include="Gherkin\GherkinDialectProvider.cs" />
-    <Compile Include="Gherkin\GherkinKeywords.cs" />
-    <Compile Include="Gherkin\InvalidGherkinLanguageException.cs" />
-    <Compile Include="Gherkin\Model\And.cs" />
-    <Compile Include="Gherkin\Model\Asterisk.cs" />
-    <Compile Include="Gherkin\Model\Background.cs" />
-    <Compile Include="Gherkin\Model\But.cs" />
-    <Compile Include="Gherkin\Model\Feature.cs" />
-    <Compile Include="Gherkin\Model\Given.cs" />
-    <Compile Include="Gherkin\Model\IGherkinFormatterModel.cs" />
-    <Compile Include="Gherkin\Model\Scenario.cs" />
-    <Compile Include="Gherkin\Model\ScenarioOutline.cs" />
-    <Compile Include="Gherkin\Model\Then.cs" />
-    <Compile Include="Gherkin\Model\When.cs" />
-    <Compile Include="Core\IAnalysisStrategyService.cs" />
-    <Compile Include="Core\IExtentReporter.cs" />
-    <Compile Include="Core\IMediaContainer.cs" />
-    <Compile Include="Core\InvalidAnalysisStrategyException.cs" />
-    <Compile Include="Core\IReportAggregatesListener.cs" />
-    <Compile Include="Core\IReportService.cs" />
-    <Compile Include="Core\IRunResult.cs" />
-    <Compile Include="Core\ITestListener.cs" />
-    <Compile Include="MarkupUtils\CodeBlock.cs" />
-    <Compile Include="MarkupUtils\CodeLanguage.cs" />
-    <Compile Include="MarkupUtils\ExtentColor.cs" />
-    <Compile Include="MarkupUtils\IMarkup.cs" />
-    <Compile Include="MarkupUtils\Label.cs" />
-    <Compile Include="MarkupUtils\MarkupHelper.cs" />
-    <Compile Include="MarkupUtils\Table.cs" />
-    <Compile Include="MediaEntityBuilder.cs" />
-    <Compile Include="MediaEntityModelProvider.cs" />
-    <Compile Include="MediaStorage\KlovHttpMediaManager.cs" />
-    <Compile Include="MediaStorage\KlovMedia.cs" />
-    <Compile Include="MediaStorage\KlovMediaStorageHandler.cs" />
-    <Compile Include="Model\AbstractStructure.cs" />
-    <Compile Include="Model\Attribute.cs" />
-    <Compile Include="Model\Author.cs" />
-    <Compile Include="Model\BasicMongoReportElement.cs" />
-    <Compile Include="Model\Category.cs" />
-    <Compile Include="Model\Device.cs" />
-    <Compile Include="Model\ExceptionInfo.cs" />
-    <Compile Include="Model\Log.cs" />
-    <Compile Include="Model\Media.cs" />
-    <Compile Include="Model\MediaType.cs" />
-    <Compile Include="Model\ScreenCapture.cs" />
-    <Compile Include="Model\StatusHierarchy.cs" />
-    <Compile Include="Model\SystemAttribute.cs" />
-    <Compile Include="Model\Test.cs" />
-    <Compile Include="Model\TestAttribute.cs" />
-    <Compile Include="Model\TestAttributeTestContext.cs" />
-    <Compile Include="Model\TIterator.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\RazorEngineTemplate.cs" />
-    <Compile Include="Core\ReportAggregates.cs" />
-    <Compile Include="Reporter\AbstractReporter.cs" />
-    <Compile Include="Reporter\BasicFileReporter.cs" />
-    <Compile Include="Reporter\ConfigurableReporter.cs" />
-    <Compile Include="Reporter\Configuration\BasicConfiguration.cs" />
-    <Compile Include="Reporter\Configuration\BasicFileConfiguration.cs" />
-    <Compile Include="Reporter\Configuration\Default\ExtentHtmlReporterSettings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>ExtentHtmlReporterSettings.settings</DependentUpon>
-    </Compile>
-    <Compile Include="Reporter\Configuration\ExtentLoggerReporterConfiguration.cs" />
-    <Compile Include="Reporter\Configuration\ExtentHtmlReporterConfiguration.cs" />
-    <Compile Include="Reporter\Configuration\IReporterConfiguration.cs" />
-    <Compile Include="Reporter\Configuration\Protocol.cs" />
-    <Compile Include="Reporter\Configuration\RichViewReporterConfiguration.cs" />
-    <Compile Include="Reporter\Configuration\Theme.cs" />
-    <Compile Include="Reporter\ExtentHtmlReporter.cs" />
-    <Compile Include="Reporter\ExtentKlovReporter.cs" />
-    <Compile Include="Reporter\ExtentV3HtmlReporter.cs" />
-    <Compile Include="Reporter\ExtentLoggerReporter.cs" />
-    <Compile Include="Reporter\TemplateEngine\RazorEngineManager.cs" />
-    <Compile Include="Reporter\TemplateEngine\TemplateLoadService.cs" />
-    <Compile Include="Reporter\TemplateInfo.cs" />
-    <Compile Include="Core\ReportStatusStats.cs" />
-    <Compile Include="Status.cs" />
-    <Compile Include="Core\SystemAttributeContext.cs" />
-    <Compile Include="Core\TestAttributeTestContextProvider.cs" />
-    <Compile Include="Core\TestRemoveService.cs" />
-    <Compile Include="Resources\GherkinLangs.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GherkinLangs.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Utils\ExceptionUtil.cs" />
-    <Compile Include="Utils\ListUtil.cs" />
-    <Compile Include="Utils\ResourceUtils.cs" />
-    <Compile Include="ViewDefs\TWBSIcon.cs" />
-    <Compile Include="ViewDefs\MaterialIcon.cs" />
-    <EmbeddedResource Include="Views\Commons\CommonsNav.cshtml" />
-    <EmbeddedResource Include="Views\Commons\CommonsNavRight.cshtml" />
-    <EmbeddedResource Include="Views\Commons\CommonsHead.cshtml" />
-    <Compile Include="Views\Commons\ICommonsMarker.cs" />
-    <Compile Include="Views\Html\IHtml2Marker.cs" />
-    <EmbeddedResource Include="Views\Html\Partials\Attributes.cshtml" />
-    <Compile Include="Views\IViewsMarker.cs" />
-    <Compile Include="Views\V3Html\IV3HtmlMarker.cs" />
-    <Compile Include="Views\Logger\ILoggerMarker.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-    <None Include="Reporter\Configuration\Default\ExtentHtmlReporterSettings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>ExtentHtmlReporterSettings.Designer.cs</LastGenOutput>
-    </None>
-    <EmbeddedResource Include="Resources\GherkinLangs.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>GherkinLangs.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Commons\CommonsAttributes.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsDashboard.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsException.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsHead.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsInjectCss.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsInjectJs.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsMedia.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsNav.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsNavRight.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsRow.cshtml" />
     <EmbeddedResource Include="Views\Commons\CommonsTag.cshtml" />
+    <EmbeddedResource Include="Views\Html\Dashboard.cshtml" />
+    <EmbeddedResource Include="Views\Html\Exception.cshtml" />
+    <EmbeddedResource Include="Views\Html\Index.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Attributes.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\AttributesView.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Head.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Log.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Navbar.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\RecurseNodes.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Scripts.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Sidenav.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkBDD.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkStandard.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkStepDetails.cshtml" />
+    <EmbeddedResource Include="Views\Html\Tag.cshtml" />
+    <EmbeddedResource Include="Views\Logger\LoggerMacro.cshtml" />
+    <EmbeddedResource Include="Views\Logger\LoggerTest.cshtml" />
     <EmbeddedResource Include="Views\V3Html\Author\V3Author.cshtml" />
     <EmbeddedResource Include="Views\V3Html\Category\V3Category.cshtml" />
     <EmbeddedResource Include="Views\V3Html\Dashboard\V3Dashboard.cshtml" />
-    <EmbeddedResource Include="Views\V3Html\Exception\V3Exception.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Views\V3Html\Exception\V3Exception.cshtml" />
     <EmbeddedResource Include="Views\V3Html\TestRunner\V3Logs.cshtml" />
-    <EmbeddedResource Include="Views\V3Html\Test\V3Charts.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\V3Html\Test\V3Test.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\V3Html\V3Head.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Views\V3Html\Test\V3Charts.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Test\V3Test.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\V3Head.cshtml" />
     <EmbeddedResource Include="Views\V3Html\V3Index.cshtml" />
-    <EmbeddedResource Include="Views\V3Html\V3Nav.cshtml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Logger\LoggerTest.cshtml" />
-    <EmbeddedResource Include="Views\Logger\LoggerMacro.cshtml" />
-    <EmbeddedResource Include="Views\Commons\CommonsAttributes.cshtml" />
-    <EmbeddedResource Include="Views\Commons\CommonsMedia.cshtml" />
-    <EmbeddedResource Include="Views\Commons\CommonsRow.cshtml" />
-    <EmbeddedResource Include="Views\Html\Dashboard.cshtml" />
-    <EmbeddedResource Include="Views\Html\Index.cshtml" />
-    <EmbeddedResource Include="Views\Html\Partials\Sidenav.cshtml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Html\Partials\Log.cshtml" />
-    <EmbeddedResource Include="Views\Html\Partials\RecurseNodes.cshtml" />
-    <EmbeddedResource Include="Views\Html\Partials\Navbar.cshtml" />
-    <EmbeddedResource Include="Views\Html\Partials\Head.cshtml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Html\Partials\Scripts.cshtml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Html\Exception.cshtml" />
-    <EmbeddedResource Include="Views\Html\Partials\AttributesView.cshtml" />
-    <EmbeddedResource Include="Views\Html\Tag.cshtml" />
-    <EmbeddedResource Include="Views\Html\Partials\SparkStandard.cshtml" />
-    <EmbeddedResource Include="Views\Html\Partials\SparkBDD.cshtml" />
-    <EmbeddedResource Include="Views\Html\Partials\SparkStepDetails.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\V3Nav.cshtml" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Include="Resources\Languages.txt" />
+    <PackageReference Include="MongoDB.Bson" Version="2.8.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.8.0" />
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.8.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
+    <PackageReference Include="RazorEngine.NetCore" Version="2.2.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+
+  <ItemGroup>
+    <Compile Update="Resources\GherkinLangs.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GherkinLangs.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\GherkinLangs.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GherkinLangs.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

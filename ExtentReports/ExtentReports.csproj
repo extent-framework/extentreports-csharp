@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>ExtentReports.Core</PackageId>
+    <Authors>SimplyTest</Authors>
+    <Company>SimplyTest</Company>
+    <Product>ExtentReports</Product>
+    <Description>Forked from extent-framework/extentreports-csharp. Modified version of Extent Reporting Framework, Community Edition, supporting .NET Core and .NET Standard</Description>
+    <Copyright>AventStack</Copyright>
+    <PackageLicenseUrl>https://licenses.nuget.org/Apache-2.0</PackageLicenseUrl>
+    <PackageProjectUrl>http://extentreports.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/simplytest/extentreports-csharp</RepositoryUrl>
+    <PackageTags>reporting test selenium</PackageTags>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>

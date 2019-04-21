@@ -1,4 +1,4 @@
-## Extent Framework 4 - .Net Core / .Net Standard - Community Edition
+## Extent Framework 4 - Community Edition - .Net Core / .Net Standard
 
 [![NuGet](https://img.shields.io/nuget/v/extentreports.svg)](https://www.nuget.org/packages/ExtentReports.Core)
 [![Join the chat at https://gitter.im/anshooarora/extentreports-csharp](https://badges.gitter.im/anshooarora/extentreports-csharp.svg)](https://gitter.im/anshooarora/extentreports-csharp?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
@@ -11,7 +11,7 @@
 
 ### Documentation
 
-This is a modified version of the popular test reporting framework ExtenReports, which supports now all current versions of .NET Frameworks including .NET Core and .NET Standard frameworks. No you can use it in all types of your .NET projects.
+This is a modified version of the popular test reporting framework ExtenReports, which supports now all current versions of .NET Frameworks including .NET Core and .NET Standard framework. Now you can use it in all types of your .NET projects.
 
 Try it out and enjoy, your SimplyTest team.
 

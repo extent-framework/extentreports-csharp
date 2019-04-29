@@ -13,6 +13,16 @@
 
 This is a modified version of the popular test reporting framework ExtentReports, which supports now all current versions of .NET Frameworks including .NET Core and .NET Standard framework. Now you can use it in all types of your .NET projects.
 
+#### Usage:
+
+``` c# 
+public AventStack.ExtentReports.ExtentReports Reporter =  new AventStack.ExtentReports.ExtentReports();
+```
+
+*Hint:* Due to the overlapping naming of the namespace and the class ExtentReports, .NET Core compiler shows an error
+'ExtentReports' is a namespace but is used like a type'. You can get rid of this issue using full qualified names like above or using a class alias.
+
+
 Try it out and enjoy, your SimplyTest team.
 
 View [extentreports.com](http://extentreports.com/docs/versions/4/net/) for complete documentation.

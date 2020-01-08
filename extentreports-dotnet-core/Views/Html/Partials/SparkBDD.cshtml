@@ -7,12 +7,12 @@
 	{
 	<div class="card">
 		<div class="card-header" role="tab">
-			<h5 class="card-title pl-3">
-				<div class="node">@node.Name</div>
+			<div class="card-title pl-3">
+				<div class="node">@node.BehaviorDrivenTypeName: @node.Name</div>
 				<div class="status-avatar float-left @node.Status.ToString().ToLower()-bg">
 					<i class="fa fa-@TWBSIcon.GetIcon(node.Status) text-white"></i>
 				</div>
-			</h5>
+			</div>
 		</div>
 		@if (node.HasChildren)
 		{
@@ -24,7 +24,7 @@
 						<div class="card-body l1">
 							<div class="card-header" role="tab">
 								<h5 class="card-title outline-child">
-									<div class="node">@child.Name</div>
+									<div class="node">@child.BehaviorDrivenTypeName: @child.Name</div>
 									<div class="status-avatar float-left @child.Status.ToString().ToLower()-bg">
 										<i class="fa fa-@TWBSIcon.GetIcon(child.Status) text-white"></i>
 									</div>
@@ -37,7 +37,7 @@
 										<span class="alert-icon @step.Status.ToString().ToLower()-bg">
 											<i class="fa fa-@TWBSIcon.GetIcon(step.Status) text-white"></i>
 										</span>
-										<span>@step.Name</span>
+										<span>@step.BehaviorDrivenTypeName @step.Name</span>
 									</div>
 									@Include("SparkStepDetails", step)
 								}
@@ -56,7 +56,7 @@
 								<span class="alert-icon @child.Status.ToString().ToLower()-bg">
 									<i class="fa fa-@TWBSIcon.GetIcon(child.Status) text-white"></i>
 								</span>
-								<span>@child.Name</span>
+								<span>@child.BehaviorDrivenTypeName @child.Name</span>
 							</div>
 							@Include("SparkStepDetails", child)
 						}

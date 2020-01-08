@@ -1,0 +1,21 @@
+﻿@using RazorEngine
+@using RazorEngine.Templating
+
+<!DOCTYPE html>
+<html>
+@Include("Head")
+<body class="attributes-view @Model.MasterConfig.GetValue("theme")">
+    <div class="app header-dark side-nav-folded">
+        <div class="layout">
+            @Include("Navbar")
+            @Include("Sidenav")
+            <div class="page-container">
+                <div class="main-content">
+                    @Include("SparkTagSPA")
+                </div>
+            </div>
+        </div>
+    </div>
+	@Include("Scripts")
+</body>
+</html> 

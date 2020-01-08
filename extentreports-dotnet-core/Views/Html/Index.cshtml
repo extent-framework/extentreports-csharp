@@ -1,0 +1,36 @@
+﻿@using AventStack.ExtentReports
+@using AventStack.ExtentReports.ViewDefs
+@using RazorEngine
+@using RazorEngine.Templating
+
+<!DOCTYPE html>
+<html>
+@Include("Head")
+<script src="https://cdn.rawgit.com/extent-framework/extent-github-cdn/7cc78ce/spark/js/jsontree.js"></script>
+
+@{
+	var isbdd = false;
+	var cls = "";
+	if (Model.TestList.Count > 0 && Model.TestList[0].IsBehaviorDrivenType)
+	{
+		isbdd = true;
+		cls = "bdd-report";
+	}
+}
+
+<body class="@cls @Model.MasterConfig.GetValue("theme")">
+    <div class="app header-dark side-nav-folded">
+        <div class="layout">
+            @Include("Navbar")
+            @Include("Sidenav")
+            <div class="page-container">
+                <div class="main-content">
+                    @Include("SparkTestSPA")
+                </div>
+            </div>
+        </div>
+    </div>
+	@Include("Scripts")
+</body>
+
+</html>

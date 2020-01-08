@@ -1,0 +1,45 @@
+﻿@using AventStack.ExtentReports
+@using RazorEngine
+@using RazorEngine.Templating
+<div class="test-wrapper row tag-view attributes-view">
+    <div class="test-list">
+        <div class="test-list-tools">
+            <ul class="tools pull-left">
+                <li>
+                    <a href="">
+                        <span class="font-size-14">Tags</span>
+                    </a>
+                </li> 
+            </ul>
+            <ul class="tools text-right">
+                <li>
+                    <a href="#">
+                        <span class="badge badge-primary">@Model.CategoryContext.Context.Count</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="test-list-wrapper scrollable">
+            <ul class="test-list-item">
+                @foreach (var category in Model.CategoryContext.Context)
+				{
+					@Include("AttributesView", category)
+                }
+            </ul>    
+        </div>
+    </div>
+    <div class="test-content scrollable">
+        <div class="test-content-tools">
+            <ul>
+                <li>
+                    <a class="back-to-test" href="javascript:void(0)">
+                        <i class="fa fa-arrow-left"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="test-content-detail">
+            <div class="detail-body"></div>
+        </div>
+    </div>
+</div>

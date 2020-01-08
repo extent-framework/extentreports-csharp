@@ -1,0 +1,61 @@
+﻿@using AventStack.ExtentReports
+
+@{
+  var bdd = Model.TestList[0].IsBehaviorDrivenType;
+
+  var boxSize = "col-md-12";
+  if (Model.ReportStatusStats.ChildCount > 0) {
+	boxSize = "col-sm-12 col-md-6";
+  }
+  if (bdd || Model.ReportStatusStats.GrandChildCount > 0) {
+	boxSize = "col-sm-12 col-md-4";
+  }
+
+  var chartWidth="115";
+  var chartHeight="90";
+  var chartBoxHeight="94px";
+
+  var parentHeading="Classes";
+  var childHeading="Tests";  
+  var grandChildHeading="Steps";
+  var parentLabel="class(es)";
+  var childLabel = "test(s)";
+  var grandchildLabel="step(s)";
+
+  if (bdd) {
+    parentHeading="Features";
+    childHeading="Scenarios";
+    grandChildHeading="Steps";
+	parentLabel="feature(s)";
+	childLabel="scenario(s)";
+  } else {
+    if (Model.AnalysisStrategy == AnalysisStrategy.Test) {
+      parentHeading="Tests";
+      childHeading="Steps";
+      grandChildHeading="";
+	  parentLabel="test(s)";
+	  childLabel=grandchildLabel;
+    }
+  }
+  
+  var runDuration = DateTime.Now - Model.StartTime;
+}
+
+<!DOCTYPE html>
+<html>
+	@Include("Head")
+	<body class="dashboard-view @Model.MasterConfig.GetValue("theme")">
+		<div class="app header-dark side-nav-folded">
+			<div class="layout">
+				@Include("Navbar")
+				@Include("Sidenav")
+				<div class="page-container">
+					<div class="main-content">
+						@Include("SparkDashboardSPA")
+					</div>
+				</div>
+			</div>
+		</div>
+		@Include("Scripts")
+	</body>
+</html>

@@ -56,24 +56,24 @@ namespace AventStack.ExtentReports.Reporter
         {
             string[] templates = new string[]
             {
-                "LoggerTest",
-                "LoggerMacro"
+                "Views.Logger.LoggerTest",
+                "Views.Logger.LoggerMacro"
             };
             TemplateLoadService.LoadTemplate<ILoggerMarker>(templates);
 
             templates = new string[]
             {
-                "CommonsAttributes",
-                "CommonsDashboard",
-                "CommonsException",
-                "CommonsHead",
-                "CommonsInjectCss",
-                "CommonsInjectJs",
-                "CommonsMedia",
-                "CommonsNav",
-                "CommonsNavRight",
-                "CommonsRow",
-                "CommonsTag"
+                "Views.Commons.CommonsAttributes",
+                "Views.Commons.CommonsDashboard",
+                "Views.Commons.CommonsException",
+                "Views.Commons.CommonsHead",
+                "Views.Commons.CommonsInjectCss",
+                "Views.Commons.CommonsInjectJs",
+                "Views.Commons.CommonsMedia",
+                "Views.Commons.CommonsNav",
+                "Views.Commons.CommonsNavRight",
+                "Views.Commons.CommonsRow",
+                "Views.Commons.CommonsTag"
             };
             TemplateLoadService.LoadTemplate<ICommonsMarker>(templates);
         }

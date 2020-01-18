@@ -12,8 +12,9 @@
     <PackageProjectUrl>http://extentreports.com</PackageProjectUrl>
     <RepositoryUrl>https://github.com/simplytest/extentreports-csharp</RepositoryUrl>
     <PackageTags>reporting test selenium</PackageTags>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <Version>1.0.3</Version>
+    <PackageReleaseNotes>V1.0.3: Updated RazorEngine package fixing ExtentReports issues on linux</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -103,7 +104,7 @@
     <PackageReference Include="MongoDB.Driver" Version="2.8.0" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.8.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="RazorEngine.NetCore" Version="2.2.2" />
+    <PackageReference Include="RazorEngine.NetCore" Version="2.2.6" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
 

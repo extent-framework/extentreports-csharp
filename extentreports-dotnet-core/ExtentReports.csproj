@@ -47,6 +47,16 @@
     <None Remove="Views\Html\Tag.cshtml" />
     <None Remove="Views\Logger\LoggerMacro.cshtml" />
     <None Remove="Views\Logger\LoggerTest.cshtml" />
+    <None Remove="Views\V3Html\Author\V3Author.cshtml" />
+    <None Remove="Views\V3Html\Category\V3Category.cshtml" />
+    <None Remove="Views\V3Html\Dashboard\V3Dashboard.cshtml" />
+    <None Remove="Views\V3Html\Exception\V3Exception.cshtml" />
+    <None Remove="Views\V3Html\TestRunner\V3Logs.cshtml" />
+    <None Remove="Views\V3Html\Test\V3Charts.cshtml" />
+    <None Remove="Views\V3Html\Test\V3Test.cshtml" />
+    <None Remove="Views\V3Html\V3Head.cshtml" />
+    <None Remove="Views\V3Html\V3Index.cshtml" />
+    <None Remove="Views\V3Html\V3Nav.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
@@ -83,14 +93,25 @@
     <EmbeddedResource Include="Views\Html\Tag.cshtml" />
     <EmbeddedResource Include="Views\Logger\LoggerMacro.cshtml" />
     <EmbeddedResource Include="Views\Logger\LoggerTest.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Author\V3Author.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Category\V3Category.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Dashboard\V3Dashboard.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Exception\V3Exception.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\TestRunner\V3Logs.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Test\V3Charts.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Test\V3Test.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\V3Head.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\V3Index.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\V3Nav.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
     <PackageReference Include="MongoDB.Bson" Version="2.10.0" />
     <PackageReference Include="MongoDB.Driver" Version="2.10.0" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.10.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="RazorEngine.NetCore" Version="2.2.4" />
+    <PackageReference Include="RazorEngine.NetCore" Version="2.2.6" />
   </ItemGroup>
 
   <ItemGroup>

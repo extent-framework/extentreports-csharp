@@ -10,12 +10,16 @@
 		}
 		spacer += "|---";
 	}
+
+	string categories = "", devices = "";
+	foreach (var category in Model.CategoryContext.All()) {categories+=category.Name;}
+	foreach (var device in Model.DeviceContext.All()) {devices+=device.Name;}
 }
 
 <div class="st @Model.Status.ToString().ToLower() test l${level}" 
   test-id="@Model.TestId"
-  tags="@foreach (var category in @Model.CategoryContext.All()) {@category.Name}"
-  devices="@foreach (var device in @Model.DeviceContext.All()) {@device.Name}">
+  tags="@categories"
+  devices="@devices">
 	<span class="tt">@Model.StartTime</span>&nbsp;
 	<span class="ts">@Model.Status.ToString().Replace("ing", "")</span>@for (var ix = Model.Status.ToString().Length; ix <= 5; ix++) {@Raw("&nbsp;")}
 	<span class="tn">@(spacer)[@Model.Name] started</span>

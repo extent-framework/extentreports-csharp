@@ -16,7 +16,7 @@ namespace AventStack.ExtentReports.Reporter.Configuration
             set
             {
                 _theme = value;
-                UserConfigurationMap.Add("theme", Enum.GetName(typeof(Theme), _theme).ToLower());
+                UserConfigurationMap["theme"] = Enum.GetName(typeof(Theme), _theme).ToLower();
             }
         }
         
@@ -29,7 +29,7 @@ namespace AventStack.ExtentReports.Reporter.Configuration
             set
             {
                 _css = value;
-                UserConfigurationMap.Add("css", _css);
+                UserConfigurationMap["css"] = _css;
             }
         }
 
@@ -42,7 +42,7 @@ namespace AventStack.ExtentReports.Reporter.Configuration
             set
             {
                 _js = value;
-                UserConfigurationMap.Add("js", _js);
+                UserConfigurationMap["js"] = _js;
             }
         }
 
@@ -55,7 +55,7 @@ namespace AventStack.ExtentReports.Reporter.Configuration
             set
             {
                 _enableTimeline = value;
-                UserConfigurationMap.Add("enableTimeline", value.ToString());
+                UserConfigurationMap["enableTimeline"] = value.ToString();
             }
         }
 

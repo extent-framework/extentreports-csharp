@@ -15,7 +15,7 @@ namespace AventStack.ExtentReports.Reporter.Configuration
             }
             set
             {
-                UserConfigurationMap.Add("reportName", value);
+                UserConfigurationMap["reportName"] = value;
                 _reportName = value;
             }
         }

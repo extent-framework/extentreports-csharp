@@ -15,7 +15,7 @@
             set
             {
                 _encoding = value;
-                UserConfigurationMap.Add("encoding", _encoding);
+                UserConfigurationMap["encoding"] = _encoding;
             }
         }
 
@@ -28,7 +28,7 @@
             set
             {
                 _documentTitle = value;
-                UserConfigurationMap.Add("documentTitle", _documentTitle);
+                UserConfigurationMap["documentTitle"] = _documentTitle;
             }
         }
 

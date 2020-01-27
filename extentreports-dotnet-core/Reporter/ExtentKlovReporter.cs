@@ -129,7 +129,7 @@ namespace AventStack.ExtentReports.Reporter
                 { "projectName", ProjectName },
                 { "startTime", DateTime.Now }
             };
-            
+
             _reportCollection.InsertOne(document);
             ReportId = document["_id"].AsObjectId;
         }
@@ -143,7 +143,7 @@ namespace AventStack.ExtentReports.Reporter
                 return;
             }
             this._reportAggregates = reportAggregates;
-            
+
             var filter = Builders<BsonDocument>.Filter.Eq("_id", ReportId);
             var update = Builders<BsonDocument>.Update
                 .Set("endTime", DateTime.Now)
@@ -266,7 +266,7 @@ namespace AventStack.ExtentReports.Reporter
                 var filter = Builders<BsonDocument>.Filter.Eq("_id", findResult["_id"].AsObjectId);
                 var update = Builders<BsonDocument>.Update.Set("testCount", testCount);
                 _exceptionCollection.UpdateOne(filter, update);
-                
+
                 filter = Builders<BsonDocument>.Filter.Eq("_id", test.ObjectId);
                 update = Builders<BsonDocument>.Update.Set("exception", _exceptionNameObjectIdCollection[ex.Name]);
                 _testCollection.UpdateOne(filter, update);
@@ -286,7 +286,7 @@ namespace AventStack.ExtentReports.Reporter
                 .Set("childNodesLength", test.NodeContext.Count)
                 .Set("categorized", test.HasCategory)
                 .Set("description", test.Description);
-            
+
             _testCollection.FindOneAndUpdate(filter, update);
 
             if (test.Level > 0)

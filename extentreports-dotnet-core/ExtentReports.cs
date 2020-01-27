@@ -144,5 +144,13 @@ namespace AventStack.ExtentReports
         {
             base.AddTestRunnerLogs(log);
         }
+
+        /// <summary>
+        /// Resets the current report session, and clears all logged information
+        /// </summary>
+        public void ResetSession()
+        {
+            base.Reset();
+        }
     }
 }

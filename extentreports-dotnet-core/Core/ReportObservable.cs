@@ -401,5 +401,15 @@ namespace AventStack.ExtentReports.Core
         {
             TestRunnerLogs.Add(log);
         }
+
+        protected void Reset()
+        {
+            _testList.Clear();
+            _statusList.Clear();
+            _statusMap.Clear();
+            ReportStatus = Status.Pass;
+            ReportStatusStats = new ReportStatusStats();
+            TestRunnerLogs.Clear();
+        }
     }
 }

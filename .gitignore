@@ -3,10 +3,11 @@
 
 # .net
 packages/
-ExtentReports/Program.cs
-ExtentReports/bin/
-ExtentReports/obj/
-ExtentReports/bin/debug/
-ExtentReports.Tests/bin/
-ExtentReports.Tests/obj/
-ExtentReports.Tests/Program.cs
+extentreports-dotnet-core/Program.cs
+extentreports-dotnet-core/bin/
+extentreports-dotnet-core/obj/
+extentreports-dotnet-core/bin/debug/
+extentreports-dotnet-core.Tests/bin/
+extentreports-dotnet-core.Tests/obj/
+extentreports-dotnet-core.Tests/Program.cs
+

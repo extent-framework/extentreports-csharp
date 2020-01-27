@@ -1,0 +1,70 @@
+﻿@using AventStack.ExtentReports.ViewDefs
+
+@if (Model.HasChildren)
+{
+<div class="accordion mt-4">
+	@foreach (var node in Model.NodeContext.All())
+	{
+	<div class="card">
+		<div class="card-header" role="tab">
+			<div class="card-title pl-3">
+				<div class="node">@node.BehaviorDrivenTypeName: @node.Name</div>
+				<div class="status-avatar float-left @node.Status.ToString().ToLower()-bg">
+					<i class="fa fa-@TWBSIcon.GetIcon(node.Status) text-white"></i>
+				</div>
+			</div>
+		</div>
+		@if (node.HasChildren)
+		{
+			if (node.BehaviorDrivenTypeName.Equals("Scenario Outline"))
+			{
+				<div class="collapse scenario_outline">
+					@foreach (var child in node.NodeContext.All())
+					{
+						<div class="card-body l1">
+							<div class="card-header" role="tab">
+								<h5 class="card-title outline-child">
+									<div class="node">@child.BehaviorDrivenTypeName: @child.Name</div>
+									<div class="status-avatar float-left @child.Status.ToString().ToLower()-bg">
+										<i class="fa fa-@TWBSIcon.GetIcon(child.Status) text-white"></i>
+									</div>
+								</h5>
+							</div>
+							<div class="card-body collapse mt-3">
+								@foreach (var step in child.NodeContext.All())
+								{
+									<div class="d-flex align-items-center justify-content-start @step.BehaviorDrivenTypeName.Replace(" ","").ToLower()" title="@step.Description">
+										<span class="alert-icon @step.Status.ToString().ToLower()-bg">
+											<i class="fa fa-@TWBSIcon.GetIcon(step.Status) text-white"></i>
+										</span>
+										<span>@step.BehaviorDrivenTypeName @step.Name</span>
+									</div>
+									@Include("SparkStepDetails", step)
+								}
+							</div>
+						</div>
+					}
+				</div>
+			}
+			else
+			{
+				<div class="collapse">
+					<div class="card-body">
+						@foreach (var child in node.NodeContext.All())
+						{
+							<div class="d-flex align-items-center justify-content-start @child.BehaviorDrivenTypeName.Replace(" ","").ToLower()" title="@child.Description">
+								<span class="alert-icon @child.Status.ToString().ToLower()-bg">
+									<i class="fa fa-@TWBSIcon.GetIcon(child.Status) text-white"></i>
+								</span>
+								<span>@child.BehaviorDrivenTypeName @child.Name</span>
+							</div>
+							@Include("SparkStepDetails", child)
+						}
+					</div>
+				</div>
+			}
+		}
+	</div>
+	}
+</div>
+}

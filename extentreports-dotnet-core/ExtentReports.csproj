@@ -1,0 +1,141 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>AventStack.ExtentReports</RootNamespace>
+    <AssemblyName>ExtentReports</AssemblyName>
+    <Version>4.1.0-alpha</Version>
+    <Company>AventStack</Company>
+    <Authors>anshooarora</Authors>
+    <ApplicationIcon />
+    <OutputType>Library</OutputType>
+    <StartupObject></StartupObject>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIconUrl>https://cdn.rawgit.com/extent-framework/extent-github-cdn/d74480e/commons/img/logo.png</PackageIconUrl>
+    <Description>Extent Reporting Framework (.Net Standard), Community Edition</Description>
+    <Copyright>AventStack</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/extent-framework/extentreports-csharp/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>http://extentreports.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/extent-framework/extentreports-csharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>extentreports extent reporting</PackageTags>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Views\Commons\CommonsAttributes.cshtml" />
+    <None Remove="Views\Commons\CommonsDashboard.cshtml" />
+    <None Remove="Views\Commons\CommonsException.cshtml" />
+    <None Remove="Views\Commons\CommonsHead.cshtml" />
+    <None Remove="Views\Commons\CommonsInjectCss.cshtml" />
+    <None Remove="Views\Commons\CommonsInjectJs.cshtml" />
+    <None Remove="Views\Commons\CommonsMedia.cshtml" />
+    <None Remove="Views\Commons\CommonsNav.cshtml" />
+    <None Remove="Views\Commons\CommonsNavRight.cshtml" />
+    <None Remove="Views\Commons\CommonsRow.cshtml" />
+    <None Remove="Views\Commons\CommonsTag.cshtml" />
+    <None Remove="Views\Html\Dashboard.cshtml" />
+    <None Remove="Views\Html\Exception.cshtml" />
+    <None Remove="Views\Html\Index.cshtml" />
+    <None Remove="Views\Html\Partials\Attributes.cshtml" />
+    <None Remove="Views\Html\Partials\AttributesView.cshtml" />
+    <None Remove="Views\Html\Partials\Head.cshtml" />
+    <None Remove="Views\Html\Partials\Log.cshtml" />
+    <None Remove="Views\Html\Partials\Navbar.cshtml" />
+    <None Remove="Views\Html\Partials\RecurseNodes.cshtml" />
+    <None Remove="Views\Html\Partials\Scripts.cshtml" />
+    <None Remove="Views\Html\Partials\Sidenav.cshtml" />
+    <None Remove="Views\Html\Partials\SparkBDD.cshtml" />
+    <None Remove="Views\Html\Partials\SparkDashboardSPA.cshtml" />
+    <None Remove="Views\Html\Partials\SparkExceptionSPA.cshtml" />
+    <None Remove="Views\Html\Partials\SparkStandard.cshtml" />
+    <None Remove="Views\Html\Partials\SparkStepDetails.cshtml" />
+    <None Remove="Views\Html\Partials\SparkTagSPA.cshtml" />
+    <None Remove="Views\Html\Partials\SparkTestSPA.cshtml" />
+    <None Remove="Views\Html\SparkIndexSPA.cshtml" />
+    <None Remove="Views\Html\Tag.cshtml" />
+    <None Remove="Views\Logger\LoggerMacro.cshtml" />
+    <None Remove="Views\Logger\LoggerTest.cshtml" />
+    <None Remove="Views\V3Html\Author\V3Author.cshtml" />
+    <None Remove="Views\V3Html\Category\V3Category.cshtml" />
+    <None Remove="Views\V3Html\Dashboard\V3Dashboard.cshtml" />
+    <None Remove="Views\V3Html\Exception\V3Exception.cshtml" />
+    <None Remove="Views\V3Html\TestRunner\V3Logs.cshtml" />
+    <None Remove="Views\V3Html\Test\V3Charts.cshtml" />
+    <None Remove="Views\V3Html\Test\V3Test.cshtml" />
+    <None Remove="Views\V3Html\V3Head.cshtml" />
+    <None Remove="Views\V3Html\V3Index.cshtml" />
+    <None Remove="Views\V3Html\V3Nav.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Commons\CommonsAttributes.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsDashboard.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsException.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsHead.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsInjectCss.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsInjectJs.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsMedia.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsNav.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsNavRight.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsRow.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsTag.cshtml" />
+    <EmbeddedResource Include="Views\Html\Dashboard.cshtml" />
+    <EmbeddedResource Include="Views\Html\Exception.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkDashboardSPA.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkExceptionSPA.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkTagSPA.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkTestSPA.cshtml" />
+    <EmbeddedResource Include="Views\Html\SparkIndexSPA.cshtml" />
+    <EmbeddedResource Include="Views\Html\Index.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Attributes.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\AttributesView.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Head.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Log.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Navbar.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\RecurseNodes.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Scripts.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\Sidenav.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkBDD.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkStandard.cshtml" />
+    <EmbeddedResource Include="Views\Html\Partials\SparkStepDetails.cshtml" />
+    <EmbeddedResource Include="Views\Html\Tag.cshtml" />
+    <EmbeddedResource Include="Views\Logger\LoggerMacro.cshtml" />
+    <EmbeddedResource Include="Views\Logger\LoggerTest.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Author\V3Author.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Category\V3Category.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Dashboard\V3Dashboard.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Exception\V3Exception.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\TestRunner\V3Logs.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Test\V3Charts.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\Test\V3Test.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\V3Head.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\V3Index.cshtml" />
+    <EmbeddedResource Include="Views\V3Html\V3Nav.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="MongoDB.Bson" Version="2.10.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.10.0" />
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.10.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="RazorEngine.NetCore" Version="2.2.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\GherkinLangs.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>GherkinLangs.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\GherkinLangs.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>GherkinLangs.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+</Project>

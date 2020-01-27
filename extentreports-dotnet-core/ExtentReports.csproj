@@ -4,13 +4,22 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>AventStack.ExtentReports</RootNamespace>
     <AssemblyName>ExtentReports</AssemblyName>
-    <Version>4.1.0</Version>
+    <Version>4.1.0-alpha</Version>
     <Company>AventStack</Company>
     <Authors>anshooarora</Authors>
     <ApplicationIcon />
     <OutputType>Library</OutputType>
     <StartupObject></StartupObject>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageIconUrl>https://cdn.rawgit.com/extent-framework/extent-github-cdn/d74480e/commons/img/logo.png</PackageIconUrl>
+    <Description>Extent Reporting Framework (.Net Standard), Community Edition</Description>
+    <Copyright>AventStack</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/extent-framework/extentreports-csharp/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>http://extentreports.com</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/extent-framework/extentreports-csharp</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>extentreports extent reporting</PackageTags>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>

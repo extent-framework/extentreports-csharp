@@ -72,6 +72,18 @@ namespace AventStack.ExtentReports
             ApplyCommonNodeSettings(node);
             return node;
         }
+        
+        /// <summary>
+        /// Removes a direct child of the current test
+        /// </summary>
+        /// <param name="test">The child node to be removed</param>
+        public void RemoveNode(ExtentTest test)
+        {
+            if (Model.HasChildren)
+            {
+                Model.NodeContext.Remove(test.Model);
+            }
+        }
 
         /// <summary>
         /// Logs an event with <see cref="Status"/>, details and a media object: <see cref="ScreenCapture"/>

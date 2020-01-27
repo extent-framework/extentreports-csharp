@@ -33,6 +33,9 @@ namespace AventStack.ExtentReports.Reporter
             _startTime = DateTime.Now;
         }
 
+        public ExtentKlovReporter(string projectName) : this(projectName, null)
+        {}
+
         public ExtentKlovReporter(string projectName, string reportName) : this()
         {
             ProjectName = string.IsNullOrEmpty(projectName) ? DefaultProjectName : projectName;

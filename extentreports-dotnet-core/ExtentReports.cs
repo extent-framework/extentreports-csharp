@@ -64,6 +64,14 @@ namespace AventStack.ExtentReports
             }
         }
 
+        public ReportConfigurator Config
+        {
+            get
+            {
+                return ReportConfigurator.I;
+            }
+        }
+
         public void AttachReporter(params IExtentReporter[] reporter)
         {
             reporter.ToList().ForEach(x => Register(x));

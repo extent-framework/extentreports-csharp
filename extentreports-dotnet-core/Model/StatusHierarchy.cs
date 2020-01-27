@@ -22,6 +22,11 @@ namespace AventStack.ExtentReports.Model
             return _statusHierarchy;
         }
 
+        public static void SetStatusHierarchy(List<Status> statusHierarchy)
+        {
+            _statusHierarchy = statusHierarchy;
+        }
+
         public static Status GetHighestStatus(List<Status> list)
         {
             var highestStatus = Status.Pass;

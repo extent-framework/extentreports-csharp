@@ -180,6 +180,44 @@ namespace AventStack.ExtentReports.Reporter
                 .Set("analysisStrategy", AnalysisStrategy.ToString().ToUpper());
 
             _reportCollection.UpdateOne(filter, update);
+            InsertUpdateSystemAttribute();
+        }
+
+        private void InsertUpdateSystemAttribute()
+        {
+            List<SystemAttribute> systemAttrList = _reportAggregates.SystemAttributeContext.SystemAttributeCollection;
+
+            foreach (SystemAttribute sysAttr in systemAttrList)
+            {
+                var document = new BsonDocument
+            {
+                { "project", ProjectId },
+                { "report", ReportId },
+                { "name", sysAttr.Name }
+            };
+
+                BsonDocument envSingle = _environmentCollection.Find(document).FirstOrDefault();
+
+                if (envSingle == null)
+                {
+                    document.Add("value", sysAttr.Value);
+                    _environmentCollection.InsertOne(document);
+                }
+                else
+                {
+                    ObjectId id = envSingle["_id"].AsObjectId;
+
+                    document = new BsonDocument
+                {
+                    { "_id", id },
+                    { "value", sysAttr.Value }
+                };
+
+                    _environmentCollection.UpdateOne(
+                            new BsonDocument("_id", id),
+                            new BsonDocument("$set", document));
+                }
+            }
         }
 
         public override void OnAuthorAssigned(Test test, Author author)

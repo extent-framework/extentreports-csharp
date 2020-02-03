@@ -39,14 +39,8 @@
             </div>
           </td>
           <td>@test.StartTime.ToString("HH:mm:ss")</td>
-          <td class='linked' test-id='@test.TestId'>
-            @test.Name
-            @if (test.Parent != null)
-            {
-            <div class="">
-              <span class="badge badge-default">@test.Parent.Name</span>
-            </div>
-            }
+          <td class='linked' test-id='@test.TestId' root-id="@test.Root.TestId">
+            <a href="#">@test.HierarchicalName</a>
           </td>
         </tr>
         }

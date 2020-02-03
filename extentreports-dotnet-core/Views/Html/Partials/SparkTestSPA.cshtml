@@ -98,7 +98,7 @@
 					{
 						tags += tag.Name + " ";
 					}
-					<li class="test-item" status="@test.Status.ToString().ToLower()" author="@authors.Trim()" device="@devices.Trim()" tag="@tags.Trim()"> 
+					<li class="test-item" status="@test.Status.ToString().ToLower()" author="@authors.Trim()" device="@devices.Trim()" tag="@tags.Trim()" test-id="@test.TestId"> 
 						<div class="status-avatar @test.Status.ToString().ToLower()-bg">
 							<i class="fa fa-@TWBSIcon.GetIcon(test.Status) text-white"></i>
 						</div>

@@ -39,12 +39,31 @@ namespace AventStack.ExtentReports.Model
             }
         }
 
-        public string HierarchicalName {
+        public string HierarchicalName
+        {
             get
             {
-               if (Parent != null)
-                    return Parent.Name + "." + Name;
-                return Name;
+                var name = Name;
+                var parent = Parent;
+                while (parent != null)
+                {
+                    name = parent.Name + "." + name;
+                    parent = parent.Parent;
+                }
+                return name;
+            }
+        }
+
+        public Test Root
+        {
+            get
+            {
+                var root = this;
+                while (root.Parent != null)
+                {
+                    root = root.Parent;
+                }
+                return root;
             }
         }
 

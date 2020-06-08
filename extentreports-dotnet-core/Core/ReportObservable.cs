@@ -353,25 +353,24 @@ namespace AventStack.ExtentReports.Core
             lock (_synclock)
             {
                 ReportStatusStats.Refresh(_testList);
+                var reportAggregates = new ReportAggregates
+                {
+                    TestList = _testList,
+                    StatusList = _statusList,
+                    ReportStatusStats = this.ReportStatusStats,
+                    AuthorContext = this.AuthorContext,
+                    CategoryContext = this.CategoryContext,
+                    DeviceContext = this.DeviceContext,
+                    ExceptionInfoContext = this.ExceptionInfoContext,
+                    TestRunnerLogs = this.TestRunnerLogs,
+                    SystemAttributeContext = this.SystemAttributeContext
+                };
+
+                StarterReporterList.ForEach(x => {
+                    x.AnalysisStrategy = AnalysisStrategy;
+                    x.Flush(reportAggregates);
+                });
             }
-
-            var reportAggregates = new ReportAggregates
-            {
-                TestList = _testList,
-                StatusList = _statusList,
-                ReportStatusStats = this.ReportStatusStats,
-                AuthorContext = this.AuthorContext,
-                CategoryContext = this.CategoryContext,
-                DeviceContext = this.DeviceContext,
-                ExceptionInfoContext = this.ExceptionInfoContext,
-                TestRunnerLogs = this.TestRunnerLogs,
-                SystemAttributeContext = this.SystemAttributeContext
-            };
-
-            StarterReporterList.ForEach(x => {
-                x.AnalysisStrategy = AnalysisStrategy;
-                x.Flush(reportAggregates);
-            });
         }
 
         protected void End()

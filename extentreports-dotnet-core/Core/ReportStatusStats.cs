@@ -304,7 +304,8 @@ namespace AventStack.ExtentReports.Core
                             if (grandchild.BehaviorDrivenType.GetType() == typeof(Scenario))
                             {
                                 IncrementItemCountByStatus(ItemLevel.Child, grandchild.Status);
-                                grandchild.NodeContext.All().ForEach(x => IncrementItemCountByStatus(ItemLevel.GrandChild, x.Status));
+                                grandchild.NodeContext.All().ToList()
+                                    .ForEach(x => IncrementItemCountByStatus(ItemLevel.GrandChild, x.Status));
                             }
                             else
                             {

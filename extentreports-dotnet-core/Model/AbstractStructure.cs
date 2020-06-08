@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AventStack.ExtentReports.Model
 {
     [Serializable]
     public class GenericStructure<T>
     {
-        private List<T> _list
+        private BlockingCollection<T> _list
         {
             get
             {
@@ -20,7 +22,7 @@ namespace AventStack.ExtentReports.Model
                 }
             }
         }
-        private List<T> _listv = new List<T>();
+        private BlockingCollection<T> _listv = new BlockingCollection<T>();
 
         private readonly object _syncLock = new object();
 
@@ -47,43 +49,37 @@ namespace AventStack.ExtentReports.Model
 
         public void Add(T t)
         {
-            lock (_syncLock)
-            {
-                _list.Add(t);
-            }
+            _list.Add(t);
         }
 
         public void Remove(T t)
         {
-            lock (_syncLock)
-            {
-                _list.Remove(t);
-            }
+            _list.ToList().Remove(t);
         }
 
         public T Get(int index)
         {
-            return _list[index];
+            return _list.ElementAt(index);
         }
 
         public T FirstOrDefault()
         {
-            return _list.Count == 0 ? default(T) : _list[0];
+            return _list.Count == 0 ? default(T) : Get(0);
         }
 
         public T LastOrDefault()
         {
-            return _list.Count == 0 ? default(T) : _list[_list.Count - 1];
+            return _list.Count == 0 ? default(T) : Get(_list.Count - 1);
         }
 
-        public List<T> All()
+        public BlockingCollection<T> All()
         {
             return _list;
         }
 
         public TIterator<T> GetEnumerator()
         {
-            return new TIterator<T>(_list);
+            return new TIterator<T>(_list.GetConsumingEnumerable().ToList());
         }
     }
 }

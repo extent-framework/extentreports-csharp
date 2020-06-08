@@ -30,7 +30,7 @@ namespace AventStack.ExtentReports.Core
             {
                 if (_removed)
                     return;
-                FindAndRemoveTest(t.NodeContext.All(), test);
+                FindAndRemoveTest(t.NodeContext.All().ToList(), test);
             }          
         }
 

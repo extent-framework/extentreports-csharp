@@ -48,12 +48,12 @@ namespace AventStack.ExtentReports.Core
         /// <summary>
         /// Report start time
         /// </summary>
-        protected internal DateTime ReportStartDateTime { get; } = DateTime.Now;
+        public DateTime ReportStartDateTime { get; } = DateTime.Now;
 
         /// <summary>
         /// Report end time
         /// </summary>
-        protected internal DateTime ReportEndDateTime { get; private set; } = DateTime.Now;
+        public DateTime ReportEndDateTime { get; private set; } = DateTime.Now;
 
         /// <summary>
         /// A list of all <see cref="IExtentReporter"/> reporters started by the <code>attachReporter</code> method

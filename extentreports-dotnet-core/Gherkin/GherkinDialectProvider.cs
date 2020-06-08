@@ -12,6 +12,7 @@ namespace AventStack.ExtentReports.Gherkin
 
         static GherkinDialectProvider()
         {
+            _dialect = DefaultDialect;
             var json = Resources.GherkinLangs.Languages;
             _dialects = JsonConvert.DeserializeObject<Dictionary<string, GherkinKeywords>>(json);
         }
@@ -24,8 +25,6 @@ namespace AventStack.ExtentReports.Gherkin
         {
             get
             {
-                if (string.IsNullOrEmpty(_dialect))
-                    _dialect = DefaultDialect;
                 return _dialect;
             }
             set

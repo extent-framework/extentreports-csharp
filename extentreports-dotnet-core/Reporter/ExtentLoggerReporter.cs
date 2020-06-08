@@ -11,6 +11,7 @@ using System.IO;
 
 namespace AventStack.ExtentReports.Reporter
 {
+    [Obsolete("ExtentLoggerReporter has been deprecated and will be removed in a future release")]
     public class ExtentLoggerReporter : BasicFileReporter
     {
         public new string ReporterName => "logger";

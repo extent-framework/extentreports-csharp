@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>AventStack.ExtentReports</RootNamespace>
     <AssemblyName>ExtentReports</AssemblyName>
-    <Version>4.1.0-alpha</Version>
+    <Version>4.1.0-alpha2</Version>
     <Company>AventStack</Company>
     <Authors>anshooarora</Authors>
     <ApplicationIcon />
@@ -20,6 +20,15 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>extentreports extent reporting</PackageTags>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PackageReleaseNotes>#27 - Attribute Views navigation to Test View on attribute click
+#38 - KlovReporter, Klov Server - adds system information
+#39 - Display image title as tooltip
+#44 - ExtentReports.ResetSession() to clear entire run session information
+#47 - HtmlReporter now displays Duration section
+#56 - Adds ability to override status hierarchy
+#63 - Fixes setting configuration params after initial creation
+#78 - Display Gherkin keywords in BDD reports
+</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

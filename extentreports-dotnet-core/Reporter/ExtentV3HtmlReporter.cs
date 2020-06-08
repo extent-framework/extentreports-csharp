@@ -10,6 +10,7 @@ using System.IO;
 
 namespace AventStack.ExtentReports.Reporter
 {
+    [Obsolete("ExtentV3HtmlReporter has been deprecated and will be removed in a future release")]
     /// <summary>
     /// The ExtentHtmlReporter creates a rich standalone HTML file. It allows several configuration options
     /// via the <code>Configuration()</code> method.

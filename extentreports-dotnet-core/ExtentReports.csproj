@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>AventStack.ExtentReports</RootNamespace>
     <AssemblyName>ExtentReports</AssemblyName>
-    <Version>4.1.0-alpha4</Version>
+    <Version>4.1.0-beta1</Version>
     <Company>AventStack</Company>
     <Authors>anshooarora</Authors>
     <ApplicationIcon />
@@ -20,9 +20,8 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>extentreports extent reporting</PackageTags>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>ExtentV3HtmlReporter has been deprecated
-#52 - Need ability to set ReportStartDateTime and ReportEndDateTime
-#79 - fixes Both AddScreenCaptureFromBase64String and AddScreenCaptureFromPath do nothing
+    <PackageReleaseNotes>#87 - Fixes ConcurrentModification exceptions
+
 </PackageReleaseNotes>
   </PropertyGroup>
 

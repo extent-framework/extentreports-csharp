@@ -8,7 +8,7 @@ namespace AventStack.ExtentReports.Model
     [Serializable]
     public class GenericStructure<T>
     {
-        private BlockingCollection<T> _list
+        private List<T> _list
         {
             get
             {
@@ -22,7 +22,7 @@ namespace AventStack.ExtentReports.Model
                 }
             }
         }
-        private BlockingCollection<T> _listv = new BlockingCollection<T>();
+        private List<T> _listv = new List<T>();
 
         private readonly object _syncLock = new object();
 
@@ -30,7 +30,10 @@ namespace AventStack.ExtentReports.Model
         {
             get
             {
-                return Count == 0;
+                lock (_syncLock)
+                {
+                    return Count == 0;
+                }
             }
         }
 
@@ -38,48 +41,69 @@ namespace AventStack.ExtentReports.Model
         {
             get
             {
-                return _list == null ? 0 : _list.Count;
+                lock (_syncLock)
+                {
+                    return _list == null ? 0 : _list.Count;
+                }
             }
         }
 
         public bool Contains(T t)
         {
-            return _list.Contains(t);
+            lock (_syncLock)
+            {
+                return _list.Contains(t);
+            }
         }
 
         public void Add(T t)
         {
-            _list.Add(t);
+            lock (_syncLock)
+            {
+                _list.Add(t);
+            }
         }
 
         public void Remove(T t)
         {
-            _list.ToList().Remove(t);
+            lock (_syncLock)
+            {
+                _list.ToList().Remove(t);
+            }
         }
 
         public T Get(int index)
         {
-            return _list.ElementAt(index);
+            lock (_syncLock)
+            {
+                return _list.ElementAt(index);
+            }
         }
 
         public T FirstOrDefault()
         {
-            return _list.Count == 0 ? default(T) : Get(0);
+            lock (_syncLock)
+            {
+                return _list.Count == 0 ? default(T) : Get(0);
+            }
         }
 
         public T LastOrDefault()
         {
-            return _list.Count == 0 ? default(T) : Get(_list.Count - 1);
+            lock (_syncLock)
+            {
+                return _list.Count == 0 ? default(T) : Get(_list.Count - 1);
+            }
         }
 
-        public BlockingCollection<T> All()
+        public List<T> All()
         {
             return _list;
         }
 
         public TIterator<T> GetEnumerator()
         {
-            return new TIterator<T>(_list.GetConsumingEnumerable().ToList());
+            return new TIterator<T>(_list);
         }
     }
 }

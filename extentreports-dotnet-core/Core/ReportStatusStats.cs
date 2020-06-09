@@ -218,7 +218,7 @@ namespace AventStack.ExtentReports.Core
         public void Refresh(List<Test> testList)
         {
             Reset();
-            _testList = testList;
+            _testList = testList.ToList();
             RefreshStats();
         }
 
@@ -304,7 +304,7 @@ namespace AventStack.ExtentReports.Core
                             if (grandchild.BehaviorDrivenType.GetType() == typeof(Scenario))
                             {
                                 IncrementItemCountByStatus(ItemLevel.Child, grandchild.Status);
-                                grandchild.NodeContext.All().ToList()
+                                grandchild.NodeContext.All()
                                     .ForEach(x => IncrementItemCountByStatus(ItemLevel.GrandChild, x.Status));
                             }
                             else
@@ -335,7 +335,7 @@ namespace AventStack.ExtentReports.Core
         {
             if (test.HasChildren)
             {
-                foreach (var node in test.NodeContext.All().ToList())
+                foreach (var node in test.NodeContext.All())
                 {
                     if (node.HasChildren)
                     {

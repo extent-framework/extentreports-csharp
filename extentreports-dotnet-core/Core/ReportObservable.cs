@@ -257,7 +257,7 @@ namespace AventStack.ExtentReports.Core
 
                 foreach (var test in _testList)
                 {
-                    test.End();
+                    EndTest(test);
                     CopyContextInfoToObservable(test);
                 }
             }

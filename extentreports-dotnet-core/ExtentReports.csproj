@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>AventStack.ExtentReports</RootNamespace>
     <AssemblyName>ExtentReports</AssemblyName>
-    <Version>4.1.0-beta1</Version>
+    <Version>4.1.0</Version>
     <Company>AventStack</Company>
     <Authors>anshooarora</Authors>
     <ApplicationIcon />
@@ -20,9 +20,7 @@
     <RepositoryType>git</RepositoryType>
     <PackageTags>extentreports extent reporting</PackageTags>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PackageReleaseNotes>#87 - Fixes ConcurrentModification exceptions
-
-</PackageReleaseNotes>
+    <PackageReleaseNotes>Update NewtonSoft.Json from 9.0.1 to 12.0.3</PackageReleaseNotes>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -127,7 +125,7 @@
     <PackageReference Include="MongoDB.Driver" Version="2.10.0" />
     <PackageReference Include="MongoDB.Driver.Core" Version="2.10.0" />
     <PackageReference Include="RazorEngine.NetCore" Version="2.2.6" />
-    <PackageReference Include="Newtonsoft.Json" Version="9.0.1">
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3">
       <NoWarn>NU1605</NoWarn>
     </PackageReference>
   </ItemGroup>

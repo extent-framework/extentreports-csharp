@@ -81,7 +81,8 @@ namespace AventStack.ExtentReports.MediaStorage
 
                         if (result.StatusCode != HttpStatusCode.OK)
                         {
-                            throw new IOException("Unable to upload file to server: " + m.Path);
+                            var fullResponseMessage = result.Content.ReadAsStringAsync().Result;
+                            throw new IOException($"Unable to upload file to server: {m.Path}. Response code: {result.StatusCode}. Full response: {fullResponseMessage}");
                         }
                     }
                 }

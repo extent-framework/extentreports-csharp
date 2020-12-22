@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace AventStack.ExtentReports.Model
 {
@@ -28,7 +30,10 @@ namespace AventStack.ExtentReports.Model
         {
             get
             {
-                return Count == 0;
+                lock (_syncLock)
+                {
+                    return Count == 0;
+                }
             }
         }
 
@@ -36,13 +41,19 @@ namespace AventStack.ExtentReports.Model
         {
             get
             {
-                return _list == null ? 0 : _list.Count;
+                lock (_syncLock)
+                {
+                    return _list == null ? 0 : _list.Count;
+                }
             }
         }
 
         public bool Contains(T t)
         {
-            return _list.Contains(t);
+            lock (_syncLock)
+            {
+                return _list.Contains(t);
+            }
         }
 
         public void Add(T t)
@@ -57,23 +68,32 @@ namespace AventStack.ExtentReports.Model
         {
             lock (_syncLock)
             {
-                _list.Remove(t);
+                _list.ToList().Remove(t);
             }
         }
 
         public T Get(int index)
         {
-            return _list[index];
+            lock (_syncLock)
+            {
+                return _list.ElementAt(index);
+            }
         }
 
         public T FirstOrDefault()
         {
-            return _list.Count == 0 ? default(T) : _list[0];
+            lock (_syncLock)
+            {
+                return _list.Count == 0 ? default(T) : Get(0);
+            }
         }
 
         public T LastOrDefault()
         {
-            return _list.Count == 0 ? default(T) : _list[_list.Count - 1];
+            lock (_syncLock)
+            {
+                return _list.Count == 0 ? default(T) : Get(_list.Count - 1);
+            }
         }
 
         public List<T> All()

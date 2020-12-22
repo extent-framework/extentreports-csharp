@@ -178,7 +178,6 @@ namespace AventStack.ExtentReports
         private ExtentTest AddLog(Log evt)
         {
             Model.LogContext.Add(evt);
-            Model.End();
             Extent.AddLog(Model, evt);
 
             if (evt.HasScreenCapture)
@@ -192,14 +191,12 @@ namespace AventStack.ExtentReports
         private Log CreateLog(Status status, string details = null)
         {
             details = details == null ? "" : details.Trim();
-
             Log evt = new Log(this.Model)
             {
                 Status = status,
                 Details = details,
                 Sequence = Model.LogContext.All().Count + 1
             };
-
             return evt;
         }
 

@@ -24,33 +24,7 @@
 						{
 							@Include("Log", node)
 						}
-						@if (node.HasScreenCapture)
-						{
-						<div class="detail-foot">
-							<ul class="attachments">
-								@foreach (var sc in node.ScreenCaptureContext.All())
-								{
-								<li>
-									<a href="@sc.ScreenCapturePath" data-featherlight="image">
-										<div class="file-icon">
-											<i class="fa fa-file-image-o"></i> 
-										</div>
-										<div class="file-info">
-											@if (sc.IsBase64)
-											{
-												<span class="file-name">base64</span>
-												<span class="file-size">0Kb</span>
-											} else {
-												<span class="file-name">@sc.Name</span>
-												<span class="file-size"> @(sc.FileSize)Kb</span>
-											}
-										</div>
-									</a>
-								</li>
-								}
-							</ul>
-						</div>
-						}
+						@if (node.HasScreenCapture) { @foreach (var sc in node.ScreenCaptureContext.All()) { @sc.Source } }
 					</div>
 				</div>
 				@if (node.HasChildren)

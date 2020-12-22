@@ -4,19 +4,7 @@
 	@Include("Log", Model)
 </div>    
 }
-@if (Model.HasScreenCapture)
-{
-<div class="detail-foot">
-	<ul class="attachments">
-		@foreach (var sc in Model.ScreenCaptureContext.All())
-		{
-		<li>
-			@sc.Source
-		</li>
-		}
-	</ul>
-</div>
-}
+@if (Model.HasScreenCapture) { @foreach (var sc in Model.ScreenCaptureContext.All()) { @sc.Source } }
 @if (Model.HasChildren)
 {
 <div class="mt-4">

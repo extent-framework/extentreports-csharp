@@ -48,12 +48,12 @@ namespace AventStack.ExtentReports.Core
         /// <summary>
         /// Report start time
         /// </summary>
-        protected internal DateTime ReportStartDateTime { get; } = DateTime.Now;
+        public DateTime ReportStartDateTime { get; } = DateTime.Now;
 
         /// <summary>
         /// Report end time
         /// </summary>
-        protected internal DateTime ReportEndDateTime { get; private set; } = DateTime.Now;
+        public DateTime ReportEndDateTime { get; private set; } = DateTime.Now;
 
         /// <summary>
         /// A list of all <see cref="IExtentReporter"/> reporters started by the <code>attachReporter</code> method
@@ -257,7 +257,7 @@ namespace AventStack.ExtentReports.Core
 
                 foreach (var test in _testList)
                 {
-                    test.End();
+                    EndTest(test);
                     CopyContextInfoToObservable(test);
                 }
             }
@@ -353,25 +353,24 @@ namespace AventStack.ExtentReports.Core
             lock (_synclock)
             {
                 ReportStatusStats.Refresh(_testList);
+                var reportAggregates = new ReportAggregates
+                {
+                    TestList = _testList,
+                    StatusList = _statusList,
+                    ReportStatusStats = this.ReportStatusStats,
+                    AuthorContext = this.AuthorContext,
+                    CategoryContext = this.CategoryContext,
+                    DeviceContext = this.DeviceContext,
+                    ExceptionInfoContext = this.ExceptionInfoContext,
+                    TestRunnerLogs = this.TestRunnerLogs,
+                    SystemAttributeContext = this.SystemAttributeContext
+                };
+
+                StarterReporterList.ForEach(x => {
+                    x.AnalysisStrategy = AnalysisStrategy;
+                    x.Flush(reportAggregates);
+                });
             }
-
-            var reportAggregates = new ReportAggregates
-            {
-                TestList = _testList,
-                StatusList = _statusList,
-                ReportStatusStats = this.ReportStatusStats,
-                AuthorContext = this.AuthorContext,
-                CategoryContext = this.CategoryContext,
-                DeviceContext = this.DeviceContext,
-                ExceptionInfoContext = this.ExceptionInfoContext,
-                TestRunnerLogs = this.TestRunnerLogs,
-                SystemAttributeContext = this.SystemAttributeContext
-            };
-
-            StarterReporterList.ForEach(x => {
-                x.AnalysisStrategy = AnalysisStrategy;
-                x.Flush(reportAggregates);
-            });
         }
 
         protected void End()

@@ -31,6 +31,7 @@
 								</h5>
 							</div>
 							<div class="card-body collapse mt-3">
+								@if (child.HasScreenCapture) { foreach (var sc in child.ScreenCaptureContext.All()) { @sc.Source } }
 								@foreach (var step in child.NodeContext.All())
 								{
 									<div class="d-flex align-items-center justify-content-start @step.BehaviorDrivenTypeName.Replace(" ","").ToLower()" title="@step.Description">
@@ -40,6 +41,7 @@
 										<span>@step.BehaviorDrivenTypeName @step.Name</span>
 									</div>
 									@Include("SparkStepDetails", step)
+									@if (step.HasScreenCapture) { foreach (var sc in step.ScreenCaptureContext.All()) { @sc.Source } }
 								}
 							</div>
 						</div>
@@ -49,18 +51,20 @@
 			else
 			{
 				<div class="collapse">
-					<div class="card-body">
-						@foreach (var child in node.NodeContext.All())
-						{
-							<div class="d-flex align-items-center justify-content-start @child.BehaviorDrivenTypeName.Replace(" ","").ToLower()" title="@child.Description">
-								<span class="alert-icon @child.Status.ToString().ToLower()-bg">
-									<i class="fa fa-@TWBSIcon.GetIcon(child.Status) text-white"></i>
-								</span>
-								<span>@child.BehaviorDrivenTypeName @child.Name</span>
-							</div>
-							@Include("SparkStepDetails", child)
-						}
-					</div>
+                    <div class="card-body">
+						@if (node.HasScreenCapture) { foreach (var sc in node.ScreenCaptureContext.All()) { @sc.Source } }
+                        @foreach (var child in node.NodeContext.All())
+                        {
+                            <div class="d-flex align-items-center justify-content-start @child.BehaviorDrivenTypeName.Replace(" ","").ToLower()" title="@child.Description">
+                                <span class="alert-icon @child.Status.ToString().ToLower()-bg">
+                                    <i class="fa fa-@TWBSIcon.GetIcon(child.Status) text-white"></i>
+                                </span>
+                                <span>@child.BehaviorDrivenTypeName @child.Name</span>
+                            </div>
+                            @Include("SparkStepDetails", child)
+							@if (child.HasScreenCapture) { foreach (var sc in child.ScreenCaptureContext.All()) { @sc.Source } }
+                        }
+                    </div>
 				</div>
 			}
 		}

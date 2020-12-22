@@ -286,7 +286,7 @@ namespace AventStack.ExtentReports.Model
                     {
                         Status = Status.Pass;
                     }
-                    test.NodeContext.All()
+                    test.NodeContext.All().ToList()
                         .FindAll(x => x.Status != Status.Skip)
                         .ForEach(x => UpdateTestStatusRecursive(x));
                 }

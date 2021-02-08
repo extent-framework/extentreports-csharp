@@ -152,6 +152,7 @@ namespace AventStack.ExtentReports
             Model.ExceptionInfoContext.Add(e);
             var evt = new Log(Model)
             {
+                Status = status,
                 ExceptionInfo = e
             };
             return AddLog(evt);

@@ -1,0 +1,316 @@
+﻿@using AventStack.ExtentReports
+@using AventStack.ExtentReports.Model
+@using RazorEngine
+@using RazorEngine.Templating
+
+@{
+  var testList = Model.Report.Tests;
+
+  var chartsCount = 2;
+  chartsCount = Model.Report.Stats.SumStat(Model.Report.Stats.Child) > 0 ? 3 : chartsCount;
+  chartsCount = Model.Report.Stats.SumStat(Model.Report.Stats.Grandchild) > 0 ? 4 : chartsCount;
+
+  var bdd = testList[0].IsBdd;
+  var boxSize = "col-md-" + (12/chartsCount);
+
+  var chartWidth="115";
+  var chartHeight="90";
+  var chartBoxHeight="94";
+
+  var parentHeading="Classes";
+  var childHeading="Tests";  
+  var grandChildHeading="Steps";
+  var parentLabel="class(es)";
+  var childLabel = "test(s)";
+  var grandchildLabel="step(s)";
+
+  if (bdd) {
+    parentHeading="Features";
+    childHeading="Scenarios";
+    grandChildHeading="Steps";
+	parentLabel="feature(s)";
+	childLabel="scenario(s)";
+    boxSize = "col-md-4";
+    chartsCount = 3;
+  } else {
+    if (Model.Report.AnalysisStrategy == AnalysisStrategy.Test) {
+      parentHeading="Tests";
+      childHeading="Steps";
+      grandChildHeading="";
+	  parentLabel="test(s)";
+	  childLabel=grandchildLabel;
+    }
+  }
+}
+
+<div class="container-fluid p-4 view dashboard-view">
+  <div class="row">
+    <div class="col-md-3">
+      <div class="card"><div class="card-body">
+          <p class="m-b-0">Started</p>
+          <h3>@Model.Report.StartTime</h3>
+      </div></div>
+    </div>
+    <div class="col-md-3">
+      <div class="card"><div class="card-body">
+          <p class="m-b-0">Ended</p>
+          <h3>@Model.Report.EndTime</h3>
+      </div></div>
+    </div>
+    <div class="col-md-3">
+      <div class="card"><div class="card-body">
+          <p class="m-b-0 text-pass">@parentHeading Passed</p>
+          <h3>@Model.Report.Stats.Parent[Status.Pass]</h3>
+      </div></div>
+    </div>
+    <div class="col-md-3">
+      <div class="card"><div class="card-body">
+          <p class="m-b-0 text-fail">@parentHeading Failed</p>
+          <h3>@Model.Report.Stats.Parent[Status.Fail]</h3>
+      </div></div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="@boxSize">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title">@parentHeading</h6>
+        </div>
+        <div class="card-body">
+          <div class="">
+            <canvas id='parent-analysis' width='@chartWidth' height='@chartHeight'></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div><small data-tooltip='@Model.Report.Stats.ParentPercentage[Status.Pass]%'>
+            <b>@Model.Report.Stats.Parent[Status.Pass]</b> @parentHeading.ToLower() passed
+            </small>
+          </div>
+          <div>
+            <small data-tooltip='@Model.Report.Stats.ParentPercentage[Status.Fail]%'><b>@Model.Report.Stats.Parent[Status.Fail]</b> @parentHeading.ToLower() failed, 
+            <b>@Model.Report.Stats.Parent[Status.Skip]</b> skipped, <b data-tooltip='@Model.Report.Stats.ParentPercentage[Status.Warning]%'>@Model.Report.Stats.Parent[Status.Warning]</b> others
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    @if (Model.Report.Stats.SumStat(Model.Report.Stats.Child) > 0) {
+    <div class="@boxSize">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title">@childHeading</h6>
+        </div>
+        <div class="card-body">
+          <div class="">
+            <canvas id='child-analysis' width='@chartWidth' height='@chartHeight'></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div><small data-tooltip='@Model.Report.Stats.ChildPercentage[Status.Pass]%'><b>@Model.Report.Stats.Child[Status.Pass]</b> @childHeading.ToLower() passed</small></div>
+          <div>
+            <small data-tooltip='@Model.Report.Stats.ChildPercentage[Status.Fail]%'><b>@Model.Report.Stats.Child[Status.Fail]</b> @childHeading.ToLower() failed, 
+            <b>@Model.Report.Stats.Child[Status.Skip]</b> skipped, <b data-tooltip='%'>@(Model.Report.Stats.Child[Status.Warning] + Model.Report.Stats.Child[Status.Info])</b> others
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+    @if (Model.Report.Stats.SumStat(Model.Report.Stats.Grandchild) > 0) {
+    <div class="@boxSize">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title">@grandChildHeading</h6>
+        </div>
+        <div class="card-body">
+          <div class="">
+            <canvas id='grandchild-analysis' width='@chartWidth' height='@chartHeight'></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div><small data-tooltip='@Model.Report.Stats.GrandchildPercentage[Status.Pass]%'><b>@Model.Report.Stats.Grandchild[Status.Pass]</b> @grandChildHeading passed</small></div>
+          <div>
+            <small data-tooltip='@Model.Report.Stats.GrandchildPercentage[Status.Fail]%'><b>@Model.Report.Stats.Grandchild[Status.Fail]</b> @grandChildHeading.ToLower() failed, 
+            <b>@Model.Report.Stats.Grandchild[Status.Skip]</b> skipped, <b data-tooltip='%'>@(Model.Report.Stats.Grandchild[Status.Warning] + Model.Report.Stats.Grandchild[Status.Info])</b> others
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+    @if (Model.Report.Stats.SumStat(Model.Report.Stats.Log) > 0 && !bdd) {
+    <div class="@boxSize">
+      <div class="card">
+        <div class="card-header">
+          <h6 class="card-title">Log events</h6>
+        </div>
+        <div class="card-body">
+          <div class="">
+            <canvas id='events-analysis' width='@chartWidth' height='@chartHeight'></canvas>
+          </div>
+        </div>
+        <div class="card-footer">
+          <div><small data-tooltip='@Model.Report.Stats.LogPercentage[Status.Pass]%'><b>@Model.Report.Stats.Log[Status.Pass]</b> events passed</small></div>
+          <div>
+            <small data-tooltip='@Model.Report.Stats.LogPercentage[Status.Fail]%'><b>@Model.Report.Stats.Log[Status.Fail]</b> events failed, 
+            <b data-tooltip='%'>@(Model.Report.Stats.Log[Status.Warning] + Model.Report.Stats.Log[Status.Skip] + Model.Report.Stats.Log[Status.Info])</b> others
+            </small>
+          </div>
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+  @if (Model.Config.TimelineEnabled)
+  {
+  <div class="row"><div class="col-md-12">
+    <div class="card"><div class="card-header"><p>Timeline</p></div>
+      <div class="card-body pt-0"><div>
+        <canvas id="timeline" height="120"></canvas>
+      </div></div>
+    </div>
+  </div></div>
+  <script>
+    @{
+      var json = "";
+      for (int ix = 0; ix < testList.Count; ix++) {
+        json += "\"" + testList[ix].Name + "\"" + ":" + testList[ix].TimeTaken;
+        if (ix != testList.Count-1) {
+          json += ",";
+        }
+      }
+    }
+	var timeline = { @json };
+  </script>
+  }
+  <div class="row">
+    @if (Model.Report.AuthorCtx.Context.Count > 0)
+    {
+    <div class="col-md-4 author-container">
+      <div class="card">
+        <div class="card-header"><p>Author</p></div>
+        <div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+          <thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead>
+          <tbody>
+            @foreach (var x in Model.Report.AuthorCtx.Context)
+            {
+            <tr>
+              <td>@x.Value.Attr.Name</td>
+              <td>@x.Value.Passed</td>
+              <td>@x.Value.Failed</td>
+              <td>@x.Value.Skipped</td>
+              <td>@x.Value.Others</td>
+              <td>@((x.Value.Passed/x.Value.Tests.Count)*100)%</td>
+            </tr>
+            }
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    }
+    @if (Model.Report.CategoryCtx.Context.Count > 0)
+    {
+    <div class="col-md-4 category-container">
+      <div class="card">
+        <div class="card-header"><p>Tags</p></div>
+        <div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+          <thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead><tbody>
+            @foreach (var x in Model.Report.CategoryCtx.Context)
+            {
+            <tr>
+              <td>@x.Value.Attr.Name</td>
+              <td>@x.Value.Passed</td>
+              <td>@x.Value.Failed</td>
+              <td>@x.Value.Skipped</td>
+              <td>@x.Value.Others</td>
+              <td>@((x.Value.Passed/x.Value.Tests.Count)*100)%</td>
+            </tr>
+            }
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    }
+    @if (Model.Report.DeviceCtx.Context.Count > 0)
+    {
+    <div class="col-md-4 device-container">
+      <div class="card">
+        <div class="card-header"><p>Device</p></div>
+        <div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+          <thead><tr class="bg-gray"><th>Name</th><th>Passed</th><th>Failed</th><th>Skipped</th><th>Others</th><th>Passed %</th></tr></thead>
+          <tbody>
+            @foreach (var x in Model.Report.DeviceCtx.Context)
+            {
+            <tr>
+              <td>@x.Value.Attr.Name</td>
+              <td>@x.Value.Passed</td>
+              <td>@x.Value.Failed</td>
+              <td>@x.Value.Skipped</td>
+              <td>@x.Value.Others</td>
+              <td>@((x.Value.Passed/x.Value.Tests.Count)*100)%</td>
+            </tr>
+            }
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    }
+    @if (Model.Report.SystemEnvInfo.Count > 0) {
+      <div class="col-md-4 sysenv-container">
+      <div class="card">
+        <div class="card-header"><p>System/Environment</p></div>
+        <div class="card-body pb-0 pt-0"><table class="table table-sm table-bordered">
+          <thead><tr class="bg-gray"><th>Name</th><th>Value</th></tr></thead>
+          <tbody>
+            @foreach (var info in Model.Report.SystemEnvInfo) {
+            <tr>
+              <td>@info.Name</td>
+              <td>@info.Value</td>
+            </tr>
+            }
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    }
+  </div>
+</div>
+<script>
+  var statusGroup = {
+    parentCount: @Model.Report.Stats.SumStat(Model.Report.Stats.Parent),
+    childCount: @Model.Report.Stats.SumStat(Model.Report.Stats.Child),
+    grandChildCount: @Model.Report.Stats.SumStat(Model.Report.Stats.Grandchild),
+    eventsCount: @Model.Report.Stats.SumStat(Model.Report.Stats.Log),
+
+    @if (Model.Report.Stats.Parent.Count > 0) {
+     @Raw("passParent:") @Model.Report.Stats.Parent[Status.Pass] @Raw(",")
+     @Raw("failParent:") @Model.Report.Stats.Parent[Status.Fail] @Raw(",")
+     @Raw("warningParent:") @Model.Report.Stats.Parent[Status.Warning] @Raw(",")
+     @Raw("skipParent:") @Model.Report.Stats.Parent[Status.Skip] @Raw(",")
+    }
+    
+    @if (Model.Report.Stats.Child.Count > 0) {
+     @Raw("passChild:") @Model.Report.Stats.Child[Status.Pass] @Raw(",")
+     @Raw("failChild:") @Model.Report.Stats.Child[Status.Fail] @Raw(",")
+     @Raw("warningChild:") @Model.Report.Stats.Child[Status.Warning] @Raw(",")
+     @Raw("skipChild:") @Model.Report.Stats.Child[Status.Skip] @Raw(",")
+     @Raw("infoChild:") @Model.Report.Stats.Child[Status.Info] @Raw(",")
+    }
+    
+    @if (Model.Report.Stats.Grandchild.Count > 0) {
+     @Raw("passGrandChild:") @Model.Report.Stats.Grandchild[Status.Pass] @Raw(",")
+     @Raw("failGrandChild:") @Model.Report.Stats.Grandchild[Status.Fail] @Raw(",")
+     @Raw("warningGrandChild:") @Model.Report.Stats.Grandchild[Status.Warning] @Raw(",")
+     @Raw("skipGrandChild:") @Model.Report.Stats.Grandchild[Status.Skip] @Raw(",")
+     @Raw("infoGrandChild:") @Model.Report.Stats.Grandchild[Status.Info] @Raw(",")
+    }
+    
+    @if (Model.Report.Stats.Log.Count > 0) {
+     @Raw("passEvents:") @Model.Report.Stats.Log[Status.Pass] @Raw(",")
+     @Raw("failEvents:") @Model.Report.Stats.Log[Status.Fail] @Raw(",")
+     @Raw("warningEvents:") @Model.Report.Stats.Log[Status.Warning] @Raw(",")
+     @Raw("skipEvents:") @Model.Report.Stats.Log[Status.Skip] @Raw(",")
+     @Raw("infoEvents:") @Model.Report.Stats.Log[Status.Info] @Raw(",")
+    }
+  };
+</script>

@@ -1,0 +1,56 @@
+﻿<div class="side-nav">
+ <div class="side-nav-inner">
+  <ul class="side-nav-menu">
+   <li class="nav-item dropdown" onclick="toggleView('test-view')">
+    <a id="nav-test" class="dropdown-toggle" href="#">
+     <span class="ico"><i class="fa fa-list"></i></span>
+    </a>
+   </li>
+   @if (Model.Report.CategoryCtx.Context.Count > 0)
+   {
+    <li class="nav-item dropdown" onclick="toggleView('category-view')">
+     <a id="nav-category" class="dropdown-toggle" href="#">
+      <span class="ico"><i class="fa fa-tag"></i></span>
+     </a>
+    </li>
+   }
+   @if (Model.Report.AuthorCtx.Context.Count > 0)
+   {
+    <li class="nav-item dropdown" onclick="toggleView('author-view')">
+     <a id="nav-author" class="dropdown-toggle" href="#">
+      <span class="ico"><i class="fa fa-user"></i></span>
+     </a>
+    </li>
+   }
+   @if (Model.Report.DeviceCtx.Context.Count > 0)
+   {
+    <li class="nav-item dropdown" onclick="toggleView('device-view')">
+     <a id="nav-device" class="dropdown-toggle" href="#">
+      <span class="ico"><i class="fa fa-tablet"></i></span>
+     </a>
+    </li>
+   }
+   @if (Model.Report.ExceptionInfoCtx.Context.Count > 0)
+   {
+   <li class="nav-item dropdown" onclick="toggleView('exception-view')">
+    <a id="nav-exception" class="dropdown-toggle" href="#">
+     <span class="ico"><i class="fa fa-bug"></i></span>
+    </a>
+   </li> 
+   }
+   <li class="nav-item dropdown" onclick="toggleView('dashboard-view')">
+    <a id="nav-dashboard" class="dropdown-toggle" href="#">
+     <span class="ico"><i class="fa fa-bar-chart"></i></span>
+    </a>
+   </li>
+   @if (Model.Report.Logs.Count > 0)
+   {
+   <li class="nav-item dropdown" onclick="toggleView('log-view')">
+    <a id="nav-dashboard" class="dropdown-toggle" href="#">
+     <span class="ico"><i class="fa fa-clipboard"></i></span>
+    </a>
+   </li>
+   }
+  </ul>
+ </div>
+</div>

@@ -3,12 +3,12 @@
 
 # .net
 packages/
-extentreports-dotnet-core/Program.cs
-extentreports-dotnet-core/bin/
-extentreports-dotnet-core/obj/
-extentreports-dotnet-core/bin/debug/
-extentreports-dotnet-core.Tests/bin/
-extentreports-dotnet-core.Tests/obj/
-extentreports-dotnet-core.Tests/Program.cs
-
-app/
+ExtentReports/Program.cs
+ExtentReports/bin/
+ExtentReports/obj/
+ExtentReports.Tests/Program.cs
+ExtentReports.Tests/bin/
+ExtentReports.Tests/obj/
+KlovReporter/Program.cs
+KlovReporter/bin/
+KlovReporter/obj/

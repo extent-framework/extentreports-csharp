@@ -1,0 +1,36 @@
+﻿@using AventStack.ExtentReports.Model
+@using RazorEngine
+@using RazorEngine.Templating
+
+@{
+    var cls = "";
+    if (Model.Report.Tests.Count > 0) {
+	  Test test = Model.Report.Tests[0];
+      cls = Model.Report.Tests.Count > 0 && test.IsBdd ? "bdd-report" : "";
+    }
+}
+
+<!DOCTYPE html>
+<html>
+@Include("Head")
+<body class="spa @cls @Model.Config.Theme.ToString().ToLower()">
+ <div class="app">
+  <div class="layout">
+   @Include("Navbar")
+   @Include("Sidenav")
+   <div class="vcontainer">
+    <div class="main-content">
+     @Include("SparkTestSPA")
+     @if (Model.Report.CategoryCtx.Context.Count > 0) { @Include("SparkTagSPA") }
+     @if (Model.Report.AuthorCtx.Context.Count > 0) { @Include("SparkAuthorSPA") }
+     @if (Model.Report.DeviceCtx.Context.Count > 0) { @Include("SparkDeviceSPA") }
+     @if (Model.Report.ExceptionInfoCtx.Context.Count > 0) { @Include("SparkExceptionSPA") }
+     @Include("SparkDashboardSPA")
+     @if (Model.Report.Logs.Count > 0) { @Include("SparkLogsSPA") }
+    </div>
+   </div>
+  </div>
+ </div>
+ @Include("Scripts")
+</body>
+</html>

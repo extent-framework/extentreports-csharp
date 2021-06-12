@@ -1,0 +1,69 @@
+﻿@if (Model.Ctx.Context.Count > 0)
+{
+<div class="test-wrapper row view @(Model.View.ToLower())-view attributes-view">
+  <div class="test-list">
+    <div class="test-list-tools">
+      <ul class="tools pull-left"><li><a href=""><span class="font-size-14">@Model.View</span></a></li></ul>
+      <ul class="tools text-right"><li><a href="#"><span class="badge badge-primary">@Model.Ctx.Context.Count</span></a></li></ul>
+    </div>
+    <div class="test-list-wrapper scrollable">
+      <ul class="test-list-item">
+        @foreach (var ctx in Model.Ctx.Context)
+        {
+        <li class="test-item">
+          <div class="test-detail">
+            <span class="meta">
+            @if (ctx.Value.Passed > 0) { <span class='badge log pass-bg'>@ctx.Value.Passed</span> }
+            @if (ctx.Value.Failed > 0) { <span class='badge log badge-danger'>@ctx.Value.Failed</span> }
+            @if (ctx.Value.Skipped > 0) { <span class='badge log badge-skip'>@ctx.Value.Skipped</span> }
+            @if (ctx.Value.Others > 0) { <span class='badge log badge-warning'>@ctx.Value.Others</span> }
+            </span>
+            <p class="name">@ctx.Key</p>
+            <p class="duration text-sm">@ctx.Value.Count() tests</p>
+          </div>
+          <div class="test-contents d-none">
+            <div class="info">
+              <h4>@ctx.Value.Attr.Name</h4>
+              @if (ctx.Value.Passed > 0) { <span status="pass" class='badge log pass-bg'>@ctx.Value.Passed passed</span> }
+              @if (ctx.Value.Failed > 0) { <span status="fail" class='badge log badge-danger'>@ctx.Value.Failed failed</span> }
+              @if (ctx.Value.Skipped > 0) { <span status="skip" class='badge log badge-skip'>@ctx.Value.Skipped skipped</span> }
+              @if (ctx.Value.Others > 0) { <span status="skip" class='badge log badge-warning'>@ctx.Value.Others others</span> }
+            </div>
+            <table class='table table-sm mt-4'>
+              <thead>
+                <tr>
+                  <th class="status-col">Status</th>
+                  <th class="timestamp-col">Timestamp</th>
+                  <th>TestName</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach (var test in ctx.Value.Tests)
+                {
+                <tr class="tag-test-status" status="@test.Status.ToString().ToLower()">
+                  <td><span class="badge log @(test.Status.ToString().ToLower())-bg">@test.Status</span></td>
+                  <td>@test.StartTime.ToLongTimeString()</td>
+                  <td>
+                    <a href="#" class="linked" test-id='@test.Ancestor.Id' id='@test.Id'>@test.Name</a>
+                    @if (test.Parent != null)
+                    {
+                    <div><span class="badge badge-default">@test.FullName</span></div>
+                    }
+                  </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        </li>
+        }
+      </ul>
+    </div>
+  </div>
+  <div class="test-content scrollable">
+    <div class="test-content-detail">
+      <div class="detail-body"></div>
+    </div>
+  </div>
+</div>
+}

@@ -1,0 +1,79 @@
+﻿@using AventStack.ExtentReports
+@using AventStack.ExtentReports.Model
+@using System
+@using RazorEngine
+@using RazorEngine.Templating
+
+@if (Model.HasChildren)
+{
+  var children = new List<Test>(Model.Children);
+  <div class="accordion mt-4">
+    @foreach (var node in children)
+    {
+      <div class="card">
+        <div class="card-header" role="tab">
+          <div class="card-title">
+            <div class="node" id="@node.Id"><span class="badge log @node.Status.ToString().ToLower()-bg mr-2">@node.Status</span>@node.BddType.Name: @node.Name</div>
+            @if (node.HasScreenCaptureDeep)
+            {
+              <div class="status-avatar float-right mr-4"><i class="fa fa-paperclip"></i></div>
+            }
+          </div>
+        </div>
+        @if (node.HasChildren)
+        {
+          if (node.IsBdd && node.BddType.Name.Replace(" ", "") == "ScenarioOutline")
+          {
+            var css = node.Status == Status.Pass ? "collapse" : "";
+            var scenarios = new List<Test>(node.Children);
+            <div class="scenario_outline @css">
+              @foreach (var child in scenarios)
+              {
+                <div class="card-body l1">
+                  <div class="card-header">
+                    <div class="card-title outline-child">
+                      <div class="node" id="@child.Id"><span class="badge log @child.Status.ToString().ToLower()-bg mr-2">@child.Status</span>@child.BddType.Name: @child.Name</div>
+                      @if (child.HasScreenCaptureDeep)
+                      {
+                        <div class="status-avatar float-right"><i class="fa fa-paperclip"></i></div>
+                      }
+                    </div>
+                  </div>
+                  @{
+                    css = child.Status == Status.Pass ? "collapse" : "";
+                    var steps = new List<Test>(child.Children);
+                  }
+                  <div class="card-body mt-3 @css">
+                    @foreach (var step in steps)
+                    {
+                      <div class="step @step.Status.ToString().ToLower()-bg">
+                        <span>@step.BddType.Name @step.Name</span>
+                        @Include("StepDetails", step)
+                      </div>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+          }
+          else
+          {
+            var css = node.Status == Status.Pass ? "collapse" : "";
+            var steps = new List<Test>(node.Children);
+            <div class="@css">
+              <div class="card-body">
+                @foreach (var child in steps)
+                {
+                  <div class="step @child.Status.ToString().ToLower()-bg" title="@child.Description">
+                    <span>@child.BddType.Name @child.Name</span>
+                    @Include("StepDetails", child)
+                  </div>
+                }
+              </div>
+            </div>
+          }
+        }
+      </div>
+    }
+  </div>
+}

@@ -1,0 +1,35 @@
+﻿@using AventStack.ExtentReports
+@using AventStack.ExtentReports.Model
+@using System
+@using RazorEngine
+@using RazorEngine.Templating
+
+@{
+ var logs = new List<Log>(Model.Logs);
+}
+
+<table class="table table-sm">
+  <thead><tr><th class="status-col">Status</th><th class="timestamp-col">Timestamp</th><th class="details-col">Details</th></tr></thead>
+  <tbody>
+    @foreach (var log in logs)
+    {
+      var status = log.Status.ToString().ToLower();
+      <tr class="event-row">
+        <td><span class="badge log @status-bg">@log.Status</span></td>
+        <td>@log.Timestamp.ToShortTimeString()</td>
+        <td>
+          @if (log.HasException)
+          { 
+            <textarea readonly class="code-block">
+@log.ExceptionInfo.Exception.Message
+@if (!string.IsNullOrEmpty(log.ExceptionInfo.Exception.Source)) { @log.ExceptionInfo.Exception.Source }
+@if (!string.IsNullOrEmpty(log.ExceptionInfo.Exception.StackTrace)) { @log.ExceptionInfo.Exception.StackTrace }
+            </textarea> 
+          } 
+          else { @log.Details }
+          @if (log.HasMedia) { @Include("SparkMedia", log.Media) }
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

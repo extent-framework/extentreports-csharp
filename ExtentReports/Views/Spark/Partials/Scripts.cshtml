@@ -1,0 +1,15 @@
+﻿@{
+var offline = Model.Config.OfflineMode;
+var cdnURI="cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@";
+var jscommit="14e9bb345ef7e2ed3a102f271d84e9f0267c88e7";
+var jsURI = cdnURI + jscommit;
+}
+@if (offline)
+{
+<script src="extent/spark-script.js"></script>
+}
+else
+{
+<script src="https://@jsURI/spark/js/spark-script.js"></script>
+}
+<script type='text/javascript'>@Model.Config.JS</script>

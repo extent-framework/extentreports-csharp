@@ -1,0 +1,12 @@
+﻿@if (Model.HasAuthor)
+{
+foreach (var x in Model.Author) { <span class="badge badge-pill badge-default"><i class="fa fa-user-o"></i> @x.Name</span>  }
+}
+@if (Model.HasCategory)
+{
+foreach (var x in Model.Category) { <span class="badge badge-pill badge-default"><i class="fa fa-tag"></i> @x.Name</span> }
+}
+@if (Model.HasDevice)
+{
+foreach (var x in Model.Device) { <span class="badge badge-pill badge-default"><i class="fa fa-tablet"></i> @x.Name</span>  }
+}

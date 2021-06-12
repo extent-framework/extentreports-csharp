@@ -1,0 +1,9 @@
+﻿@using AventStack.ExtentReports.Model
+@using AventStack.ExtentReports.Model.Context
+
+@{
+  var ctx = new SharedContext<Category>();
+  ctx.Ctx = Model.Report.CategoryCtx;
+  ctx.View = "Category";
+}
+@Include("AttributesView", ctx)

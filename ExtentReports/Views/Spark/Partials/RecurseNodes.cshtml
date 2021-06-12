@@ -1,0 +1,70 @@
+﻿@using AventStack.ExtentReports
+@using AventStack.ExtentReports.Model
+@using System
+@using RazorEngine
+@using RazorEngine.Templating
+
+@if (Model.HasChildren)
+{
+  @{
+    var children = new List<Test>(Model.Children);
+  }
+  <div class="accordion">
+    @foreach (var child in children)
+    {
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="node" id="@child.Id">@child.Name</div>
+            <div class="node-status float-right"><span class="badge @child.Status.ToString().ToLower()-bg log ">@child.Status</span></div>
+            <div class="node-time">
+              <span class='badge badge-default'>@child.TimeTaken</span>
+            </div>
+            <div class="node-attr">
+                @Include("Attributes", child)
+            </div>
+            @if (child.HasScreenCaptureDeep)
+            {
+              <div class="status-avatar float-right"><i class="fa fa-paperclip"></i></div>
+            }
+          </div>
+        </div>
+        @if (child.HasLog)
+        {
+          @{
+            var css = child.Status != Status.Fail ? "collapse" : "";
+          }
+        <div class="@css">
+          <div class="card-body">
+            @if (child.HasAnyLog)
+            {
+            <div class="detail-body mt-4">
+              @if (child.HasGeneratedLog)
+              {
+               var genLog = new List<Log>(child.GeneratedLog);
+               @foreach (var l in genLog)
+               {
+               <div>
+  	             <div class="float-left"><span class="badge log @l.Status.ToString().ToLower()-bg">@l.Status</span></div>
+   	             <div class="float-right" style="width:95%;">@l.Details</div>
+               </div>
+               }
+              }
+              @if (child.HasLog) { @Include("Log", child) }
+            </div>
+            }
+            @foreach (var m in child.Media)
+            {
+              @Include("SparkMedia", m)
+            }
+          </div>
+        </div>
+        }
+        @if (child.HasChildren)
+        {
+          @Include("RecurseNodes", child)
+        }
+      </div>
+    }
+  </div>
+}

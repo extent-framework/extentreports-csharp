@@ -1,0 +1,29 @@
+﻿@{
+  var cdnURI="cdn.jsdelivr.net/gh/extent-framework/extent-github-cdn@";
+  var csscommit="c952cc003431b643d7a73337421ff42b75bac784";
+  var jscommit="14e9bb345ef7e2ed3a102f271d84e9f0267c88e7";
+  var iconcommit="b00a2d0486596e73dd7326beacf352c639623a0e";
+  var iconURI = cdnURI + iconcommit;
+  var cssURI = cdnURI + csscommit;
+  var offline = Model.Config.OfflineMode;
+}
+
+<head>
+ <meta charset="utf-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <title>@Model.Config.DocumentTitle</title>
+ @if (offline) {
+ <link rel="apple-touch-icon" href="extent/logo.png">
+ <link rel="shortcut icon" href="extent/logo.png">
+ <link href="extent/spark-style.css" rel="stylesheet" />
+ <link href="extent/font-awesome.min.css" rel="stylesheet">
+ <script src="extent/jsontree.js"></script>
+ } else {
+ <link rel="apple-touch-icon" href="https://@iconURI/commons/img/logo.png">
+ <link rel="shortcut icon" href="https://@iconURI/commons/img/logo.png">
+ <link href="https://@cssURI/spark/css/spark-style.css" rel="stylesheet" />
+ <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+ <script src="https://cdn.rawgit.com/extent-framework/extent-github-cdn/7cc78ce/spark/js/jsontree.js"></script>
+ }
+ <style>@Model.Config.CSS</style>
+</head>

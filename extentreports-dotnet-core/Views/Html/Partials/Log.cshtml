@@ -15,7 +15,7 @@
 				<td>
 					@if (log.HasException)
 					{
-						<textarea disabled class="code-block">@log.ExceptionInfo.Exception.StackTrace</textarea>
+						<textarea disabled class="code-block">@log.ExceptionInfo.Exception.ToString()</textarea>
 					}
 					else
 					{

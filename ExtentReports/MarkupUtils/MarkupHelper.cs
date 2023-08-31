@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace AventStack.ExtentReports.MarkupUtils
 {
@@ -30,7 +29,7 @@ namespace AventStack.ExtentReports.MarkupUtils
             return cb;
         }
 
-        public static IMarkup CreateCodeBlocks(params string[] code)
+        public static IMarkup CreateCodeBlock(params string[] code)
         {
             var cb = new CodeBlock
             {

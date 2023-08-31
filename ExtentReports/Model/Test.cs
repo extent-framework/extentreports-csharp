@@ -63,7 +63,9 @@ namespace AventStack.ExtentReports.Model
                 {
                     test = test.Parent;
                     if (!test.IsBdd || test.BddType.GetType() == typeof(ScenarioOutline))
+                    {
                         sb.Insert(0, test.Name + Separator);
+                    }
                 }
                 return sb.ToString();
             }
@@ -76,7 +78,10 @@ namespace AventStack.ExtentReports.Model
             {
                 var test = this;
                 while (test.Parent != null)
+                {
                     test = test.Parent;
+                }
+
                 return test;
             }
         }
@@ -120,14 +125,14 @@ namespace AventStack.ExtentReports.Model
 
             if (UseNaturalConf)
             {
-                PropagateTime();
+                EndTime = DateTime.Now;
             }
+
+            Propagate();
         }
 
-        private void PropagateTime()
+        private void Propagate()
         {
-            EndTime = DateTime.Now;
-
             if (Parent != null)
             {
                 Parent.End(Status);
@@ -136,110 +141,56 @@ namespace AventStack.ExtentReports.Model
 
         public void AddLog(Log log)
         {
-            Assert.NotNull(log, "Log must not be null");
-            Logs.Enqueue(log);
-            AddLogCommon(log);
+            if (log != null)
+            {
+                Logs.Enqueue(log);
+                AddLogCommon(log);
+            }
         }
 
         public void AddGeneratedLog(Log log)
         {
-            Assert.NotNull(log, "Log must not be null");
-            GeneratedLog.Enqueue(log);
-            AddLogCommon(log);
+            if (log != null)
+            {
+                GeneratedLog.Enqueue(log);
+                AddLogCommon(log);
+            }
         }
 
         private void AddLogCommon(Log log)
         {
             log.Seq = Logs.Count + GeneratedLog.Count;
             End(log.Status);
-            UpdateResult();
+            //UpdateResult();
         }
 
         public void AddMedia(ScreenCapture m)
         {
             if (m != null && (m.Path != null || m.ResolvedPath != null || ((ScreenCapture)m).Base64 != null))
+            {
                 Media.Add(m);
-        }
-
-        public bool HasAnyLog
-        {
-            get
-            {
-                return !Logs.IsEmpty || !GeneratedLog.IsEmpty;
             }
         }
 
-        public bool HasGeneratedLog
-        {
-            get
-            {
-                return !GeneratedLog.IsEmpty;
-            }
-        }
+        public bool HasAnyLog => !Logs.IsEmpty || !GeneratedLog.IsEmpty;
 
-        public bool HasLog
-        {
-            get
-            {
-                return !Logs.IsEmpty;
-            }
-        }
+        public bool HasGeneratedLog => !GeneratedLog.IsEmpty;
 
-        public bool HasChildren
-        {
-            get
-            {
-                return Children.Count != 0;
-            }
-        }
+        public bool HasLog => !Logs.IsEmpty;
 
-        public bool HasAttributes
-        {
-            get
-            {
-                return HasCategory || HasDevice || HasAuthor;
-            }
-        }
+        public bool HasChildren => Children.Count != 0;
 
-        public bool HasAuthor
-        {
-            get
-            {
-                return Author.Count > 0;
-            }
-        }
+        public bool HasAttributes => HasCategory || HasDevice || HasAuthor;
 
-        public bool HasCategory
-        {
-            get
-            {
-                return Category.Count > 0;
-            }
-        }
+        public bool HasAuthor => Author.Count > 0;
 
-        public bool HasDevice
-        {
-            get
-            {
-                return Device.Count > 0;
-            }
-        }
+        public bool HasCategory => Category.Count > 0;
 
-        public bool HasScreenCapture
-        {
-            get
-            {
-                return Media.Count > 0;
-            }
-        }
+        public bool HasDevice => Device.Count > 0;
 
-        public bool HasScreenCaptureDeep
-        {
-            get
-            {
-                return HasScreenCapture || HasScreenCaptureDeepImpl(this);
-            }
-        }
+        public bool HasScreenCapture => Media.Count > 0;
+
+        public bool HasScreenCaptureDeep => HasScreenCapture || HasScreenCaptureDeepImpl(this);
 
         private bool HasScreenCaptureDeepImpl(Test test)
         {
@@ -247,7 +198,7 @@ namespace AventStack.ExtentReports.Model
             {
                 var nodes = test.Children.ToList();
 
-                foreach (var node in nodes)
+                foreach (Test node in nodes)
                 {
                     if (node.HasScreenCapture)
                     {

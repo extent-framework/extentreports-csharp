@@ -1,5 +1,4 @@
 ﻿using AventStack.ExtentReports.Core;
-using AventStack.ExtentReports.Gherkin.Model;
 using System.Linq;
 
 namespace AventStack.ExtentReports.Gherkin
@@ -7,9 +6,12 @@ namespace AventStack.ExtentReports.Gherkin
     public class GherkinKeyword
     {
         public string Name { get; private set; }
+        public string OriginalName { get; private set; }
 
         public GherkinKeyword(string name)
         {
+            OriginalName = name;
+
             if (name == "ScenarioOutline")
             {
                 name = "Scenario Outline";

@@ -53,61 +53,19 @@ namespace AventStack.ExtentReports.Model
             }
         }
 
-        public bool IsBDD
-        {
-            get
-            {
-                return Tests.Count != 0 && Tests.Any(x => x.IsBdd);
-            }
-        }
+        public bool IsBDD => Tests.Count != 0 && Tests.Any(x => x.IsBdd);
 
-        public TimeSpan TimeTaken
-        {
-            get
-            {
-                return EndTime.Subtract(StartTime);
-            }
-        }
+        public TimeSpan TimeTaken => EndTime.Subtract(StartTime);
 
-        public bool HasAuthors
-        {
-            get
-            {
-                return AuthorCtx.HasItems;
-            }
-        }
+        public bool HasAuthors => AuthorCtx.HasItems;
 
-        public bool HasCategories
-        {
-            get
-            {
-                return CategoryCtx.HasItems;
-            }
-        }
+        public bool HasCategories => CategoryCtx.HasItems;
 
-        public bool HasDevices
-        {
-            get
-            {
-                return DeviceCtx.HasItems;
-            }
-        }
+        public bool HasDevices => DeviceCtx.HasItems;
 
-        public bool HasExceptions
-        {
-            get
-            {
-                return ExceptionInfoCtx.HasItems;
-            }
-        }
+        public bool HasExceptions => ExceptionInfoCtx.HasItems;
 
-        public bool HasTests
-        {
-            get
-            {
-                return Tests.Count != 0;
-            }
-        }
+        public bool HasTests => Tests.Count > 0;
 
         public void AddTest(Test test)
         {

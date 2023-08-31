@@ -1,5 +1,4 @@
 ﻿using AventStack.ExtentReports.Extensions;
-using System;
 using System.Collections.Generic;
 
 namespace AventStack.ExtentReports.Config
@@ -8,13 +7,7 @@ namespace AventStack.ExtentReports.Config
     {
         public Dictionary<string, object> Store { get; } = new Dictionary<string, object>();
 
-        public bool IsEmpty
-        {
-            get
-            {
-                return Store.Count == 0;
-            }
-        }
+        public bool IsEmpty => Store.Count == 0;
 
         public void AddConfig(string k, string v)
         {

@@ -77,7 +77,9 @@ namespace AventStack.ExtentReports.Tests.Model
         [Test]
         public void AddNullLogToTest()
         {
-            Assert.Throws(typeof(ArgumentNullException), () => _test.AddLog(null));
+            var logs = _test.Logs.Count;
+            _test.AddLog(null);
+            Assert.AreEqual(logs, _test.Logs.Count);
         }
 
         [Test]

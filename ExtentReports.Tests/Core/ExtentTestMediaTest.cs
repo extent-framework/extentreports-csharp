@@ -41,9 +41,9 @@ namespace AventStack.ExtentReports.Tests.Core
         public void AddScreenCaptureFromPathTest()
         {
             _test.AddScreenCaptureFromPath(Path, Title).Pass("Pass");
-            Assert.AreEqual(_test.Model.Media.Count, 1);
-            Assert.AreEqual(_test.Model.Media[0].Path, Path);
-            Assert.AreEqual(_test.Model.Media[0].Title, Title);
+            Assert.AreEqual(_test.Test.Media.Count, 1);
+            Assert.AreEqual(_test.Test.Media[0].Path, Path);
+            Assert.AreEqual(_test.Test.Media[0].Title, Title);
         }
 
         [Test]
@@ -52,8 +52,8 @@ namespace AventStack.ExtentReports.Tests.Core
             _test
                     .AddScreenCaptureFromPath(Path)
                     .Pass("Pass");
-            Assert.AreEqual(_test.Model.Media.Count, 1);
-            Assert.AreEqual(_test.Model.Media[0].Path, Path);
+            Assert.AreEqual(_test.Test.Media.Count, 1);
+            Assert.AreEqual(_test.Test.Media[0].Path, Path);
         }
 
         [Test]
@@ -63,10 +63,10 @@ namespace AventStack.ExtentReports.Tests.Core
                     .CreateNode("Node")
                     .AddScreenCaptureFromPath(Path, Title)
                     .Pass("Pass");
-            Assert.AreEqual(_test.Model.Media.Count, 0);
-            Assert.AreEqual(node.Model.Media.Count, 1);
-            Assert.AreEqual(node.Model.Media[0].Path, Path);
-            Assert.AreEqual(node.Model.Media[0].Title, Title);
+            Assert.AreEqual(_test.Test.Media.Count, 0);
+            Assert.AreEqual(node.Test.Media.Count, 1);
+            Assert.AreEqual(node.Test.Media[0].Path, Path);
+            Assert.AreEqual(node.Test.Media[0].Title, Title);
         }
 
         [Test]
@@ -85,8 +85,8 @@ namespace AventStack.ExtentReports.Tests.Core
         public void AddScreenCaptureFromPathTestLog()
         {
             _test.Pass("Pass", MediaEntityBuilder.CreateScreenCaptureFromPath(Path, Title).Build());
-            Assert.AreEqual(_test.Model.Media.Count, 0);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Media.Count, 0);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.NotNull(logs[0].Media);
             Assert.AreEqual(logs[0].Media.Path, Path);
             Assert.AreEqual(logs[0].Media.Title, Title);
@@ -96,8 +96,8 @@ namespace AventStack.ExtentReports.Tests.Core
         public void AddScreenCaptureFromPathTestLogOverloads()
         {
             _test.Pass("Pass", MediaEntityBuilder.CreateScreenCaptureFromPath(Path).Build());
-            Assert.AreEqual(_test.Model.Media.Count, 0);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Media.Count, 0);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.NotNull(logs[0].Media);
             Assert.AreEqual(logs[0].Media.Path, Path);
         }
@@ -108,8 +108,8 @@ namespace AventStack.ExtentReports.Tests.Core
             ExtentTest node = _test
                     .CreateNode("Node")
                     .Pass("Pass", MediaEntityBuilder.CreateScreenCaptureFromPath(Path, Title).Build());
-            Assert.AreEqual(node.Model.Media.Count, 0);
-            var logs = new List<Log>(node.Model.Logs);
+            Assert.AreEqual(node.Test.Media.Count, 0);
+            var logs = new List<Log>(node.Test.Logs);
             Assert.NotNull(logs[0].Media);
             Assert.AreEqual(logs[0].Media.Path, Path);
             Assert.AreEqual(logs[0].Media.Title, Title);
@@ -132,9 +132,9 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             _test.AddScreenCaptureFromBase64String(Base64, Title)
                     .Pass("Pass");
-            Assert.AreEqual(_test.Model.Media.Count, 1);
-            Assert.AreEqual(((ScreenCapture)_test.Model.Media[0]).Base64, Base64Encoded + Base64);
-            Assert.AreEqual(_test.Model.Media[0].Title, Title);
+            Assert.AreEqual(_test.Test.Media.Count, 1);
+            Assert.AreEqual(((ScreenCapture)_test.Test.Media[0]).Base64, Base64Encoded + Base64);
+            Assert.AreEqual(_test.Test.Media[0].Title, Title);
         }
 
         [Test]
@@ -143,10 +143,10 @@ namespace AventStack.ExtentReports.Tests.Core
             var node = _test.CreateNode("Node")
                     .AddScreenCaptureFromBase64String(Base64, Title)
                     .Pass("Pass");
-            Assert.AreEqual(_test.Model.Media.Count, 0);
-            Assert.AreEqual(node.Model.Media.Count, 1);
-            Assert.AreEqual(((ScreenCapture)node.Model.Media[0]).Base64, Base64Encoded + Base64);
-            Assert.AreEqual(node.Model.Media[0].Title, Title);
+            Assert.AreEqual(_test.Test.Media.Count, 0);
+            Assert.AreEqual(node.Test.Media.Count, 1);
+            Assert.AreEqual(((ScreenCapture)node.Test.Media[0]).Base64, Base64Encoded + Base64);
+            Assert.AreEqual(node.Test.Media[0].Title, Title);
         }
 
         [Test]
@@ -155,17 +155,17 @@ namespace AventStack.ExtentReports.Tests.Core
             var node = _test.CreateNode("Node")
                     .AddScreenCaptureFromBase64String(Base64)
                     .Pass("Pass");
-            Assert.AreEqual(_test.Model.Media.Count, 0);
-            Assert.AreEqual(node.Model.Media.Count, 1);
-            Assert.AreEqual(((ScreenCapture)node.Model.Media[0]).Base64, Base64Encoded + Base64);
+            Assert.AreEqual(_test.Test.Media.Count, 0);
+            Assert.AreEqual(node.Test.Media.Count, 1);
+            Assert.AreEqual(((ScreenCapture)node.Test.Media[0]).Base64, Base64Encoded + Base64);
         }
 
         [Test]
         public void AddScreenCaptureFromBase64TestLog()
         {
             _test.Pass("Pass", MediaEntityBuilder.CreateScreenCaptureFromBase64String(Base64, Title).Build());
-            Assert.AreEqual(_test.Model.Media.Count, 0);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Media.Count, 0);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.NotNull(logs[0].Media);
             Assert.AreEqual(((ScreenCapture)logs[0].Media).Base64,
                     Base64Encoded + Base64);
@@ -177,8 +177,8 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var node = _test.CreateNode("Node")
                     .Pass("Pass", MediaEntityBuilder.CreateScreenCaptureFromBase64String(Base64, Title).Build());
-            Assert.AreEqual(node.Model.Media.Count, 0);
-            var logs = new List<Log>(node.Model.Logs);
+            Assert.AreEqual(node.Test.Media.Count, 0);
+            var logs = new List<Log>(node.Test.Logs);
             Assert.NotNull(logs[0].Media);
             Assert.AreEqual(((ScreenCapture)logs[0].Media).Base64,
                     Base64Encoded + Base64);
@@ -190,8 +190,8 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var node = _test.CreateNode("Node")
                     .Pass("Pass", MediaEntityBuilder.CreateScreenCaptureFromBase64String(Base64).Build());
-            Assert.AreEqual(node.Model.Media.Count, 0);
-            var logs = new List<Log>(node.Model.Logs);
+            Assert.AreEqual(node.Test.Media.Count, 0);
+            var logs = new List<Log>(node.Test.Logs);
             Assert.NotNull(logs[0].Media);
             Assert.AreEqual(((ScreenCapture)logs[0].Media).Base64,
                     Base64Encoded + Base64);

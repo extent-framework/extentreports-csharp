@@ -35,7 +35,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void UseNaturalConfReportWithTimeChanged()
         {
             _test.Pass("init");
-            _test.Model.EndTime = DateTime.Now.AddMilliseconds(5000);
+            _test.Test.EndTime = DateTime.Now.AddMilliseconds(5000);
             _test.Pass("complete");
             // must flush to determine time for report
             _extent.Flush();
@@ -48,16 +48,16 @@ namespace AventStack.ExtentReports.Tests.Core
             _test.Pass("init");
             Thread.Sleep(500);
             _test.Pass("complete");
-            Assert.True(_test.Model.TimeTaken < 5);
+            Assert.True(_test.Test.TimeTaken < 5);
         }
 
         [Test]
         public void UseNaturalConfTestWithTimeChanged()
         {
             _test.Pass("init");
-            _test.Model.EndTime = DateTime.Now.AddMilliseconds(5000);
+            _test.Test.EndTime = DateTime.Now.AddMilliseconds(5000);
             _test.Pass("complete");
-            Assert.True(_test.Model.TimeTaken >= 5000);
+            Assert.True(_test.Test.TimeTaken >= 5000);
         }
 
         [Test]
@@ -66,8 +66,8 @@ namespace AventStack.ExtentReports.Tests.Core
             ExtentTest child = _test.CreateNode("Node").Pass("init");
             Thread.Sleep(500);
             child.Pass("complete");
-            Assert.True(_test.Model.TimeTaken < 5);
-            Assert.True(child.Model.TimeTaken < 5);
+            Assert.True(_test.Test.TimeTaken < 5);
+            Assert.True(child.Test.TimeTaken < 5);
         }
     }
 }

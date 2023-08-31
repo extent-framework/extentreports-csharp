@@ -31,7 +31,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void CreateNodeName()
         {
             var node = _test.CreateNode(NodeName);
-            var model = node.Model;
+            var model = node.Test;
             Assert.AreEqual(NodeName, model.Name);
             Assert.IsEmpty(model.Description);
         }
@@ -40,7 +40,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void CreateNodeNameDesc()
         {
             var node = _test.CreateNode(NodeName, Description);
-            var model = node.Model;
+            var model = node.Test;
             Assert.AreEqual(NodeName, model.Name);
             Assert.AreEqual(Description, model.Description);
         }
@@ -49,7 +49,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void NodeTimeInit()
         {
             var node = _test.CreateNode(NodeName, Description);
-            var model = node.Model;
+            var model = node.Test;
             Assert.True(model.TimeTaken <= 1);
         }
 
@@ -57,7 +57,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void NodeTimeElapsed()
         {
             var node = _test.CreateNode(NodeName, Description);
-            var model = node.Model;
+            var model = node.Test;
             Thread.Sleep(100);
             node.Pass("");
             Assert.True(model.TimeTaken >= 100);

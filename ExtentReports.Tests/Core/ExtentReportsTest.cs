@@ -28,7 +28,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void CreateTestOverloadTypeNameDesc()
         {
             var test = _extent.CreateTest<Feature>(TestName, "Description");
-            var model = test.Model;
+            var model = test.Test;
             Assert.True(model.IsBdd);
             Assert.AreEqual(model.Name, TestName);
             Assert.AreEqual(model.Description, "Description");
@@ -40,7 +40,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void CreateTestOverloadTypeName()
         {
             var test = _extent.CreateTest<Feature>(TestName);
-            var model = test.Model;
+            var model = test.Test;
             Assert.True(model.IsBdd);
             Assert.AreEqual(model.Name, TestName);
             Assert.IsEmpty(model.Description);
@@ -52,7 +52,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void CreateTestOverloadKeywordNameDesc()
         {
             var test = _extent.CreateTest(new GherkinKeyword("Feature"), TestName, "Description");
-            var model = test.Model;
+            var model = test.Test;
             Assert.True(model.IsBdd);
             Assert.AreEqual(model.Name, TestName);
             Assert.AreEqual(model.Description, "Description");
@@ -64,7 +64,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void CreateTestOverloadKeywordName()
         {
             var test = _extent.CreateTest(new GherkinKeyword("Feature"), TestName);
-            var model = test.Model;
+            var model = test.Test;
             Assert.True(model.IsBdd);
             Assert.AreEqual(model.Name, TestName);
             Assert.IsEmpty(model.Description);
@@ -76,7 +76,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void CreateTestOverloadNameDesc()
         {
             var test = _extent.CreateTest(TestName, "Description");
-            var model = test.Model;
+            var model = test.Test;
             Assert.False(model.IsBdd);
             Assert.AreEqual(model.Name, TestName);
             Assert.AreEqual(model.Description, "Description");
@@ -88,7 +88,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void CreateTestOverloadName()
         {
             var test = _extent.CreateTest(TestName);
-            var model = test.Model;
+            var model = test.Test;
             Assert.False(model.IsBdd);
             Assert.AreEqual(model.Name, TestName);
             Assert.IsEmpty(model.Description);

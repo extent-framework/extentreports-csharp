@@ -41,8 +41,8 @@ namespace AventStack.ExtentReports.Model.Convert
 
         public void CreateEntity(Test test, ExtentTest extentTest)
         {
-            extentTest.Model.StartTime = test.StartTime;
-            extentTest.Model.EndTime = test.EndTime;
+            extentTest.Test.StartTime = test.StartTime;
+            extentTest.Test.EndTime = test.EndTime;
 
             if (test.Logs != null)
             {

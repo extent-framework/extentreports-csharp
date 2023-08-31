@@ -9,7 +9,7 @@ namespace AventStack.ExtentReports.Extensions
         {
             Assert.NotNull(source, "Collection must not be null");
 
-            foreach (var item in collection)
+            foreach (KeyValuePair<T, V> item in collection)
             {
                 source[item.Key] = item.Value;
             }

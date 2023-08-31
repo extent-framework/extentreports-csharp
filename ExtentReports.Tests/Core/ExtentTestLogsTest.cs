@@ -28,12 +28,12 @@ namespace AventStack.ExtentReports.Tests.Core
         public void LogDetails()
         {
             _test.Log(Status.Skip, Details + "1");
-            Assert.AreEqual(_test.Model.Status, Status.Skip);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Status, Status.Skip);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].Details, Details + "1");
             Assert.AreEqual(logs[0].Status, Status.Skip);
             _test.Log(Status.Fail, Details);
-            logs = new List<Log>(_test.Model.Logs);
+            logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[1].Details, Details);
             Assert.AreEqual(logs[1].Status, Status.Fail);
         }
@@ -43,13 +43,13 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             _test.Log(Status.Skip, Details,
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            var logs = new List<Log>(_test.Model.Logs);
-            Assert.AreEqual(_test.Model.Status, Status.Skip);
+            var logs = new List<Log>(_test.Test.Logs);
+            Assert.AreEqual(_test.Test.Status, Status.Skip);
             Assert.AreEqual(logs[0].Details, Details);
             Assert.AreEqual(logs[0].Status, Status.Skip);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
             _test.Log(Status.Fail, Details, MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            logs = new List<Log>(_test.Model.Logs);
+            logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[1].Details, Details);
             Assert.AreEqual(logs[1].Status, Status.Fail);
             Assert.AreEqual(logs[1].Media.Path, Attachment);
@@ -60,13 +60,13 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var test = _test.Log(Status.Skip,
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            Assert.AreEqual(_test.Model.Status, Status.Skip);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Status, Status.Skip);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].Details, "");
             Assert.AreEqual(logs[0].Status, Status.Skip);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
             _test.Log(Status.Fail, MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            logs = new List<Log>(_test.Model.Logs);
+            logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[1].Details, "");
             Assert.AreEqual(logs[1].Status, Status.Fail);
             Assert.AreEqual(logs[1].Media.Path, Attachment);
@@ -77,8 +77,8 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var m = MarkupHelper.CreateCodeBlock("code");
             _test.Log(Status.Skip, m);
-            Assert.AreEqual(_test.Model.Status, Status.Skip);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Status, Status.Skip);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.True(logs[0].Details.Contains("code"));
             Assert.AreEqual(logs[0].Status, Status.Skip);
         }
@@ -88,12 +88,12 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var ex = new Exception("Exception");
             _test.Log(Status.Skip, ex);
-            Assert.AreEqual(_test.Model.Status, Status.Skip);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Status, Status.Skip);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[0].Status, Status.Skip);
             _test.Log(Status.Fail, ex);
-            logs = new List<Log>(_test.Model.Logs);
+            logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[1].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[1].Status, Status.Fail);
         }
@@ -104,13 +104,13 @@ namespace AventStack.ExtentReports.Tests.Core
             var ex = new Exception("Exception");
             var test = _test.Log(Status.Skip, ex,
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            Assert.AreEqual(_test.Model.Status, Status.Skip);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Status, Status.Skip);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[0].Status, Status.Skip);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
             _test.Log(Status.Fail, ex, MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            logs = new List<Log>(_test.Model.Logs);
+            logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[1].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[1].Status, Status.Fail);
             Assert.AreEqual(logs[1].Media.Path, Attachment);
@@ -120,7 +120,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void FailDetails()
         {
             _test.Fail(Details);
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].Details, Details);
             Assert.AreEqual(logs[0].Status, Status.Fail);
         }
@@ -131,7 +131,7 @@ namespace AventStack.ExtentReports.Tests.Core
             _test.Fail(
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
             _test.Log(Status.Fail, Details, MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].Status, Status.Fail);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
         }
@@ -141,7 +141,7 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var ex = new Exception("Exception");
             _test.Fail(ex);
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[0].Status, Status.Fail);
         }
@@ -152,7 +152,7 @@ namespace AventStack.ExtentReports.Tests.Core
             var ex = new Exception("Exception");
             _test.Fail(ex,
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[0].Status, Status.Fail);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
@@ -163,8 +163,8 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var m = MarkupHelper.CreateCodeBlock("code");
             _test.Fail(m);
-            Assert.AreEqual(_test.Model.Status, Status.Fail);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Status, Status.Fail);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.True(logs[0].Details.Contains("code"));
             Assert.AreEqual(logs[0].Status, Status.Fail);
         }
@@ -173,7 +173,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void SkipDetails()
         {
             _test.Skip(Details);
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].Details, Details);
             Assert.AreEqual(logs[0].Status, Status.Skip);
         }
@@ -184,7 +184,7 @@ namespace AventStack.ExtentReports.Tests.Core
             _test.Skip(
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
             _test.Log(Status.Fail, Details, MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].Status, Status.Skip);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
         }
@@ -194,7 +194,7 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var ex = new Exception("Exception");
             _test.Skip(ex);
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[0].Status, Status.Skip);
         }
@@ -205,7 +205,7 @@ namespace AventStack.ExtentReports.Tests.Core
             var ex = new Exception("Exception");
             _test.Skip(ex,
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[0].Status, Status.Skip);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
@@ -216,8 +216,8 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var m = MarkupHelper.CreateCodeBlock("code");
             _test.Log(Status.Skip, m);
-            Assert.AreEqual(_test.Model.Status, Status.Skip);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Status, Status.Skip);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.True(logs[0].Details.Contains("code"));
             Assert.AreEqual(logs[0].Status, Status.Skip);
         }
@@ -226,7 +226,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void WarnDetails()
         {
             _test.Warning(Details);
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].Details, Details);
             Assert.AreEqual(logs[0].Status, Status.Warning);
         }
@@ -237,7 +237,7 @@ namespace AventStack.ExtentReports.Tests.Core
             _test.Warning(
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
             _test.Log(Status.Warning, Details, MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].Status, Status.Warning);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
         }
@@ -247,7 +247,7 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var ex = new Exception("Exception");
             _test.Warning(ex);
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[0].Status, Status.Warning);
         }
@@ -258,7 +258,7 @@ namespace AventStack.ExtentReports.Tests.Core
             var ex = new Exception("Exception");
             _test.Log(Status.Warning, ex,
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[0].Status, Status.Warning);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
@@ -269,8 +269,8 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var m = MarkupHelper.CreateCodeBlock("code");
             _test.Log(Status.Warning, m);
-            Assert.AreEqual(_test.Model.Status, Status.Warning);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Status, Status.Warning);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.True(logs[0].Details.Contains("code"));
             Assert.AreEqual(logs[0].Status, Status.Warning);
         }
@@ -279,7 +279,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void PassDetails()
         {
             _test.Pass(Details);
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].Details, Details);
             Assert.AreEqual(logs[0].Status, Status.Pass);
         }
@@ -290,7 +290,7 @@ namespace AventStack.ExtentReports.Tests.Core
             _test.Pass(
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
             _test.Log(Status.Pass, Details, MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].Status, Status.Pass);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
         }
@@ -300,7 +300,7 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var ex = new Exception("Exception");
             _test.Pass(ex);
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[0].Status, Status.Pass);
         }
@@ -311,7 +311,7 @@ namespace AventStack.ExtentReports.Tests.Core
             var ex = new Exception("Exception");
             _test.Pass(ex,
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[0].Status, Status.Pass);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
@@ -322,8 +322,8 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var m = MarkupHelper.CreateCodeBlock("code");
             _test.Log(Status.Pass, m);
-            Assert.AreEqual(_test.Model.Status, Status.Pass);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Status, Status.Pass);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.True(logs[0].Details.Contains("code"));
             Assert.AreEqual(logs[0].Status, Status.Pass);
         }
@@ -332,7 +332,7 @@ namespace AventStack.ExtentReports.Tests.Core
         public void InfoDetails()
         {
             _test.Info(Details);
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].Details, Details);
             Assert.AreEqual(logs[0].Status, Status.Info);
         }
@@ -343,7 +343,7 @@ namespace AventStack.ExtentReports.Tests.Core
             _test.Info(
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
             _test.Log(Status.Info, Details, MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].Status, Status.Info);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
         }
@@ -353,7 +353,7 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var ex = new Exception("Exception");
             _test.Info(ex);
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[0].Status, Status.Info);
         }
@@ -364,7 +364,7 @@ namespace AventStack.ExtentReports.Tests.Core
             var ex = new Exception("Exception");
             _test.Info(ex,
                     MediaEntityBuilder.CreateScreenCaptureFromPath(Attachment).Build());
-            var logs = new List<Log>(_test.Model.Logs);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.AreEqual(logs[0].ExceptionInfo.Exception, ex);
             Assert.AreEqual(logs[0].Status, Status.Info);
             Assert.AreEqual(logs[0].Media.Path, Attachment);
@@ -375,8 +375,8 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var m = MarkupHelper.CreateCodeBlock("code");
             _test.Log(Status.Info, m);
-            Assert.AreEqual(_test.Model.Status, Status.Pass);
-            var logs = new List<Log>(_test.Model.Logs);
+            Assert.AreEqual(_test.Test.Status, Status.Pass);
+            var logs = new List<Log>(_test.Test.Logs);
             Assert.True(logs[0].Details.Contains("code"));
             Assert.AreEqual(logs[0].Status, Status.Info);
         }

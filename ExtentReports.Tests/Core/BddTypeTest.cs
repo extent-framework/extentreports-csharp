@@ -18,8 +18,8 @@ namespace AventStack.ExtentReports.Tests.Core
         public void FeatureIsOfBddType()
         {
             var feature = _extent.CreateTest<Feature>(TestContext.CurrentContext.Test.Name);
-            Assert.True(feature.Model.IsBdd);
-            Assert.AreEqual(feature.Model.BddType.Name, "Feature");
+            Assert.True(feature.Test.IsBdd);
+            Assert.AreEqual(feature.Test.BddType.Name, "Feature");
         }
 
         [Test]
@@ -27,8 +27,8 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var feature = _extent.CreateTest<Feature>(TestContext.CurrentContext.Test.Name);
             var scenario = feature.CreateNode<Scenario>("Scenario");
-            Assert.True(scenario.Model.IsBdd);
-            Assert.AreEqual(scenario.Model.BddType.Name, "Scenario");
+            Assert.True(scenario.Test.IsBdd);
+            Assert.AreEqual(scenario.Test.BddType.Name, "Scenario");
         }
 
         [Test]
@@ -36,8 +36,8 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var feature = _extent.CreateTest<Feature>(TestContext.CurrentContext.Test.Name);
             var scenarioOutline = feature.CreateNode<ScenarioOutline>("ScenarioOutline");
-            Assert.True(scenarioOutline.Model.IsBdd);
-            Assert.AreEqual(scenarioOutline.Model.BddType.Name, "ScenarioOutline");
+            Assert.True(scenarioOutline.Test.IsBdd);
+            Assert.AreEqual(scenarioOutline.Test.BddType.Name, "ScenarioOutline");
         }
 
         [Test]
@@ -46,8 +46,8 @@ namespace AventStack.ExtentReports.Tests.Core
             var feature = _extent.CreateTest<Feature>(TestContext.CurrentContext.Test.Name);
             var scenario = feature.CreateNode<Scenario>("Scenario");
             var and = scenario.CreateNode<And>("And");
-            Assert.True(and.Model.IsBdd);
-            Assert.AreEqual(and.Model.BddType.Name, "And");
+            Assert.True(and.Test.IsBdd);
+            Assert.AreEqual(and.Test.BddType.Name, "And");
         }
 
         [Test]
@@ -56,8 +56,8 @@ namespace AventStack.ExtentReports.Tests.Core
             var feature = _extent.CreateTest<Feature>(TestContext.CurrentContext.Test.Name);
             var scenario = feature.CreateNode<Scenario>("Scenario");
             var asterisk = scenario.CreateNode<Asterisk>("Asterisk");
-            Assert.True(asterisk.Model.IsBdd);
-            Assert.AreEqual(asterisk.Model.BddType.Name, "*");
+            Assert.True(asterisk.Test.IsBdd);
+            Assert.AreEqual(asterisk.Test.BddType.Name, "*");
         }
 
         [Test]
@@ -66,8 +66,8 @@ namespace AventStack.ExtentReports.Tests.Core
             var feature = _extent.CreateTest<Feature>(TestContext.CurrentContext.Test.Name);
             var scenario = feature.CreateNode<Scenario>("Scenario");
             var background = scenario.CreateNode<Background>("Background");
-            Assert.True(background.Model.IsBdd);
-            Assert.AreEqual(background.Model.BddType.Name, "Background");
+            Assert.True(background.Test.IsBdd);
+            Assert.AreEqual(background.Test.BddType.Name, "Background");
         }
 
         [Test]
@@ -76,8 +76,8 @@ namespace AventStack.ExtentReports.Tests.Core
             var feature = _extent.CreateTest<Feature>(TestContext.CurrentContext.Test.Name);
             var scenario = feature.CreateNode<Scenario>("Scenario");
             var but = scenario.CreateNode<But>("But");
-            Assert.True(but.Model.IsBdd);
-            Assert.AreEqual(but.Model.BddType.Name, "But");
+            Assert.True(but.Test.IsBdd);
+            Assert.AreEqual(but.Test.BddType.Name, "But");
         }
 
         [Test]
@@ -86,8 +86,8 @@ namespace AventStack.ExtentReports.Tests.Core
             var feature = _extent.CreateTest<Feature>(TestContext.CurrentContext.Test.Name);
             var scenario = feature.CreateNode<Scenario>("Scenario");
             var given = scenario.CreateNode<Given>("Given");
-            Assert.True(given.Model.IsBdd);
-            Assert.AreEqual(given.Model.BddType.Name, "Given");
+            Assert.True(given.Test.IsBdd);
+            Assert.AreEqual(given.Test.BddType.Name, "Given");
         }
 
         [Test]
@@ -96,8 +96,8 @@ namespace AventStack.ExtentReports.Tests.Core
             var feature = _extent.CreateTest<Feature>(TestContext.CurrentContext.Test.Name);
             var scenario = feature.CreateNode<Scenario>("Scenario");
             var then = scenario.CreateNode<Then>("Then");
-            Assert.True(then.Model.IsBdd);
-            Assert.AreEqual(then.Model.BddType.Name, "Then");
+            Assert.True(then.Test.IsBdd);
+            Assert.AreEqual(then.Test.BddType.Name, "Then");
         }
 
         [Test]
@@ -106,8 +106,8 @@ namespace AventStack.ExtentReports.Tests.Core
             var feature = _extent.CreateTest<Feature>(TestContext.CurrentContext.Test.Name);
             var scenario = feature.CreateNode<Scenario>("Scenario");
             var when = scenario.CreateNode<When>("When");
-            Assert.True(when.Model.IsBdd);
-            Assert.AreEqual(when.Model.BddType.Name, "When");
+            Assert.True(when.Test.IsBdd);
+            Assert.AreEqual(when.Test.BddType.Name, "When");
         }
     }
 }

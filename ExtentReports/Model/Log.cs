@@ -13,21 +13,9 @@ namespace AventStack.ExtentReports.Model
         public ScreenCapture Media { get; set; }
         public IDictionary<string, object> Info { get; set; } = new Dictionary<string, object>();
 
-        public bool HasMedia
-        {
-            get
-            {
-                return Media != null;
-            }
-        }
+        public bool HasMedia => Media != null;
 
-        public bool HasException
-        {
-            get
-            {
-                return ExceptionInfo != null;
-            }
-        }
+        public bool HasException => ExceptionInfo != null;
 
         public void AddMedia(Media media)
         {

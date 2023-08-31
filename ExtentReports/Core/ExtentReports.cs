@@ -13,26 +13,14 @@ namespace AventStack.ExtentReports
     {
         public string GherkinDialect
         {
-            get
-            {
-                return GherkinDialectProvider.Lang;
-            }
-            set
-            {
-                GherkinDialectProvider.Lang = value;
-            }
+            get => GherkinDialectProvider.Lang;
+            set => GherkinDialectProvider.Lang = value;
         }
 
         public bool UseNaturalTime
         {
-            get
-            {
-                return UsingNaturalConf;
-            }
-            set
-            {
-                UsingNaturalConf = value;
-            }
+            get => UsingNaturalConf;
+            set => UsingNaturalConf = value;
         }
 
         public Status Status => Report.Status;
@@ -41,7 +29,7 @@ namespace AventStack.ExtentReports
 
         public void AttachReporter(params IObserver<ReportEntity>[] observer)
         {
-            foreach (var x in observer)
+            foreach (IObserver<ReportEntity> x in observer)
             {
                 Subscribe(x);
             }
@@ -50,7 +38,7 @@ namespace AventStack.ExtentReports
         public ExtentTest CreateTest(GherkinKeyword keyword, string name, string description = "")
         {
             var test = new ExtentTest(this, keyword, name, description);
-            OnTestCreated(test.Model);
+            OnTestCreated(test.Test);
             return test;
         }
 
@@ -64,7 +52,7 @@ namespace AventStack.ExtentReports
         public ExtentTest CreateTest(string name, string description = "")
         {
             var test = new ExtentTest(this, name, description);
-            OnTestCreated(test.Model);
+            OnTestCreated(test.Test);
             return test;
         }
 
@@ -76,7 +64,7 @@ namespace AventStack.ExtentReports
 
         public void RemoveTest(ExtentTest test)
         {
-            Report.RemoveTest(test.Model);
+            Report.RemoveTest(test.Test);
         }
 
         public new void Flush()
@@ -104,7 +92,7 @@ namespace AventStack.ExtentReports
         /// <param name="log"></param>
         public void AddTestRunnerLogs(string[] log)
         {
-            foreach (var l in log)
+            foreach (string l in log)
             {
                 AddTestRunnerLogs(l);
             }

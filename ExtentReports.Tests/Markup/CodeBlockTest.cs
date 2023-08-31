@@ -9,7 +9,7 @@ namespace AventStack.ExtentReports.Tests.Markup
         [Test]
         public void NullCodeBlockContent()
         {
-            var m = MarkupHelper.CreateCodeBlock(null);
+            var m = MarkupHelper.CreateCodeBlock((string)null);
             Assert.AreEqual(m.GetMarkup(), "");
         }
 
@@ -68,7 +68,7 @@ namespace AventStack.ExtentReports.Tests.Markup
         public void MultipleCodeBlocks1()
         {
             var xml = "<tag>value</tag>";
-            var m = MarkupHelper.CreateCodeBlocks(new String[] { xml });
+            var m = MarkupHelper.CreateCodeBlock(new String[] { xml });
             String s = m.GetMarkup();
             Assert.True(s.Contains("col-md-12"));
         }
@@ -77,7 +77,7 @@ namespace AventStack.ExtentReports.Tests.Markup
         public void MultipleCodeBlocks2()
         {
             var xml = "<tag>value</tag>";
-            var m = MarkupHelper.CreateCodeBlocks(new String[] { xml, xml });
+            var m = MarkupHelper.CreateCodeBlock(new String[] { xml, xml });
             String s = m.GetMarkup();
             Assert.True(s.Contains("col-md-6"));
         }
@@ -86,7 +86,7 @@ namespace AventStack.ExtentReports.Tests.Markup
         public void MultipleCodeBlocks3()
         {
             var xml = "<tag>value</tag>";
-            var m = MarkupHelper.CreateCodeBlocks(new String[] { xml, xml, xml });
+            var m = MarkupHelper.CreateCodeBlock(new String[] { xml, xml, xml });
             String s = m.GetMarkup();
             Assert.True(s.Contains("col-md-4"));
         }
@@ -95,7 +95,7 @@ namespace AventStack.ExtentReports.Tests.Markup
         public void MultipleCodeBlocks4()
         {
             var xml = "<tag>value</tag>";
-            var m = MarkupHelper.CreateCodeBlocks(new String[] { xml, xml, xml, xml });
+            var m = MarkupHelper.CreateCodeBlock(new String[] { xml, xml, xml, xml });
             String s = m.GetMarkup();
             Assert.True(s.Contains("col-md-3"));
         }

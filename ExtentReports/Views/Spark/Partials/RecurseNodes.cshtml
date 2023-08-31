@@ -14,12 +14,14 @@
     {
       <div class="card">
         <div class="card-header">
+            <div class="card-toolbar node-info">
+            <ul class="list-inline d-none d-sm-block">
+              <li><span class="badge @child.Status.ToString().ToLower()-bg log ">@child.Status</span></li>
+              <li><span class='badge badge-default'>@Math.Round(child.TimeTaken, 2)</span></li>
+            </ul>
+          </div>
           <div class="card-title">
             <div class="node" id="@child.Id">@child.Name</div>
-            <div class="node-status float-right"><span class="badge @child.Status.ToString().ToLower()-bg log ">@child.Status</span></div>
-            <div class="node-time">
-              <span class='badge badge-default'>@child.TimeTaken</span>
-            </div>
             <div class="node-attr">
                 @Include("Attributes", child)
             </div>

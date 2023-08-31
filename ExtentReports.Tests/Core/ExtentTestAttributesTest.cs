@@ -17,7 +17,7 @@ namespace AventStack.ExtentReports.Tests.Core
         [Test]
         public void ExtentTestWithNoAuthor()
         {
-            Assert.AreEqual(0, _extent.CreateTest("Test").AssignAuthor().Model.Author.Count);
+            Assert.AreEqual(0, _extent.CreateTest("Test").AssignAuthor().Test.Author.Count);
         }
 
         [Test]
@@ -26,7 +26,7 @@ namespace AventStack.ExtentReports.Tests.Core
             Assert.True(
                     _extent.CreateTest("Test")
                             .AssignAuthor("Author")
-                            .Model
+                            .Test
                             .Author
                             .Any(x => x.Name.Equals("Author")));
         }
@@ -34,7 +34,7 @@ namespace AventStack.ExtentReports.Tests.Core
         [Test]
         public void ExtentTestWithNoDevice()
         {
-            Assert.AreEqual(0, _extent.CreateTest("Test").AssignDevice().Model.Device.Count);
+            Assert.AreEqual(0, _extent.CreateTest("Test").AssignDevice().Test.Device.Count);
         }
 
         [Test]
@@ -43,7 +43,7 @@ namespace AventStack.ExtentReports.Tests.Core
             Assert.True(
                     _extent.CreateTest("Test")
                             .AssignDevice("Device")
-                            .Model
+                            .Test
                             .Device
                             .Any(x => x.Name.Equals("Device")));
         }
@@ -51,7 +51,7 @@ namespace AventStack.ExtentReports.Tests.Core
         [Test]
         public void ExtentTestWithNoCategory()
         {
-            Assert.AreEqual(0, _extent.CreateTest("Test").AssignCategory().Model.Category.Count);
+            Assert.AreEqual(0, _extent.CreateTest("Test").AssignCategory().Test.Category.Count);
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace AventStack.ExtentReports.Tests.Core
             Assert.True(
                     _extent.CreateTest("Test")
                             .AssignCategory("Tag")
-                            .Model
+                            .Test
                             .Category
                             .Any(x => x.Name.Equals("Tag")));
         }

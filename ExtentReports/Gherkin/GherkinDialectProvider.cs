@@ -26,18 +26,12 @@ namespace AventStack.ExtentReports.Gherkin
 
                 return _dialect;
             }
-            set
-            {
-                _dialect = value;
-            }
+            set => _dialect = value;
         }
 
         public static string Lang
         {
-            get
-            {
-                return _lang;
-            }
+            get => _lang;
             set
             {
                 _lang = value;

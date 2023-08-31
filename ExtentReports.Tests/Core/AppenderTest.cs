@@ -37,12 +37,12 @@ namespace AventStack.ExtentReports.Tests.Core
             Assert.AreEqual(list.Count, 2);
             Assert.AreEqual(list[0].Status, test1.Status);
             Assert.AreEqual(list[1].Status, test2.Status);
-            Assert.AreEqual(list[0].Name, test1.Model.Name);
-            Assert.AreEqual(list[1].Name, test2.Model.Name);
-            Assert.AreEqual(list[0].Description, test1.Model.Description);
-            Assert.AreEqual(list[1].Description, test2.Model.Description);
-            Assert.AreEqual(list[0].Logs.Count, test1.Model.Logs.Count);
-            Assert.AreEqual(list[1].Logs.Count, test2.Model.Logs.Count);
+            Assert.AreEqual(list[0].Name, test1.Test.Name);
+            Assert.AreEqual(list[1].Name, test2.Test.Name);
+            Assert.AreEqual(list[0].Description, test1.Test.Description);
+            Assert.AreEqual(list[1].Description, test2.Test.Description);
+            Assert.AreEqual(list[0].Logs.Count, test1.Test.Logs.Count);
+            Assert.AreEqual(list[1].Logs.Count, test2.Test.Logs.Count);
         }
 
         [Test]
@@ -74,12 +74,12 @@ namespace AventStack.ExtentReports.Tests.Core
             Assert.AreEqual(list[1].Children.Count, 2);
             Assert.AreEqual(list[0].Status, test1.Status);
             Assert.AreEqual(list[1].Status, test2.Status);
-            Assert.AreEqual(list[0].Name, test1.Model.Name);
-            Assert.AreEqual(list[1].Name, test2.Model.Name);
-            Assert.AreEqual(list[0].Description, test1.Model.Description);
-            Assert.AreEqual(list[1].Description, test2.Model.Description);
-            Assert.AreEqual(list[0].Logs.Count, test1.Model.Logs.Count);
-            Assert.AreEqual(list[1].Logs.Count, test2.Model.Logs.Count);
+            Assert.AreEqual(list[0].Name, test1.Test.Name);
+            Assert.AreEqual(list[1].Name, test2.Test.Name);
+            Assert.AreEqual(list[0].Description, test1.Test.Description);
+            Assert.AreEqual(list[1].Description, test2.Test.Description);
+            Assert.AreEqual(list[0].Logs.Count, test1.Test.Logs.Count);
+            Assert.AreEqual(list[1].Logs.Count, test2.Test.Logs.Count);
         }
 
         [Test]
@@ -108,13 +108,13 @@ namespace AventStack.ExtentReports.Tests.Core
             Assert.IsNotEmpty(list[0].Children);
 
             // children checks
-            Assert.AreEqual(list[0].Children.First().Name, child1.Model.Name);
-            Assert.AreEqual(list[1].Children.First().Name, child2.Model.Name);
-            Assert.AreEqual(list[0].Children.First().Logs.Count, child1.Model.Logs.Count);
-            Assert.AreEqual(list[1].Children.First().Logs.Count, child2.Model.Logs.Count);
+            Assert.AreEqual(list[0].Children.First().Name, child1.Test.Name);
+            Assert.AreEqual(list[1].Children.First().Name, child2.Test.Name);
+            Assert.AreEqual(list[0].Children.First().Logs.Count, child1.Test.Logs.Count);
+            Assert.AreEqual(list[1].Children.First().Logs.Count, child2.Test.Logs.Count);
             list[1].Children.RemoveAt(0);
-            Assert.AreEqual(list[1].Children.First().Name, child3.Model.Name);
-            Assert.AreEqual(list[1].Children.First().Logs.Count, child3.Model.Logs.Count);
+            Assert.AreEqual(list[1].Children.First().Name, child3.Test.Name);
+            Assert.AreEqual(list[1].Children.First().Logs.Count, child3.Test.Logs.Count);
         }
 
         [Test]
@@ -135,9 +135,9 @@ namespace AventStack.ExtentReports.Tests.Core
             Assert.AreEqual(list.Count, 1);
             Assert.AreEqual(list[0].Media.Count, 1);
             Assert.NotNull(list[0].Logs.First().Media);
-            Assert.AreEqual(list[0].Media[0].Path, test1.Model.Media[0].Path);
+            Assert.AreEqual(list[0].Media[0].Path, test1.Test.Media[0].Path);
             Assert.AreEqual(list[0].Logs.First().Media.Path,
-                    test1.Model.Logs.First().Media.Path);
+                    test1.Test.Logs.First().Media.Path);
         }
 
         [Test]
@@ -159,9 +159,9 @@ namespace AventStack.ExtentReports.Tests.Core
             Assert.AreEqual(list[0].Media.Count, 1);
             Assert.NotNull(list[0].Logs.First().Media);
             Assert.AreEqual(((ScreenCapture)list[0].Media[0]).Base64,
-                    ((ScreenCapture)test1.Model.Media[0]).Base64);
+                    ((ScreenCapture)test1.Test.Media[0]).Base64);
             Assert.AreEqual(((ScreenCapture)list[0].Logs.First().Media).Base64,
-                    ((ScreenCapture)test1.Model.Logs.First().Media).Base64);
+                    ((ScreenCapture)test1.Test.Logs.First().Media).Base64);
         }
     }
 }

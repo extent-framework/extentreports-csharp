@@ -10,8 +10,9 @@ namespace AventStack.ExtentReports
 {
     public class ExtentTest
     {
-        public Status Status => Model.Status;
-        public Test Model { get; private set; }
+        public Status Status => Test.Status;
+        public Test Test { get; private set; }
+        public Test Model => Test;
         public ExtentReports Extent { get; private set; }
 
         internal ExtentTest(ExtentReports extent, GherkinKeyword bddType, string name, string description)
@@ -20,7 +21,7 @@ namespace AventStack.ExtentReports
 
             Extent = extent;
 
-            Model = new Test
+            Test = new Test
             {
                 Name = name,
                 BddType = bddType,
@@ -37,16 +38,16 @@ namespace AventStack.ExtentReports
 
         public ExtentTest CreateNode(GherkinKeyword keyword, string name, string description = "")
         {
-            Assert.NotEmpty(name, "Test name must not be null or empty");
+            Assert.NotEmpty(name, "Node name must not be null or empty");
 
             var t = new ExtentTest(Extent, keyword, name, description);
-            Notify(t.Model);
+            Notify(t.Test);
             return t;
         }
 
         private void Notify(Test t)
         {
-            Model.AddChild(t);
+            Test.AddChild(t);
             Extent.OnNodeCreated(t);
         }
 
@@ -60,7 +61,7 @@ namespace AventStack.ExtentReports
         public ExtentTest CreateNode(string name, string description = "")
         {
             var t = new ExtentTest(Extent, name, description);
-            Notify(t.Model);
+            Notify(t.Test);
             return t;
         }
 
@@ -92,8 +93,8 @@ namespace AventStack.ExtentReports
                 Details = details ?? ""
             };
 
-            Model.AddGeneratedLog(evt);
-            Extent.OnLogCreated(evt, Model);
+            Test.AddGeneratedLog(evt);
+            Extent.OnLogCreated(evt, Test);
 
             return this;
         }
@@ -141,16 +142,16 @@ namespace AventStack.ExtentReports
             {
                 var ei = new ExceptionInfo(ex);
                 evt.ExceptionInfo = ei;
-                Model.ExceptionInfo.Add(ei);
+                Test.ExceptionInfo.Add(ei);
             }
 
-            Model.AddLog(evt);
-            Extent.OnLogCreated(evt, Model);
+            Test.AddLog(evt);
+            Extent.OnLogCreated(evt, Test);
 
             if (media != null)
             {
                 evt.AddMedia(media);
-                Extent.OnMediaAdded(media, evt, Model);
+                Extent.OnMediaAdded(media, evt, Test);
             }
 
             return this;
@@ -476,12 +477,13 @@ namespace AventStack.ExtentReports
                 return this;
             }
 
-            var authors = author.Where(x => !string.IsNullOrEmpty(x)).Select(x => new Author(x));
+            var authors = author.Where(x => !string.IsNullOrEmpty(x))
+                                .Select(x => new Author(x));
 
-            foreach (var x in authors)
+            foreach (Author x in authors)
             {
-                Model.Author.Add(x);
-                Extent.OnAuthorAdded(x, Model);
+                Test.Author.Add(x);
+                Extent.OnAuthorAdded(x, Test);
             }
 
             return this;
@@ -499,12 +501,13 @@ namespace AventStack.ExtentReports
                 return this;
             }
 
-            var categories = category.Where(x => !string.IsNullOrEmpty(x)).Select(x => new Category(x));
+            var categories = category.Where(x => !string.IsNullOrEmpty(x))
+                                     .Select(x => new Category(x));
 
-            foreach (var x in categories)
+            foreach (Category x in categories)
             {
-                Model.Category.Add(x);
-                Extent.OnCategoryAdded(x, Model);
+                Test.Category.Add(x);
+                Extent.OnCategoryAdded(x, Test);
             }
 
             return this;
@@ -522,12 +525,13 @@ namespace AventStack.ExtentReports
                 return this;
             }
 
-            var devices = device.Where(x => !string.IsNullOrEmpty(x)).Select(x => new Device(x));
+            var devices = device.Where(x => !string.IsNullOrEmpty(x))
+                                .Select(x => new Device(x));
 
-            foreach (var x in devices)
+            foreach (Device x in devices)
             {
-                Model.Device.Add(x);
-                Extent.OnDeviceAdded(x, Model);
+                Test.Device.Add(x);
+                Extent.OnDeviceAdded(x, Test);
             }
 
             return this;
@@ -549,7 +553,7 @@ namespace AventStack.ExtentReports
                 Title = title
             };
 
-            Model.Media.Add(sc);
+            Test.Media.Add(sc);
 
             return this;
         }
@@ -575,7 +579,7 @@ namespace AventStack.ExtentReports
                 Title = title
             };
 
-            Model.Media.Add(sc);
+            Test.Media.Add(sc);
 
             return this;
         }

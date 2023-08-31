@@ -14,7 +14,7 @@ namespace AventStack.ExtentReports.Tests.Core
         {
             var extent = new ExtentReports();
             var set = new HashSet<int>();
-            Enumerable.Range(0, Attempts).ToList().ForEach(x => set.Add(extent.CreateTest("test").Model.Id));
+            Enumerable.Range(0, Attempts).ToList().ForEach(x => set.Add(extent.CreateTest("test").Test.Id));
             Assert.AreEqual(Attempts, set.Count);
         }
     }

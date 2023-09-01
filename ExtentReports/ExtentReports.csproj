@@ -19,12 +19,13 @@
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageIconUrl>https://www.extentreports.com/logo.jpg</PackageIconUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>5.0.0-beta1</Version>
+    <Version>5.0.0-beta2</Version>
+    <UserSecretsId>6576a851-016a-4abc-a1d1-bdd65a6090d5</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
-    <PackageReference Include="System.Reactive" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Reactive" Version="6.0.0" />
     <PackageReference Include="RazorEngine.NetCore.nixFix" Version="1.0.1" />
   </ItemGroup>
 	

@@ -2,12 +2,15 @@
 
 ### Documentation ###
 
-Documentation for ExtentReports 5.x and lower versions is hosted on [ExtentReports.com](http://extentreports.com)
+Documentation for ExtentReports 5.x and lower versions is hosted on [ExtentReports.com](https://www.extentreports.com/docs/versions/5/net/index.html)
+
+### Official Package ###
+
+https://www.nuget.org/packages/ExtentReports
 
 ### Samples ###
 
-* [Klov](http://klov.herokuapp.com)
-* [Spark](http://extentreports.com/docs/v5/wiki/spark/spark.html) from [Docs:A Complete Example](https://www.extentreports.com/docs/versions/5/net/index.html#complete-example)
+* [Spark](http://extentreports.com/docs/v5/wiki/spark/spark.html) from [Docs: A Complete Example](https://www.extentreports.com/docs/versions/5/net/index.html#complete-example)
 
 ### Contributing ###
 

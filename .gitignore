@@ -14,3 +14,4 @@ KlovReporter/bin/
 KlovReporter/obj/
 extentreports-dotnet-core/
 extentreports-dotnet-core/obj/
+pkg/

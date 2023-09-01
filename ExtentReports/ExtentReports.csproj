@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <PackOnBuild>true</PackOnBuild>
     <RootNamespace>AventStack.ExtentReports</RootNamespace>
-    <PackageVersion>5.0.0-alpha7</PackageVersion>
+    <PackageVersion>5.0.0-beta1</PackageVersion>
     <Authors>anshooarora</Authors>
     <Copyright>AventStack</Copyright>
     <PackageLicenseUrl>https://github.com/extent-framework/extentreports-csharp/blob/master/LICENSE</PackageLicenseUrl>
@@ -19,7 +19,7 @@
     <PackageReleaseNotes></PackageReleaseNotes>
     <PackageIconUrl>https://www.extentreports.com/logo.jpg</PackageIconUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>5.0.0-alpha7</Version>
+    <Version>5.0.0-beta1</Version>
   </PropertyGroup>
 
   <ItemGroup>

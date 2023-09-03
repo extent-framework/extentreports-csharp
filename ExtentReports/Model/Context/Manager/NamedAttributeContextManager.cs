@@ -5,16 +5,9 @@ namespace AventStack.ExtentReports.Model.Context.Manager
 {
     public class NamedAttributeContextManager<T> where T: NamedAttribute
     {
-        public ConcurrentDictionary<string, NamedAttributeContext<T>> Context =
-            new ConcurrentDictionary<string, NamedAttributeContext<T>>();
+        public ConcurrentDictionary<string, NamedAttributeContext<T>> Context = new ConcurrentDictionary<string, NamedAttributeContext<T>>();
 
-        public bool HasItems
-        {
-            get
-            {
-                return !Context.IsEmpty;
-            }
-        }
+        public bool HasItems => !Context.IsEmpty;
 
         public void AddContext(T attr, Test test)
         {

@@ -17,7 +17,7 @@ namespace AventStack.ExtentReports.Model
     {
         private const char Separator = '.';
 
-        private StatusDeterminator _determinator = new StatusDeterminator();
+        private readonly StatusDeterminator _determinator = new StatusDeterminator();
         private static int _cntr;
         private readonly object _synclock = new object();
 
@@ -86,25 +86,14 @@ namespace AventStack.ExtentReports.Model
             }
         }
 
-        public double TimeTaken
-        {
-            get
-            {
-                return EndTime.Subtract(StartTime).TotalMilliseconds;
-            }
-        }
+        public double TimeTaken => EndTime.Subtract(StartTime).TotalMilliseconds;
 
-        public bool IsBdd
-        {
-            get
-            {
-                return BddType != null;
-            }
-        }
+        public bool IsBdd => BddType != null;
 
         public void AddChild(Test test)
         {
             Assert.NotNull(test, "The assigned node must not be null");
+
             test.Level = Level + 1;
             test.Parent = this;
             test.Leaf = true;

@@ -21,13 +21,12 @@ namespace AventStack.ExtentReports.Reporter
 
                 var tests = report.Tests.Where(x => set.Contains(x.Status));
 
-                foreach (var test in tests)
+                foreach (Test test in tests)
                 {
                     cloned.AddTest(test);
                 }
 
                 RefreshContext(cloned);
-                cloned.Refresh();
 
                 return cloned;
             }
@@ -59,6 +58,7 @@ namespace AventStack.ExtentReports.Reporter
                 }
             }
 
+            cloned.Refresh();
         }
     }
 }

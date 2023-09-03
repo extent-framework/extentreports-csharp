@@ -9,7 +9,8 @@ namespace AventStack.ExtentReports.Config
         {
             var json = File.ReadAllText(filePath);
             var serializer = new JsonSerializer();
-            config = serializer.Deserialize<T>(new JsonTextReader(new StringReader(json)));
+            var jsonTextReader = new JsonTextReader(new StringReader(json));
+            config = serializer.Deserialize<T>(jsonTextReader);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace AventStack.ExtentReports.Reporter.Filter
 {
     public class ContextFilter
     {
-        private static ContextFilter Filter = new ContextFilter();
+        private static readonly ContextFilter Filter = new ContextFilter();
 
         public HashSet<Status> Status { get; set; }
         public HashSet<string> Author { get; set; }
@@ -15,7 +15,7 @@ namespace AventStack.ExtentReports.Reporter.Filter
 
         public class ContextFilterBuilder
         {
-            private ContextFilter _filter;
+            private readonly ContextFilter _filter;
 
             public ContextFilterBuilder(ContextFilter filter)
             {
@@ -24,7 +24,7 @@ namespace AventStack.ExtentReports.Reporter.Filter
 
             public ContextFilterBuilder Status(Status[] status)
             {
-                foreach (var s in status)
+                foreach (Status s in status)
                 {
                     _filter.Status.Add(s);
                 }
@@ -34,7 +34,7 @@ namespace AventStack.ExtentReports.Reporter.Filter
 
             public ContextFilterBuilder Author(string[] author)
             {
-                foreach (var s in author)
+                foreach (string s in author)
                 {
                     _filter.Author.Add(s);
                 }
@@ -44,7 +44,7 @@ namespace AventStack.ExtentReports.Reporter.Filter
 
             public ContextFilterBuilder Category(string[] category)
             {
-                foreach (var s in category)
+                foreach (string s in category)
                 {
                     _filter.Category.Add(s);
                 }
@@ -54,7 +54,7 @@ namespace AventStack.ExtentReports.Reporter.Filter
 
             public ContextFilterBuilder Device(string[] device)
             {
-                foreach (var s in device)
+                foreach (string s in device)
                 {
                     _filter.Device.Add(s);
                 }

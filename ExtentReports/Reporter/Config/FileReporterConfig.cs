@@ -6,6 +6,7 @@ namespace AventStack.ExtentReports.Reporter.Config
     {
         [XmlElement("encoding")]
         public string Encoding = "utf-8";
+
         [XmlElement("documentTitle")]
         public string DocumentTitle = "";
     }

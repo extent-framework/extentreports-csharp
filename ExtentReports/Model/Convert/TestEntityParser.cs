@@ -7,7 +7,7 @@ namespace AventStack.ExtentReports.Model.Convert
 {
     internal class TestEntityParser
     {
-        private ExtentReports _extent;
+        private readonly ExtentReports _extent;
 
         public TestEntityParser(ExtentReports extent)
         {
@@ -17,7 +17,9 @@ namespace AventStack.ExtentReports.Model.Convert
         public void CreateEntities(string jsonFilePath)
         {
             if (!File.Exists(jsonFilePath))
+            {
                 return;
+            }
 
             _extent.UsingNaturalConf = false;
 

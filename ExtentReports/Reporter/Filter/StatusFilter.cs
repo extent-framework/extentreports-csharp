@@ -5,7 +5,7 @@ namespace AventStack.ExtentReports.Reporter.Filter
 {
     public class StatusFilter<T> where T : AbstractReporter
     {
-        private EntityFilters<T> _configurer;
+        private readonly EntityFilters<T> _configurer;
 
         public HashSet<Status> Status { get; private set; }
 

@@ -36,8 +36,7 @@ namespace AventStack.ExtentReports.Reporter.Templating
             _initialized = true;
         }
 
-        private static readonly Lazy<RazorEngineManager> lazy =
-        new Lazy<RazorEngineManager>(() => new RazorEngineManager());
+        private static readonly Lazy<RazorEngineManager> lazy = new Lazy<RazorEngineManager>(() => new RazorEngineManager());
 
         public static RazorEngineManager Instance { get { return lazy.Value; } }
 

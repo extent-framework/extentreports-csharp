@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System.IO;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 
 namespace AventStack.ExtentReports.Reporter.Config
@@ -26,7 +27,7 @@ namespace AventStack.ExtentReports.Reporter.Config
 
                 if (value)
                 {
-                    SaveOfflineResources();
+                    Task.Run(() => SaveOfflineResources());
                 }
             }
         }

@@ -9,12 +9,16 @@ namespace AventStack.ExtentReports.Reporter.Config
 
         [XmlElement("protocol")]
         public Protocol Protocol = Protocol.HTTP;
+
         [XmlElement("theme")]
         public Theme Theme = Theme.Standard;
+
         [XmlElement("timelineEnabled")]
         public bool TimelineEnabled = true;
+
         [XmlElement("styles")]
         public string CSS = "";
+
         [XmlElement("scripts")]
         public string JS = "";
 

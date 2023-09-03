@@ -3,7 +3,7 @@
     public class EntityFilters<T> where T : AbstractReporter
     {
         public StatusFilter<T> StatusFilter; 
-        private T _reporter;
+        private readonly T _reporter;
 
         public EntityFilters(T reporter)
         {

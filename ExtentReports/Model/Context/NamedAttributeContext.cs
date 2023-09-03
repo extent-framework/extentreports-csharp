@@ -10,7 +10,6 @@ namespace AventStack.ExtentReports.Model.Context
         public static int adding = 0;
         public static int removing = 0;
 
-
         public ConcurrentQueue<Test> Tests { get; private set; } = new ConcurrentQueue<Test>();
         public T Attr;
         public int Passed { get; private set; }
@@ -18,7 +17,7 @@ namespace AventStack.ExtentReports.Model.Context
         public int Skipped { get; private set; }
         public int Others { get; private set; }
 
-        private static object _synclock = new object();
+        private static readonly object _synclock = new object();
 
         public NamedAttributeContext(T attr, Test test)
         {
@@ -40,8 +39,9 @@ namespace AventStack.ExtentReports.Model.Context
                 Passed += test.Status == Status.Pass ? 1 : 0;
                 Failed += test.Status == Status.Fail ? 1 : 0;
                 Skipped += test.Status == Status.Skip ? 1 : 0;
-                Others += test.Status != Status.Pass && test.Status != Status.Fail
-                        && test.Status != Status.Skip ? 1 : 0;
+                Others += test.Status != Status.Pass 
+                    && test.Status != Status.Fail
+                    && test.Status != Status.Skip ? 1 : 0;
             }
         }
 

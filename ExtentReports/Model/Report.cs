@@ -78,7 +78,7 @@ namespace AventStack.ExtentReports.Model
 
             if (item == null && deep)
             {
-                foreach (var t in tests)
+                foreach (Test t in tests)
                 {
                     RemoveTest(t.Children, test);
                 }
@@ -90,6 +90,12 @@ namespace AventStack.ExtentReports.Model
         public void RemoveTest(Test test)
         {
             RemoveTest(Tests, test);
+        }
+
+        public void RemoveTest(int id)
+        {
+            var test = FindTest(id);
+            RemoveTest(test);
         }
 
         public void ApplyOverrideConf()
@@ -110,13 +116,13 @@ namespace AventStack.ExtentReports.Model
             return Tests.Any(x => x.Status == status);
         }
 
-        public Test FindTest(IList<Test> list, String name)
+        public Test FindTest(IList<Test> list, string name)
         {
             var test = list.SingleOrDefault(x => x.Name.Equals(name));
 
             if (test == null)
             {
-                foreach (var t in list)
+                foreach (Test t in list)
                 {
                     return FindTest(t.Children, name);
                 }
@@ -128,6 +134,26 @@ namespace AventStack.ExtentReports.Model
         public Test FindTest(string name)
         {
             return FindTest(Tests, name);
+        }
+
+        public Test FindTest(IList<Test> list, int id)
+        {
+            var test = list.SingleOrDefault(x => x.Id.Equals(id));
+
+            if (test == null)
+            {
+                foreach (Test t in list)
+                {
+                    return FindTest(t.Children, id);
+                }
+            }
+
+            return test;
+        }
+
+        public Test FindTest(int id)
+        {
+            return FindTest(Tests, id);
         }
     }
 }

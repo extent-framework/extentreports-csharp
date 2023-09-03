@@ -56,6 +56,11 @@ namespace AventStack.ExtentReports
             return test;
         }
 
+        public void RemoveTest(int id)
+        {
+            Report.RemoveTest(id);
+        }
+
         public void RemoveTest(string name)
         {
             var test = Report.FindTest(name);

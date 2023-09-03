@@ -74,7 +74,7 @@ namespace AventStack.ExtentReports.Model
 
         public void RemoveTest(IList<Test> tests, Test test, bool deep = true)
         {
-            var item = tests.SingleOrDefault(x => x.Name == test.Name);
+            var item = tests.SingleOrDefault(x => x.Id == test.Id);
 
             if (item == null && deep)
             {
@@ -89,7 +89,7 @@ namespace AventStack.ExtentReports.Model
 
         public void RemoveTest(Test test)
         {
-            RemoveTest(Tests, test);
+            RemoveTest(Tests, test, true);
         }
 
         public void RemoveTest(int id)

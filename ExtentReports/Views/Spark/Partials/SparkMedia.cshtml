@@ -1,0 +1,29 @@
+﻿@using AventStack.ExtentReports
+@using AventStack.ExtentReports.Model
+@using System
+@using RazorEngine
+@using RazorEngine.Templating
+
+@if (Model is ScreenCapture)
+{
+  <div class="row mb-3">
+   <div class="col-md-3">
+    @if (Model.Base64 != null)
+    {
+     <a href="@Model.Base64" data-featherlight="image"><span class="badge badge-gradient-primary">base64 img</span></a>
+    }
+    @if (Model.ResolvedPath != null)
+    {
+     <img data-featherlight='@Model.ResolvedPath' src="@Model.ResolvedPath">
+    }
+    else if (Model.Path != null)
+    {
+     <img data-featherlight='@Model.Path' src="@Model.Path">
+    }
+    @if (!string.IsNullOrEmpty(Model.Title))
+    {
+     <div class='title'>@Model.Title</div>
+    }
+  </div>
+ </div>
+}

@@ -1,0 +1,13 @@
+﻿@if (Model.Report.Logs.Count > 0)
+{
+<div class="test-wrapper row view log-view">
+ <div class="col-md-12 mt-3">
+  <div class="card"><div class="card-body">
+   @foreach (var log in Model.Report.Logs)
+   {
+	@Raw(log)
+   }
+  </div></div>
+ </div>
+</div>
+}

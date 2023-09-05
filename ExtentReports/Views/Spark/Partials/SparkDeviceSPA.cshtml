@@ -1,0 +1,9 @@
+﻿@using AventStack.ExtentReports.Model
+@using AventStack.ExtentReports.Model.Context
+
+@{
+  var ctx = new SharedContext<Device>();
+  ctx.Ctx = Model.Report.DeviceCtx;
+  ctx.View = "Device";
+}
+@Include("AttributesView", ctx)

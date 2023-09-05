@@ -1,0 +1,27 @@
+﻿@using AventStack.ExtentReports
+@using AventStack.ExtentReports.Model
+@using System
+@using RazorEngine
+@using RazorEngine.Templating
+
+@if (Model.HasLog)
+{
+  var logs = new List<Log>(Model.Logs);
+  foreach (var log in logs)
+  {
+    <div>
+    @if (log.HasException)
+    {
+      <textarea readonly class="code-block">@log.ExceptionInfo.Name @log.ExceptionInfo.Exception.StackTrace</textarea>
+    }
+    else
+    {
+      @log.Details
+    }
+    @if (log.HasMedia)
+    {
+      @Include("SparkMedia", log.Media);
+    }
+    </div>
+  }
+}

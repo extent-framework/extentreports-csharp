@@ -1,0 +1,124 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackOnBuild>true</PackOnBuild>
+    <RootNamespace>AventStack.ExtentReports</RootNamespace>
+    <PackageVersion>5.0.0</PackageVersion>
+    <Authors>anshooarora</Authors>
+    <Copyright>AventStack</Copyright>
+    <PackageLicenseUrl>https://github.com/extent-framework/extentreports-csharp/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Owners>anshooarora</Owners>
+    <PackageProjectUrl>https://github.com/extent-framework/extentreports-csharp</PackageProjectUrl>
+    <Summary>ExtentReports .Net Standard</Summary>
+    <PackageTags>.net reporting extent extentreports klov</PackageTags>
+    <Title>ExtentReports</Title>
+    <Description>ExtentReports .Net Standard</Description>
+    <PackageId>ExtentReports</PackageId>
+    <PackageReleaseNotes></PackageReleaseNotes>
+    <PackageIconUrl>https://www.extentreports.com/logo.jpg</PackageIconUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Version>5.0.0</Version>
+    <UserSecretsId>6576a851-016a-4abc-a1d1-bdd65a6090d5</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="System.Reactive" Version="6.0.0" />
+    <PackageReference Include="RazorEngine.NetCore.nixFix" Version="1.0.1" />
+  </ItemGroup>
+	
+  <ItemGroup>
+    <None Remove="Views\Spark\SparkIndexSPA.cshtml" />
+    <None Remove="Views\Spark\Partials\Navbar.cshtml" />
+    <None Remove="Views\Spark\Partials\AttributesView.cshtml" />
+    <None Remove="Views\Spark\Partials\Head.cshtml" />
+    <None Remove="Views\Spark\Partials\SparkDashboardSPA.cshtml" />
+    <None Remove="Views\Spark\Partials\SparkMedia.cshtml" />
+    <None Remove="Views\Spark\Partials\SparkStandard.cshtml" />
+    <None Remove="Views\Spark\Partials\RecurseNodes.cshtml" />
+    <None Remove="Views\Spark\Partials\SparkAuthorSPA.cshtml" />
+    <None Remove="Views\Spark\Partials\SparkBDD.cshtml" />
+    <None Remove="Views\Spark\Partials\Sidenav.cshtml" />
+    <None Remove="Views\Spark\Partials\Attributes.cshtml" />
+    <None Remove="Views\Spark\Partials\StepDetails.cshtml" />
+    <None Remove="Views\Spark\Partials\SparkStepDetails.cshtml" />
+    <None Remove="Views\Spark\Partials\SparkLogsSPA.cshtml" />
+    <None Remove="Views\Spark\Partials\Scripts.cshtml" />
+    <None Remove="Views\Spark\Partials\SparkTagSPA.cshtml" />
+    <None Remove="Views\Spark\Partials\SparkTestSPA.cshtml" />
+    <None Remove="Views\Spark\Partials\SparkDeviceSPA.cshtml" />
+    <None Remove="Views\Spark\Partials\Log.cshtml" />
+    <None Remove="Views\Spark\Partials\SparkExceptionSPA.cshtml" />
+    <None Remove="Views\Spark\Offline\spark-style.css" />
+    <None Remove="Views\Spark\Offline\spark-script.js" />
+    <None Remove="Views\Commons\CommonsAttributes.cshtml" />
+    <None Remove="Views\Commons\CommonsInjectJs.cshtml" />
+    <None Remove="Views\Commons\CommonsHead.cshtml" />
+    <None Remove="Views\Commons\CommonsDashboard.cshtml" />
+    <None Remove="Views\Commons\CommonsInjectCss.cshtml" />
+    <None Remove="Views\Commons\CommonsMedia.cshtml" />
+    <None Remove="Views\Commons\CommonsException.cshtml" />
+    <None Remove="Views\Commons\CommonsRow.cshtml" />
+    <None Remove="Views\Commons\CommonsTag.cshtml" />
+    <None Remove="Views\Commons\CommonsNavRight.cshtml" />
+    <None Remove="Views\Commons\CommonsNav.cshtml" />
+    <None Remove="Views\Commons\Offline\fontawesome-webfont.svg" />
+    <None Remove="Views\Commons\Offline\FontAwesome.otf" />
+    <None Remove="Views\Commons\Offline\jsontree.js" />
+    <None Remove="Views\Commons\Offline\fontawesome-webfont.woff2" />
+    <None Remove="Views\Commons\Offline\logo.png" />
+    <None Remove="Views\Commons\Offline\fontawesome-webfont.ttf" />
+    <None Remove="Views\Commons\Offline\font-awesome.min.css" />
+    <None Remove="Views\Commons\Offline\fontawesome-webfont.woff" />
+    <None Remove="Views\Commons\Offline\fontawesome-webfont.eot" />
+    <None Remove="Gherkin\Resource\lang.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\Spark\SparkIndexSPA.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\Navbar.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\AttributesView.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\Head.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\SparkDashboardSPA.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\SparkMedia.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\SparkStandard.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\RecurseNodes.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\SparkAuthorSPA.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\SparkBDD.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\Sidenav.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\Attributes.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\StepDetails.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\SparkStepDetails.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\SparkLogsSPA.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\Scripts.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\SparkTagSPA.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\SparkTestSPA.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\SparkDeviceSPA.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\Log.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Partials\SparkExceptionSPA.cshtml" />
+    <EmbeddedResource Include="Views\Spark\Offline\spark-style.css" />
+    <EmbeddedResource Include="Views\Spark\Offline\spark-script.js" />
+    <EmbeddedResource Include="Views\Commons\CommonsAttributes.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsInjectJs.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsHead.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsDashboard.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsInjectCss.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsMedia.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsException.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsRow.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsTag.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsNavRight.cshtml" />
+    <EmbeddedResource Include="Views\Commons\CommonsNav.cshtml" />
+    <EmbeddedResource Include="Views\Commons\Offline\fontawesome-webfont.svg" />
+    <EmbeddedResource Include="Views\Commons\Offline\FontAwesome.otf" />
+    <EmbeddedResource Include="Views\Commons\Offline\jsontree.js" />
+    <EmbeddedResource Include="Views\Commons\Offline\fontawesome-webfont.woff2" />
+    <EmbeddedResource Include="Views\Commons\Offline\logo.png" />
+    <EmbeddedResource Include="Views\Commons\Offline\fontawesome-webfont.ttf" />
+    <EmbeddedResource Include="Views\Commons\Offline\font-awesome.min.css" />
+    <EmbeddedResource Include="Views\Commons\Offline\fontawesome-webfont.woff" />
+    <EmbeddedResource Include="Views\Commons\Offline\fontawesome-webfont.eot" />
+    <EmbeddedResource Include="Gherkin\Resource\lang.json" />
+  </ItemGroup>
+</Project>

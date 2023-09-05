@@ -1,0 +1,9 @@
+﻿@using AventStack.ExtentReports.Model
+@using AventStack.ExtentReports.Model.Context
+
+@{
+  var ctx = new SharedContext<ExceptionInfo>();
+  ctx.Ctx = Model.Report.ExceptionInfoCtx;
+  ctx.View = "Exception";
+}
+@Include("AttributesView", ctx)

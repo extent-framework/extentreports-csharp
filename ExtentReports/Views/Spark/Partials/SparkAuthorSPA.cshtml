@@ -1,0 +1,9 @@
+﻿@using AventStack.ExtentReports.Model
+@using AventStack.ExtentReports.Model.Context
+
+@{
+  var ctx = new SharedContext<Author>();
+  ctx.Ctx = Model.Report.AuthorCtx;
+  ctx.View = "Author";
+}
+@Include("AttributesView", ctx)

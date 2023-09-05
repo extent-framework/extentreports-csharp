@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>KlovReporter</PackageId>
+    <PackageVersion>5.0.0-alpha7</PackageVersion>
+    <Authors>anshooarora</Authors>
+    <Copyright>AventStack</Copyright>
+    <PackageIconUrl>https://www.extentreports.com/logo.jpg</PackageIconUrl>
+    <PackageLicenseUrl>https://github.com/extent-framework/extentreports-csharp/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Owners>anshooarora</Owners>
+    <PackageProjectUrl>https://github.com/extent-framework/extentreports-csharp</PackageProjectUrl>
+    <Summary>Klov Server's Client API (ExtentReports)</Summary>
+    <PackageTags>extent extentreports klov klovreporter</PackageTags>
+    <Title>KlovReporter</Title>
+    <Description>KlovReporter .NET Standard (ExtentReports, Klov Server)</Description>
+    <PackOnBuild>true</PackOnBuild>
+    <PackageReleaseNotes>Fix issues with packaging</PackageReleaseNotes>
+    <Version>5.0.0-alpha7</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ExtentReports" Version="5.0.0-alpha6" />
+    <PackageReference Include="MongoDB.Bson" Version="2.12.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.12.0" />
+    <PackageReference Include="MongoDB.Driver.Core" Version="2.12.0" />
+  </ItemGroup>
+</Project>

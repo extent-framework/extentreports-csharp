@@ -24,7 +24,7 @@ A complete list of contributors since ExtentReports migrated from [@anshooarora/
 
 ### Versions ###
 
-* ExtentReports 4.x is available from the [4.x branch](https://github.com/extent-framework/extentreports-chsarp/tree/4.x)
+* ExtentReports 4.x is available from the [4.x branch](https://github.com/extent-framework/extentreports-csharp/tree/4.x)
 * ExtentReports 3.x is no longer maintained, and is available from [@anshooarora/extentreports-csharp](https://github.com/anshooarora/extentreports-csharp)
 
 ### License ###

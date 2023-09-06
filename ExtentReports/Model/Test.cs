@@ -30,6 +30,7 @@ namespace AventStack.ExtentReports.Model
             BddType = bddType;
         }
 
+        public Guid ReportUuid { get; set; }
         public int Id = Interlocked.Increment(ref _cntr);
         public bool UseNaturalConf { get; set; } = true;
         public DateTime StartTime { get; set; } = DateTime.Now;

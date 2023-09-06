@@ -21,6 +21,7 @@ namespace AventStack.ExtentReports.Model
         public ConcurrentQueue<string> Logs { get; } = new ConcurrentQueue<string>();
         public List<SystemEnvInfo> SystemEnvInfo { get; } = new List<SystemEnvInfo>();
         public IDictionary<string, object> Info { get; set; } = new Dictionary<string, object>();
+        public Guid Uuid { get; } = Guid.NewGuid();
 
         private readonly object _synclock = new object();
 

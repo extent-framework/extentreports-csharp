@@ -12,6 +12,7 @@ namespace AventStack.ExtentReports.Core
 
         protected internal void OnTestCreated(Test test)
         {
+            Tests.Enqueue(test);
             Report.AddTest(test);
         }
 

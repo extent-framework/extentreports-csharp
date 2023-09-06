@@ -35,6 +35,14 @@ namespace AventStack.ExtentReports
             }
         }
 
+        public void AttachReporter(params IObserver<TestEntity>[] observer)
+        {
+            foreach (IObserver<TestEntity> x in observer)
+            {
+                Subscribe(x);
+            }
+        }
+
         public ExtentTest CreateTest(GherkinKeyword keyword, string name, string description = "")
         {
             var test = new ExtentTest(this, keyword, name, description);

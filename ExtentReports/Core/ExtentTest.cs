@@ -26,7 +26,8 @@ namespace AventStack.ExtentReports
                 Name = name,
                 BddType = bddType,
                 Description = description,
-                UseNaturalConf = extent.UsingNaturalConf
+                UseNaturalConf = extent.UsingNaturalConf,
+                ReportUuid = Extent.Report.Uuid
             };
 
             Extent = extent;

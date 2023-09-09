@@ -26,23 +26,25 @@ namespace AventStack.ExtentReports.Model
             Reset();
 
             if (tests == null || tests.Count() == 0)
+            {
                 return;
+            }
 
             // Level 0
             Update(tests, ref Parent, ref ParentPercentage);
 
             // level 1, for BDD, this would also include Scenario and excludes ScenarioOutline
             var children = tests.SelectMany(x => x.Children)
-                                .Where(x => x.BddType == null || (x.BddType != null && !x.BddType.Name.ToUpper().Equals("SCENARIOOUTLINE")));
+                .Where(x => x.BddType == null || (x.BddType != null && !x.BddType.Name.ToUpper().Equals("SCENARIOOUTLINE")));
             var scenarios = tests.SelectMany(x => x.Children)
-                                .SelectMany(x => x.Children)
-                                .Where(x => x.BddType != null && x.BddType.Name.ToUpper().Equals("SCENARIO"));
+                .SelectMany(x => x.Children)
+                .Where(x => x.BddType != null && x.BddType.Name.ToUpper().Equals("SCENARIO"));
             children.Concat(scenarios);
             Update(children, ref Child, ref ChildPercentage);
 
             // level 2, for BDD, this only includes Steps
             var grandchildren = children.SelectMany(x => x.Children)
-                                .Where(x => x.BddType == null || (x.BddType != null && !x.BddType.Name.ToUpper().Equals("SCENARIO")));
+                .Where(x => x.BddType == null || (x.BddType != null && !x.BddType.Name.ToUpper().Equals("SCENARIO")));
             Update(grandchildren, ref Grandchild, ref GrandchildPercentage);
 
             // events

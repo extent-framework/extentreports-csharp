@@ -4,6 +4,7 @@ using AventStack.ExtentReports.Gherkin;
 using AventStack.ExtentReports.Gherkin.Model;
 using AventStack.ExtentReports.Util;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -31,10 +32,14 @@ namespace AventStack.ExtentReports.Model
         }
 
         public Guid ReportUuid { get; set; }
+
+        [JsonIgnore]
         public int Id = Interlocked.Increment(ref _cntr);
         public bool UseNaturalConf { get; set; } = true;
         public DateTime StartTime { get; set; } = DateTime.Now;
         public DateTime EndTime { get; set; } = DateTime.Now;
+
+        [JsonConverter(typeof(StringEnumConverter))]
         public Status Status { get; set; } = Status.Pass;
         public int Level { get; set; } = 0;
         public bool Leaf { get; set; } = true;
@@ -87,7 +92,7 @@ namespace AventStack.ExtentReports.Model
             }
         }
 
-        public double TimeTaken => EndTime.Subtract(StartTime).TotalMilliseconds;
+        public double TimeTaken => EndTime.Subtract(StartTime).Milliseconds;
 
         public bool IsBdd => BddType != null;
 

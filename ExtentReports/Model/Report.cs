@@ -4,12 +4,15 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using AventStack.ExtentReports.Collections;
 using AventStack.ExtentReports.Model.Context.Manager;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 
 namespace AventStack.ExtentReports.Model
 {
     public class Report : IBaseEntity, IMetaDataStorable
     {
         public AnalysisStrategy AnalysisStrategy = AnalysisStrategy.Test;
+        public string Name { get; set; }
         public DateTime StartTime { get; set; } = DateTime.Now;
         public DateTime EndTime { get; set; } = DateTime.Now;
         public ReportStats Stats { get; } = new ReportStats();
@@ -39,6 +42,7 @@ namespace AventStack.ExtentReports.Model
             }
         }
 
+        [JsonConverter(typeof(StringEnumConverter))]
         public Status Status
         {
             get
@@ -56,7 +60,7 @@ namespace AventStack.ExtentReports.Model
 
         public bool IsBDD => Tests.Count != 0 && Tests.Any(x => x.IsBdd);
 
-        public TimeSpan TimeTaken => EndTime.Subtract(StartTime);
+        public double TimeTaken => EndTime.Subtract(StartTime).Milliseconds;
 
         public bool HasAuthors => AuthorCtx.HasItems;
 

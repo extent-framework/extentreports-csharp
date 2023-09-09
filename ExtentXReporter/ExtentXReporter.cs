@@ -56,10 +56,11 @@ namespace AventStack.ExtentReports.Reporter
         private async Task<HttpResponseMessage> TransferReportAsync(Report report)
         {
             StringContent content = GetContent(report);
+            string r = JsonConvert.SerializeObject(report);
 
             try
             {
-                HttpResponseMessage response = await _httpClient.PostAsync("http://localhost:8080/api/report", content);
+                HttpResponseMessage response = await _httpClient.PostAsync("http://localhost:8080/api/reports", content);
                 if (!response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("Error sending report: " + response.StatusCode);
@@ -96,7 +97,7 @@ namespace AventStack.ExtentReports.Reporter
             {
                 token.ThrowIfCancellationRequested();
 
-                HttpResponseMessage response = await _httpClient.PostAsync("http://localhost:8080/api/test", content);
+                HttpResponseMessage response = await _httpClient.PostAsync("http://localhost:8080/api/tests", content);
                 if (!response.IsSuccessStatusCode)
                 {
                     Console.WriteLine("Error sending test: " + response.StatusCode);

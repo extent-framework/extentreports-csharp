@@ -6,9 +6,8 @@
 
 @if (Model.HasChildren)
 {
-  @{
-    var children = new List<Test>(Model.Children);
-  }
+  var children = new List<Test>(Model.Children);
+  
   <div class="accordion">
     @foreach (var child in children)
     {
@@ -17,14 +16,17 @@
             <div class="card-toolbar node-info">
             <ul class="list-inline d-none d-sm-block">
               <li><span class="badge @child.Status.ToString().ToLower()-bg log ">@child.Status</span></li>
-              <li><span class='badge badge-default'>@Math.Round(child.TimeTaken, 2)</span></li>
+              <li title="Time taken"><span class='badge badge-default'>@Math.Round(child.TimeTaken, 2)</span></li>
             </ul>
           </div>
           <div class="card-title">
             <div class="node" id="@child.Id">@child.Name</div>
+            @if (child.HasAttributes)
+            {
             <div class="node-attr">
                 @Include("Attributes", child)
             </div>
+            }
             @if (child.HasScreenCaptureDeep)
             {
               <div class="status-avatar float-right"><i class="fa fa-paperclip"></i></div>
@@ -33,9 +35,8 @@
         </div>
         @if (child.HasLog)
         {
-          @{
-            var css = child.Status != Status.Fail ? "collapse" : "";
-          }
+        var css = child.Status != Status.Fail ? "collapse" : "";
+
         <div class="@css">
           <div class="card-body">
             @if (child.HasAnyLog)

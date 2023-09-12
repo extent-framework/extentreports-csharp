@@ -1,7 +1,12 @@
-﻿namespace AventStack.ExtentReports.Reporter.Config
+﻿using System.Xml.Serialization;
+
+namespace AventStack.ExtentReports.Reporter.Config
 {
     public enum Theme
     {
-        Standard, Dark
+        [XmlEnum(Name = "STANDARD")]
+        Standard,
+        [XmlEnum(Name = "DARK")]
+        Dark
     }
 }

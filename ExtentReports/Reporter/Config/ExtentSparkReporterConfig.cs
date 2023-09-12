@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 
 namespace AventStack.ExtentReports.Reporter.Config
 {
-    [XmlRoot("configuration")]
+    [XmlRoot("extentreports")]
     public class ExtentSparkReporterConfig : InteractiveReporterConfig
     {
         private const string OfflinePackage = "extent";

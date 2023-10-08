@@ -8,14 +8,13 @@ using AventStack.ExtentReports.Views.Spark;
 using RazorEngine.Templating;
 using System;
 using System.IO;
-using System.Xml.Serialization;
 
 namespace AventStack.ExtentReports.Reporter
 {
     public class ExtentSparkReporter : AbstractFileReporter, IReporterFilterable<ExtentSparkReporter>, IReporterConfigurable, IObserver<ReportEntity>
     {
         private EntityFilters<ExtentSparkReporter> _filter;
-        [XmlElement(ElementName = "configuration")]
+
         public ExtentSparkReporterConfig Config;
         public Report Report;
 

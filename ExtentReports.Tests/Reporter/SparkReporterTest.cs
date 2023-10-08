@@ -1,4 +1,5 @@
 ﻿using AventStack.ExtentReports.Reporter;
+using AventStack.ExtentReports.Reporter.Config;
 using NUnit.Framework;
 using System;
 using System.IO;
@@ -134,6 +135,28 @@ namespace AventStack.ExtentReports.Tests.Reporter
             AssertFileExists(false);
             Assert.True(File.Exists("extent/" + Scripts));
             Assert.True(File.Exists("extent/" + Stylesheet));
+        }
+
+        [Test]
+        public void SparkXMLConfig()
+        {
+            var xmlConfigPath = Path.Combine(@"..\..\..\..\", @"config\spark-config.xml");
+            var spark = new ExtentSparkReporter("Spark.html");
+            spark.LoadXMLConfig(xmlConfigPath);
+            Assert.AreEqual(spark.Config.Theme, Theme.Standard);
+            Assert.AreEqual(spark.Config.DocumentTitle, "Extent Framework");
+            Assert.AreEqual(spark.Config.Protocol, Protocol.HTTPS);
+        }
+
+        [Test]
+        public void SparkJSONConfig()
+        {
+            var xmlConfigPath = Path.Combine(@"..\..\..\..\", @"config\spark-config.json");
+            var spark = new ExtentSparkReporter("Spark.html");
+            spark.LoadJSONConfig(xmlConfigPath);
+            Assert.AreEqual(spark.Config.Theme, Theme.Standard);
+            Assert.AreEqual(spark.Config.DocumentTitle, "Extent Framework");
+            Assert.AreEqual(spark.Config.Protocol, Protocol.HTTPS);
         }
     }
 }

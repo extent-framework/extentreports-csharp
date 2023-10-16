@@ -22,7 +22,8 @@ namespace AventStack.ExtentReports.Tests.Reporter
         [Test]
         public void TestTag()
         {
-            _extent.CreateTest("Test").AssignCategory(Tag);
+            _extent.CreateTest("Test1").AssignCategory(Tag).Pass();
+            _extent.CreateTest("Test2").AssignCategory(Tag).Fail();
             _extent.Flush();
             var text = File.ReadAllText(Path);
             Assert.True(text.Contains(Tag));

@@ -200,7 +200,7 @@
               <td>@x.Value.Failed</td>
               <td>@x.Value.Skipped</td>
               <td>@x.Value.Others</td>
-              <td>@((x.Value.Passed/x.Value.Tests.Count)*100)%</td>
+              <td>@((int)Math.Round((double)(100 * x.Value.Passed) / ((double)x.Value.Tests.Count)))%</td>
             </tr>
             }
           </tbody>
@@ -223,7 +223,7 @@
               <td>@x.Value.Failed</td>
               <td>@x.Value.Skipped</td>
               <td>@x.Value.Others</td>
-              <td>@((x.Value.Passed/x.Value.Tests.Count)*100)%</td>
+              <td>@((int)Math.Round((double)(100 * x.Value.Passed) / ((double)x.Value.Tests.Count)))%</td>
             </tr>
             }
           </tbody>
@@ -247,7 +247,7 @@
               <td>@x.Value.Failed</td>
               <td>@x.Value.Skipped</td>
               <td>@x.Value.Others</td>
-              <td>@((x.Value.Passed/x.Value.Tests.Count)*100)%</td>
+              <td>@((int)Math.Round((double)(100 * x.Value.Passed) / ((double)x.Value.Tests.Count)))%</td>
             </tr>
             }
           </tbody>

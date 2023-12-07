@@ -8,7 +8,7 @@ namespace AventStack.ExtentReports
     {
         private static readonly string Base64Encoded = "data:image/png;base64,";
         private static readonly MediaEntityBuilder _instance = new MediaEntityBuilder();
-        private static ThreadLocal<Media> _media;
+        private static ThreadLocal<Media> _media = new ThreadLocal<Media>();
 
         public Media Build()
         {
@@ -19,10 +19,7 @@ namespace AventStack.ExtentReports
         {
             Assert.NotEmpty(path, "ScreenCapture path must not be null or empty");
 
-            _media = new ThreadLocal<Media>
-            {
-                Value = new ScreenCapture(path, title)
-            };
+            _media.Value = new ScreenCapture(path, title);
             return _instance;
         }
 
@@ -40,12 +37,9 @@ namespace AventStack.ExtentReports
                 base64 = Base64Encoded + base64;
             }
 
-            _media = new ThreadLocal<Media>
+            _media.Value = new ScreenCapture(null, title)
             {
-                Value = new ScreenCapture(null, title)
-                {
-                    Base64 = base64
-                }
+                Base64 = base64
             };
 
             return _instance;

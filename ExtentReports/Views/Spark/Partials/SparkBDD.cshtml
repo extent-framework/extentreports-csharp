@@ -7,6 +7,7 @@
 @if (Model.HasChildren)
 {
   var children = new List<Test>(Model.Children);
+  @Include("SparkMediaTest", Model)
   <div class="accordion mt-4">
     @foreach (var node in children)
     {
@@ -37,6 +38,7 @@
                       {
                         <div class="status-avatar float-right"><i class="fa fa-paperclip"></i></div>
                       }
+                      @Include("SparkMediaTest", child)
                     </div>
                   </div>
                   @{
@@ -48,6 +50,7 @@
                     <div class="step @step.Status.ToString().ToLower()-bg" title="@step.Description">
                       <span>@step.BddType.Name @step.Name</span>
                       @Include("StepDetails", step)
+                      @Include("SparkMediaTest", step)
                     </div>
                   }
                 </div>
@@ -60,11 +63,13 @@
             var steps = new List<Test>(node.Children);
             <div class="@css">
               <div class="card-body">
+                @Include("SparkMediaTest", node)
                 @foreach (var child in steps)
                 {
                   <div class="step @child.Status.ToString().ToLower()-bg" title="@child.Description">
                     <span>@child.BddType.Name @child.Name</span>
                     @Include("StepDetails", child)
+                    @Include("SparkMediaTest", child)
                   </div>
                 }
               </div>
@@ -75,3 +80,4 @@
     }
   </div>
 }
+ 

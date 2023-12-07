@@ -29,6 +29,7 @@
   </ItemGroup>
 	
   <ItemGroup>
+    <None Remove="Views\Spark\Partials\SparkMediaTest.cshtml" />
     <None Remove="Views\Spark\SparkIndexSPA.cshtml" />
     <None Remove="Views\Spark\Partials\Navbar.cshtml" />
     <None Remove="Views\Spark\Partials\AttributesView.cshtml" />
@@ -75,6 +76,7 @@
     <None Remove="Gherkin\Resource\lang.json" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Views\Spark\Partials\SparkMediaTest.cshtml" />
     <EmbeddedResource Include="Views\Spark\SparkIndexSPA.cshtml" />
     <EmbeddedResource Include="Views\Spark\Partials\Navbar.cshtml" />
     <EmbeddedResource Include="Views\Spark\Partials\AttributesView.cshtml" />

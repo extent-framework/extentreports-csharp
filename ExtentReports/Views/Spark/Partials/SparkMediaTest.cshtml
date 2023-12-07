@@ -1,0 +1,9 @@
+﻿@using System
+
+@if (Model.HasScreenCapture)
+{
+  foreach (var media in Model.Media)
+  {
+    @Include("SparkMedia", media)
+  }
+}

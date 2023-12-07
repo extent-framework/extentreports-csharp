@@ -97,6 +97,7 @@ namespace AventStack.ExtentReports.Reporter
                 "Partials.SparkStepDetails",
                 "SparkIndexSPA",
                 "Partials.SparkMedia",
+                "Partials.SparkMediaTest",
                 "Partials.SparkTestSPA",
                 "Partials.SparkAuthorSPA",
                 "Partials.SparkDeviceSPA",

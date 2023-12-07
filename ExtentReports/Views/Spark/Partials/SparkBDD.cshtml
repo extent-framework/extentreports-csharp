@@ -22,7 +22,7 @@
         </div>
         @if (node.HasChildren)
         {
-          if (node.IsBdd && node.BddType.Name.Replace(" ", "") == "ScenarioOutline")
+          if (node.BddType.Name == "ScenarioOutline")
           {
             var css = node.Status == Status.Pass ? "collapse" : "";
             var scenarios = new List<Test>(node.Children);
@@ -32,7 +32,7 @@
                 <div class="card-body l1">
                   <div class="card-header">
                     <div class="card-title outline-child">
-                      <div class="node" id="@child.Id"><span class="badge log @child.Status.ToString().ToLower()-bg mr-2">@child.Status</span>@child.BddType.Name: @child.Name</div>
+                      <div class="node mb-3" id="@child.Id"><span class="badge log @child.Status.ToString().ToLower()-bg mr-2">@child.Status</span>@child.BddType.Name: @child.Name</div>
                       @if (child.HasScreenCaptureDeep)
                       {
                         <div class="status-avatar float-right"><i class="fa fa-paperclip"></i></div>
@@ -43,15 +43,13 @@
                     css = child.Status == Status.Pass ? "collapse" : "";
                     var steps = new List<Test>(child.Children);
                   }
-                  <div class="card-body mt-3 @css">
-                    @foreach (var step in steps)
-                    {
-                      <div class="step @step.Status.ToString().ToLower()-bg">
-                        <span>@step.BddType.Name @step.Name</span>
-                        @Include("StepDetails", step)
-                      </div>
-                    }
-                  </div>
+                  @foreach (var step in steps)
+                  {
+                    <div class="step @step.Status.ToString().ToLower()-bg" title="@step.Description">
+                      <span>@step.BddType.Name @step.Name</span>
+                      @Include("StepDetails", step)
+                    </div>
+                  }
                 </div>
               }
             </div>

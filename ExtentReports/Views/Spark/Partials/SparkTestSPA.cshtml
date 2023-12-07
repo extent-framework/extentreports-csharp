@@ -5,8 +5,7 @@
 @using RazorEngine.Templating
 
 @{
-	Test t = Model.Report.Tests[0];
-    var isbdd = Model.Report.Tests.Count > 0 && t.IsBdd ? true : false;
+    var isbdd = Model.Report.IsBDD;
     var testList = Model.Report.Tests;
 }
 

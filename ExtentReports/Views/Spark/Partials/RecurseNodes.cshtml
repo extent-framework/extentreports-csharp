@@ -21,6 +21,10 @@
           </div>
           <div class="card-title">
             <div class="node" id="@child.Id">@child.Name</div>
+            @if (child.Description.Length > 0)
+            {
+              <div class="desc">@child.Description</div>
+            }
             @if (child.HasAttributes)
             {
             <div class="node-attr">

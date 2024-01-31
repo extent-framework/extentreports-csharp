@@ -25,8 +25,11 @@ namespace AventStack.ExtentReports.Reporter.Config
         protected void SaveResourceToDisk(string resourceStreamPath, string savePath)
         {
             var stream = this.GetType().Assembly.GetManifestResourceStream(resourceStreamPath);
-            var text = new StreamReader(stream).ReadToEnd();
-            File.WriteAllText(savePath, text);
+            using (var sr = new StreamReader(stream))
+            {
+                var text = sr.ReadToEnd();
+                File.WriteAllText(savePath, text);
+            }
         }
 
         protected void SaveBinaryResourceToDisk(string resourceStreamPath, string savePath)

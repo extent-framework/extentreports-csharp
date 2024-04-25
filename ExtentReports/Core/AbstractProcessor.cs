@@ -45,7 +45,7 @@ namespace AventStack.ExtentReports.Core
 
         private void TryResolveMediaPath(Media media)
         {
-            if (_mediaResolverPath == null || (media is ScreenCapture && ((ScreenCapture)media).Base64 != null))
+            if (_mediaResolverPath == null || (media is ScreenCapture capture && capture.Base64 != null))
             {
                 return;
             }

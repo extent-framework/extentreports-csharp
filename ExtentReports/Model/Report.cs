@@ -74,9 +74,14 @@ namespace AventStack.ExtentReports.Model
 
         public void RemoveTest(IList<Test> tests, Test test, bool deep = true)
         {
-            var item = tests.SingleOrDefault(x => x.Id == test.Id);
+            if (test == null) 
+            {
+                return;
+            } 
 
-            if (item == null && deep)
+            var match = tests.Any(x => x.Id == test.Id);
+
+            if (!match && deep)
             {
                 foreach (Test t in tests)
                 {

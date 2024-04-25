@@ -140,7 +140,7 @@ namespace AventStack.ExtentReports.Tests.Reporter
         [Test]
         public void SparkXMLConfig()
         {
-            var xmlConfigPath = Path.Combine(@"..\..\..\..\", @"config\spark-config.xml");
+            var xmlConfigPath = Path.Combine(@"../../../../", @"config/spark-config.xml");
             var spark = new ExtentSparkReporter("Spark.html");
             spark.LoadXMLConfig(xmlConfigPath);
             Assert.AreEqual(spark.Config.Theme, Theme.Standard);
@@ -151,7 +151,7 @@ namespace AventStack.ExtentReports.Tests.Reporter
         [Test]
         public void SparkJSONConfig()
         {
-            var xmlConfigPath = Path.Combine(@"..\..\..\..\", @"config\spark-config.json");
+            var xmlConfigPath = Path.Combine(@"../../../../", @"config/spark-config.json");
             var spark = new ExtentSparkReporter("Spark.html");
             spark.LoadJSONConfig(xmlConfigPath);
             Assert.AreEqual(spark.Config.Theme, Theme.Standard);

@@ -151,12 +151,26 @@ namespace AventStack.ExtentReports.Tests.Reporter
         [Test]
         public void SparkJSONConfig()
         {
-            var xmlConfigPath = Path.Combine(@"../../../../", @"config/spark-config.json");
+            var jsonConfigPath = Path.Combine(@"../../../../", @"config/spark-config.json");
             var spark = new ExtentSparkReporter("Spark.html");
-            spark.LoadJSONConfig(xmlConfigPath);
+            spark.LoadJSONConfig(jsonConfigPath);
             Assert.AreEqual(spark.Config.Theme, Theme.Standard);
             Assert.AreEqual(spark.Config.DocumentTitle, "Extent Framework");
             Assert.AreEqual(spark.Config.Protocol, Protocol.HTTPS);
+        }
+
+        [Test]
+        public void SparkReporterTimestamp()
+        {
+            var extent = new ExtentReports();
+            var spark = new ExtentSparkReporter("Index.html");
+            extent.AttachReporter(spark);
+            var jsonConfigPath = Path.Combine(@"../../../../", @"config/spark-config.json");
+            spark.LoadJSONConfig(jsonConfigPath);
+
+            extent.CreateTest("SparkReporterTimestamp")
+                .Pass("Passed");
+            extent.Flush();
         }
     }
 }

@@ -10,7 +10,9 @@ namespace AventStack.ExtentReports.Reporter.Config
     {
         private const string OfflinePackage = "extent";
         private const string Package = "AventStack.ExtentReports.Views.Spark.Offline";
+        private const string DefaultTimeStampFormat = "MMM dd, yyyy HH:mm:ss a";
         private bool _offline = false;
+        private string _timestampFormat = DefaultTimeStampFormat;
 
         internal ExtentSparkReporter Reporter { get; set; }
 
@@ -29,6 +31,19 @@ namespace AventStack.ExtentReports.Reporter.Config
                 {
                     Task.Run(() => SaveOfflineResources());
                 }
+            }
+        }
+
+        [XmlElement("timeStampFormat")]
+        public string TimeStampFormat
+        {
+            get
+            {
+                return string.IsNullOrEmpty(_timestampFormat) ? DefaultTimeStampFormat : _timestampFormat;
+            }
+            set
+            {
+                _timestampFormat = value;
             }
         }
 

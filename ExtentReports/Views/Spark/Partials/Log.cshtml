@@ -5,7 +5,7 @@
 @using RazorEngine.Templating
 
 @{
- var logs = new List<Log>(Model.Logs);
+ var logs = Model.Test.Logs;
 }
 
 <table class="table table-sm">
@@ -16,7 +16,7 @@
       var status = log.Status.ToString().ToLower();
       <tr class="event-row">
         <td><span class="badge log @status-bg">@log.Status</span></td>
-        <td>@log.Timestamp.ToShortTimeString()</td>
+        <td>@log.Timestamp.ToString(Model.Reporter.Config.TimeStampFormat)</td>
         <td>
           @if (log.HasException)
           { 

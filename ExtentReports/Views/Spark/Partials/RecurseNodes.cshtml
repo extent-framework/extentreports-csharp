@@ -1,12 +1,13 @@
 ﻿@using AventStack.ExtentReports
 @using AventStack.ExtentReports.Model
+@using AventStack.ExtentReports.Reporter.Model
 @using System
 @using RazorEngine
 @using RazorEngine.Templating
 
-@if (Model.HasChildren)
+@if (Model.Test.HasChildren)
 {
-  var children = new List<Test>(Model.Children);
+  var children = Model.Test.Children;
   
   <div class="accordion">
     @foreach (var child in children)
@@ -48,7 +49,7 @@
             <div class="detail-body mt-4">
               @if (child.HasGeneratedLog)
               {
-               var genLog = new List<Log>(child.GeneratedLog);
+               var genLog = child.GeneratedLog;
                @foreach (var l in genLog)
                {
                <div>
@@ -57,7 +58,7 @@
                </div>
                }
               }
-              @if (child.HasLog) { @Include("Log", child) }
+              @if (child.HasLog) { @Include("Log", new SparkReporterTest(Model.Reporter, child)) }
             </div>
             }
             @foreach (var m in child.Media)
@@ -69,7 +70,8 @@
         }
         @if (child.HasChildren)
         {
-          @Include("RecurseNodes", child)
+          var reporterTest = new SparkReporterTest(Model.Reporter, child);
+          @Include("RecurseNodes", reporterTest)
         }
       </div>
     }

@@ -4,10 +4,10 @@
 @using RazorEngine
 @using RazorEngine.Templating
 
-@if (Model.HasChildren)
+@if (Model.Test.HasChildren)
 {
-  var children = new List<Test>(Model.Children);
-  @Include("SparkMediaTest", Model)
+  var children = Model.Test.Children;
+  @Include("SparkMediaTest", Model.Test)
   <div class="accordion mt-4">
     @foreach (var node in children)
     {
@@ -26,7 +26,7 @@
           if (node.BddType.Name == "ScenarioOutline")
           {
             var css = node.Status == Status.Pass ? "collapse" : "";
-            var scenarios = new List<Test>(node.Children);
+            var scenarios = node.Children;
             <div class="scenario_outline @css">
               @foreach (var child in scenarios)
               {
@@ -43,7 +43,7 @@
                   </div>
                   @{
                     css = child.Status == Status.Pass ? "collapse" : "";
-                    var steps = new List<Test>(child.Children);
+                    var steps = child.Children;
                   }
                   @foreach (var step in steps)
                   {
@@ -60,7 +60,7 @@
           else
           {
             var css = node.Status == Status.Pass ? "collapse" : "";
-            var steps = new List<Test>(node.Children);
+            var steps = node.Children;
             <div class="@css">
               <div class="card-body">
                 @Include("SparkMediaTest", node)

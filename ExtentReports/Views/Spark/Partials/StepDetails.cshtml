@@ -6,7 +6,7 @@
 
 @if (Model.HasLog)
 {
-  var logs = new List<Log>(Model.Logs);
+  var logs = Model.Logs;
   foreach (var log in logs)
   {
     <div>

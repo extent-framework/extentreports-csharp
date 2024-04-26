@@ -10,7 +10,7 @@ namespace AventStack.ExtentReports.Reporter.Config
     {
         private const string OfflinePackage = "extent";
         private const string Package = "AventStack.ExtentReports.Views.Spark.Offline";
-        private const string DefaultTimeStampFormat = "MMM dd, yyyy HH:mm:ss a";
+        private const string DefaultTimeStampFormat = "MMM dd, yyyy HH:mm:ss";
         private bool _offline = false;
         private string _timestampFormat = DefaultTimeStampFormat;
 

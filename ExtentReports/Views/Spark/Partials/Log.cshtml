@@ -16,7 +16,7 @@
       var status = log.Status.ToString().ToLower();
       <tr class="event-row">
         <td><span class="badge log @status-bg">@log.Status</span></td>
-        <td>@log.Timestamp.ToShortTimeString()</td>
+        <td>@log.Timestamp.ToString("HH:mm:ss.fff")</td>
         <td>
           @if (log.HasException)
           { 

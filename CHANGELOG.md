@@ -1,3 +1,12 @@
+## [5.0.3](https://github.com/extent-framework/extentreports-csharp/compare/5.0.2...v5.0.3)
+
+#### Issues Resolved
+- [#215](/issues/214) Timestamp cannot be configured in ExtentSparkReporter
+- [#211](/issues/211) NPE on RemoveTest that does not exist
+- [#149](/issues/149) Screenshots for BDD nodes
+- [#148](/issues/148) Node description not displaying
+
+
 ## [5.0.2](https://github.com/extent-framework/extentreports-csharp/compare/5.0.1...v5.0.2)
 
 #### Issues Resolved

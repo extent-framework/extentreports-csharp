@@ -4,17 +4,17 @@
 @using RazorEngine
 @using RazorEngine.Templating
 
-@foreach (var m in Model.Media)
+@foreach (var m in Model.Test.Media)
 {
   @Include("SparkMedia", m)
 }
 
-@if (Model.HasAnyLog)
+@if (Model.Test.HasAnyLog)
 {
 <div class="detail-body mt-4">
-  @if (Model.HasGeneratedLog)
+  @if (Model.Test.HasGeneratedLog)
   {
-   var genLog = new List<Log>(Model.GeneratedLog);
+   var genLog = new List<Log>(Model.Test.GeneratedLog);
    @foreach (var l in genLog)
    {
    <div>
@@ -23,10 +23,10 @@
    </div>
    }
   }
-  @if (Model.HasLog) { @Include("Log", Model) }
+  @if (Model.Test.HasLog) { @Include("Log", Model) }
 </div>
 }
-@if (Model.HasChildren) 
+@if (Model.Test.HasChildren) 
 { 
   <div class="mt-4">@Include("RecurseNodes", Model)</div> 
 }

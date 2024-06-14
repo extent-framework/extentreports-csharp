@@ -1,5 +1,6 @@
 ﻿@using AventStack.ExtentReports
 @using AventStack.ExtentReports.Model
+@using AventStack.ExtentReports.Reporter.Model
 @using System
 @using RazorEngine
 @using RazorEngine.Templating
@@ -60,6 +61,7 @@
       <ul class="test-list-item">
         @foreach (var test in testList)
         {
+        var reporterTest = new SparkReporterTest(Model, test);
         var timeTaken = Math.Round(test.TimeTaken, 2);
         var status = test.Status.ToString().ToLower();
         var authors = ""; var tags = ""; var devices = "";
@@ -82,8 +84,8 @@
               <div class="p-v-10">
                 <div class="info">
                   <h5 class="test-status text-@status">@test.Name</h5>
-                  <span class='badge badge-success'>@test.StartTime</span>
-                  <span class='badge badge-danger'>@test.EndTime</span>
+                  <span class='badge badge-success'>@test.StartTime.ToString(Model.Config.TimeStampFormat)</span>
+                  <span class='badge badge-danger'>@test.EndTime.ToString(Model.Config.TimeStampFormat)</span>
                   <span class='badge badge-default'>@timeTaken ms</span>
                   &middot; <span class='uri-anchor badge badge-default'>#test-id=@test.Id</span>
                   <span title='Skip to the next failed step' class='badge badge-danger pointer float-right ne ml-1'><i class="fa fa-fast-forward"></i></span>
@@ -94,7 +96,7 @@
                 @if (!string.IsNullOrEmpty(test.Description)) { <div class="m-t-10 m-l-5">@test.Description</div> }
               </div>
             </div>
-            @if (isbdd) { @Include("SparkBDD", test) } else { @Include("SparkStandard", test) }
+            @if (isbdd) { @Include("SparkBDD", reporterTest) } else { @Include("SparkStandard", reporterTest) }
           </div>
         </li>
         }

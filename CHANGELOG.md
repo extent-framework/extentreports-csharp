@@ -1,3 +1,10 @@
+## [5.0.4](https://github.com/extent-framework/extentreports-csharp/compare/5.0.3...v5.0.4)
+
+#### Issues Resolved
+- [#208](/issues/208) CWE-404: Improper Resource Shutdown or Release fix
+- [#217](/issues/217) Remove cdn.rawgit links
+
+
 ## [5.0.3](https://github.com/extent-framework/extentreports-csharp/compare/5.0.2...v5.0.3)
 
 #### Issues Resolved

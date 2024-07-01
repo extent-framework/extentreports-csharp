@@ -75,7 +75,7 @@
           <div class="test-detail">
             <p class="name">@test.Name</p>
             <p class="text-sm">
-              <span>@test.StartTime.ToLongTimeString()</span> / <span>@timeTaken ms</span>
+              <span>@test.StartTime.ToLongTimeString()</span> / <span>@timeTaken.ToString("''h'h:'m'm:'s's+'fff'ms'")</span>
               <span class="badge @status-bg log float-right">@test.Status</span>
             </p>
           </div>

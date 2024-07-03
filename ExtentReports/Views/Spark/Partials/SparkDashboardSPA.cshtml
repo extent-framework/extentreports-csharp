@@ -8,7 +8,8 @@
 
   var chartsCount = 2;
   chartsCount = Model.Report.Stats.SumStat(Model.Report.Stats.Child) > 0 ? 3 : chartsCount;
-  chartsCount = Model.Report.Stats.SumStat(Model.Report.Stats.Grandchild) > 0 ? 4 : chartsCount;
+  chartsCount = Model.Report.AnalysisStrategy == AnalysisStrategy.BDD && 
+    Model.Report.Stats.SumStat(Model.Report.Stats.Grandchild) > 0 ? 4 : chartsCount;
 
   var bdd = testList[0].IsBdd;
   var boxSize = "col-md-" + (12/chartsCount);
@@ -116,7 +117,7 @@
       </div>
     </div>
     }
-    @if (Model.Report.Stats.SumStat(Model.Report.Stats.Grandchild) > 0) {
+    @if (Model.Report.AnalysisStrategy == AnalysisStrategy.BDD && Model.Report.Stats.SumStat(Model.Report.Stats.Grandchild) > 0) {
     <div class="@boxSize">
       <div class="card">
         <div class="card-header">

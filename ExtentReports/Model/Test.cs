@@ -86,7 +86,9 @@ namespace AventStack.ExtentReports.Model
             }
         }
 
-        public double TimeTaken => EndTime.Subtract(StartTime).TotalMilliseconds;
+        public TimeSpan RunDuration => EndTime.Subtract(StartTime);
+
+        public double TimeTaken => RunDuration.TotalMilliseconds;
 
         public bool IsBdd => BddType != null;
 
